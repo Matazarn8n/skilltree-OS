@@ -139,8 +139,11 @@ export function computeWheelLayout(sectorsIn: Sector[], jobs: Skill[]): WheelLay
   for (const sector of sectors) {
     const alpha = -90 + sector.order * W_STEP;
     const p = polar(C, C, alpha, R_SECTOR);
-    const label = polar(C, C, alpha, R_SECTOR + 52); // label au-dessus (côté extérieur)
-    sectorPos.push({ sector, x: p.x, y: p.y, angleDeg: alpha, labelX: label.x, labelY: label.y });
+    // Label radialement AU-DELÀ du fan (comme la capture 01_after_login.png) : à R_SECTOR+Δ
+    // ou au-dessus du nœud, les 7 labels se chevauchent entre eux ou avec les nœuds.
+    const lbl = polar(C, C, alpha, R_MAX + 45);
+    const clamp = (v: number) => Math.min(1930, Math.max(70, v));
+    sectorPos.push({ sector, x: p.x, y: p.y, angleDeg: alpha, labelX: clamp(lbl.x), labelY: clamp(lbl.y) });
     edges.push({ x1: C, y1: C, x2: p.x, y2: p.y, colorVar: sector.colorVar }); // centre→secteur
 
     const fns = branchesOf(jobs, sector.slug);

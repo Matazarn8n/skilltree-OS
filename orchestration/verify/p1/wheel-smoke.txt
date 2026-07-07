@@ -1,0 +1,81 @@
+# Preuve smoke — Plan 02-01 (roue-constellation) — 2026-07-08
+
+Serveur : `pnpm build` (prebuild assert-graph inclus) puis `npx next start -p 3010`
+(build exit=0 ; assert-graph : `[assert-graph] PASS sectors=7 functions=34 jobs=137 skills=78 chart_total=165 chart_human=36 req_unresolved=0 orphans=0`)
+Test géométrie : `node --experimental-strip-types tools/test-geometry.mjs`
+→ `[test-geometry] PASS nodes=137 sectors=7 branches=34 minDist=52.74`
+
+## 1. 137 boutons job — HTML SSR (curl, pas besoin de Playwright pour le compte)
+
+    $ curl -s http://localhost:3010/map | grep -o 'data-node' | wc -l
+    137
+
+Contre-vérifié sur le DOM réel hydraté (Playwright chromium, viewport 1440×900) :
+
+    [playwright] data-node buttons = 137        # document.querySelectorAll('[data-node]').length
+    [playwright] sector buttons = 7             # button[aria-label^="Secteur "]
+    [playwright] data-lowfx = false             # marqueur MAP-04 posé (desktop, pas reduced-motion)
+    [playwright] data-node sans aria-label = 0  # les 137 boutons ont un aria-label non vide
+
+Interaction vue secteur (Playwright, clic réel) :
+
+    [playwright] vue secteur sales: bouton retour=True, jobs=22   # « ← Tous les départements » présent
+    [playwright] retour roue: jobs=137                            # aller-retour fonctionnel
+
+## 2. 7 nœuds secteur + hex exacts du catalogue dans le rendu SSR
+
+    $ grep -o 'Secteur [^"]*ouvrir la vue secteur' map.html | wc -l
+    7
+
+    $ for h in FF9D5C EF4444 A78BFA 5EEAD4 7DD3FC FB7185 FACC15; do grep -ioc "#$h" map.html; done
+    #FF9D5C: 48   (sales)
+    #EF4444: 52   (deals)
+    #A78BFA: 50   (marketing)
+    #5EEAD4: 42   (operations)
+    #7DD3FC: 38   (intelligence)
+    #FB7185: 32   (customer)
+    #FACC15: 40   (back-office)
+
+Les 7 hex trouvés (arêtes SVG + points des chips + bordures des hubs secteur).
+
+## 3. ?view= shareable par URL directe (MAP-05)
+
+    $ curl -s -o dash.html -w "%{http_code}" "http://localhost:3010/map?view=dashboards"
+    200
+    $ grep -o 'Dashboards — bientôt' dash.html
+    Dashboards — bientôt
+    $ grep -c 'aria-current="page"[^>]*href="/map?view=dashboards">DASHBOARDS' dash.html
+    1
+
+    $ curl -s -o chart.html -w "%{http_code}" "http://localhost:3010/map?view=chart"
+    200
+    $ grep -o 'Chart — bientôt' chart.html
+    Chart — bientôt
+    $ grep -c 'aria-current="page"[^>]*href="/map?view=chart">CHART' chart.html
+    1
+
+    /map sans param → pill MAP active :
+    $ grep -c 'aria-current="page"[^>]*href="/map">MAP' map.html
+    1
+
+## 4. Screenshot vs capture originale
+
+`orchestration/verify/p1/wheel.png` (Playwright chromium 1440×900, ~465 Ko).
+
+Verdict œil vs `captures/01_after_login.png` : 7 fans radiaux distincts autour du hub
+central de particules « Cerveau d'entreprise », labels secteur serif uppercase + tagline
+minuscule placés radialement au-delà des fans, nœuds hub colorés (hex secteur exacts),
+arêtes fines couleur secteur, chips crème à point coloré. Structure conforme.
+Écart assumé vs original : orientation (plan fixe alpha_i = -90 + i·W_STEP → Ventes en
+haut ; l'original a Sales en bas) et labels de jobs masqués en vue roue (densité 137,
+aria-label les porte — vue secteur les affiche tous).
+
+## Incident de vérif (anti faux-positif)
+
+Premier run : compte data-node = 0 → un serveur next STALE de la Phase 1 occupait :3010
+(EADDRINUSE silencieux, curl frappait l'ancien build). Deuxième piège : un
+`pnpm build | head` a tronqué le build (SIGPIPE) → chunks 400, page non hydratée,
+clics morts. Les deux débusqués parce que les checks lisent la sortie réelle.
+Fix : kill du stale, rebuild complet (exit=0), re-vérification intégrale ci-dessus.
+
+Serveur tué en fin de vérification.
