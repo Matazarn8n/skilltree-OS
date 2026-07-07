@@ -10,7 +10,7 @@ Reconstruction perso FR de SkillTree en 6 phases, dérivées du plan d'exécutio
 - Integer phases (1-6): Planned milestone work (v1-perso)
 - Decimal phases (2.1, …): Urgent insertions (marked INSERTED)
 
-- [ ] **Phase 1: Fondations data + scaffold** - Catalogue consolidé buildé + invariants assertés + prototype rebranché
+- [x] **Phase 1: Fondations data + scaffold** - Catalogue consolidé buildé + invariants assertés + prototype rebranché
 - [ ] **Phase 2: Hero constellation** - Roue-constellation 137 nœuds + ViewSwitcher, a11y + LOWFX
 - [ ] **Phase 3: Vues & modules UI** - Hub, Modules, Brain, Tree/Community/Settings, Dashboards/Chart (5 plans parallèles)
 - [ ] **Phase 4: Backend** - Supabase RLS + auth + routes user + LLM draft + Stripe-ready
