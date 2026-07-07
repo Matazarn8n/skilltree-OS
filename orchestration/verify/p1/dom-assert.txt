@@ -1,0 +1,29 @@
+# Preuve DOM — Phase 2 (roue + JobPanel) — rendu réel Playwright chromium
+
+Serveur : `cd apps/web && pnpm build && npx next start -p 3010` (build exit=0, prebuild assert-graph inclus).
+Runner : /home/nuveo/.higgsfield-login-venv/bin/python tools/verify_p1.py
+Viewport desktop 1440×900 sauf checks 6 (reduced-motion), 7 (390×844).
+
+## Fidélité visuelle
+map.png (roue all-departments) vs captures/01_after_login.png : 7 fans radiaux, hub central,
+couleurs secteur exactes. sector-zoom.png vs captures/map_zoom/sales.png : éventail fonctions + labels jobs.
+
+## Checks (mesures citées)
+
+[PASS] 137 nœuds job :: count=137
+[PASS] tous les nœuds sont des <button> :: tagNames=['BUTTON']
+[PASS] 0 aria-label vide sur les 137 :: vides=0
+[PASS] 7 couleurs secteur exactes :: ['#5EEAD4', '#7DD3FC', '#A78BFA', '#EF4444', '#FACC15', '#FB7185', '#FF9D5C']
+[PASS] Tab secteur→jobs du même secteur :: séquence=['Secteur Ventes — 22 jobs', 'ICP Definition — Ventes', 'Market Mapping — Ventes', 'Trigger Detection — Ventes', 'Lookalike Modeling — Ventes']
+[PASS] JobPanel icp-definition complet :: manquants=[] desc_ok=True
+[PASS] BUILDS ON navigue intra-panel :: aria-label dialog après clic = ICP Definition
+[PASS] sop-generation : 0 undefined/null, L'humain absent :: no_undef=True human_absent=True
+[PASS] ?view=chart shareable :: pill_current=1 placeholder=True
+[PASS] ?view=dashboards shareable :: pill_current=1 placeholder=True
+[PASS] zoom secteur : fonctions + retour :: retour=1 label_fonction_Targeting=1
+    label job (JobNode): fg=rgb(154, 163, 196) sur bg=rgb(6, 8, 16) → ratio 8.01:1
+    tagline secteur: fg=rgb(154, 163, 196) sur bg=rgb(6, 8, 16) → ratio 8.01:1
+[PASS] contraste AA ≥ 4.5:1 (2 mesures) :: job=8.01:1 tagline=8.01:1
+[PASS] retour roue : 137 nœuds :: count=137
+[PASS] reduced-motion : 0 animation :: node_anim=1e-06s node_trans=1e-06s group_anim=1e-06s
+[PASS] LOWFX 390px : data-lowfx=true présent :: éléments data-lowfx=true = 1
