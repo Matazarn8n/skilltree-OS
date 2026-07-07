@@ -3,7 +3,7 @@ import { z } from "zod";
 // Contrats API partagés front/back (source de vérité des payloads). Zod = validation + types.
 // Miroir de lib/types.ts, lui-même généré depuis apps/web/lib/catalog/catalog.json.
 export const SectorSlug = z.enum([
-  "sales", "deals", "marketing", "operations", "intelligence", "customer", "backoffice",
+  "sales", "deals", "marketing", "operations", "intelligence", "customer", "back-office",
 ]);
 export const JobLevel = z.enum(["autonomous", "assisted", "human-led"]);
 export const JobOrigin = z.enum(["map", "chart"]);

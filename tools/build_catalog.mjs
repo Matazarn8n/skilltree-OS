@@ -265,7 +265,7 @@ const TYPES_TS = `// GÉNÉRÉ par tools/build_catalog.mjs — ne pas éditer à
 // (137 jobs, 78 skills, 7 secteurs — cf. docs/ARCHITECTURE.md).
 export type SectorSlug =
   | "sales" | "deals" | "marketing" | "operations"
-  | "intelligence" | "customer" | "backoffice";
+  | "intelligence" | "customer" | "back-office";
 
 export type JobLevel = "autonomous" | "assisted" | "human-led";
 /** origin='map' = un des 137 jobs de la roue. origin='chart' = extra human-led visible
