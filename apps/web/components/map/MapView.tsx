@@ -1,34 +1,64 @@
 "use client";
 import { useState } from "react";
-import { SkillMap } from "./SkillMap";
-import { StageGrid } from "./StageGrid";
-import { cn } from "@/lib/utils";
+import { skillBySlug } from "@/lib/catalog";
+import type { SectorSlug, Skill } from "@/lib/types";
+import { useLowFx } from "@/lib/constellation/useLowFx";
+import { ConstellationWheel } from "@/components/constellation/ConstellationWheel";
+import { SectorView } from "@/components/constellation/SectorView";
+import { SkillPanel } from "@/components/skill/SkillPanel";
+import { EmptyState } from "@/components/ui/EmptyState";
 
-type View = "constellation" | "grid";
+export type MapViewKind = "map" | "dashboards" | "chart";
 
-// Bascule entre la constellation (hero) et la grille par étape. État de vue = local (léger, pas d'URL).
-export function MapView({ initialSkill }: { initialSkill?: string }) {
-  const [view, setView] = useState<View>("constellation");
+// Point d'entrée client de /map. La vue (MAP/DASHBOARDS/CHART) vient de l'URL ?view=
+// (D6, shareable) — jamais d'un state local. Le deep-link ?skill= (⌘K) reste supporté.
+export function MapView({ view = "map", initialSkill }: { view?: MapViewKind; initialSkill?: string }) {
+  const [focusedSector, setFocusedSector] = useState<SectorSlug | null>(null);
+  const [selected, setSelected] = useState<Skill | null>(
+    initialSkill ? skillBySlug(initialSkill) ?? null : null
+  );
+  const { lowFx } = useLowFx();
+
+  if (view === "dashboards") {
+    return (
+      <div className="flex h-full items-center justify-center p-8">
+        <div className="w-full max-w-md">
+          <EmptyState title="Dashboards — bientôt" hint="Les command centers arrivent à la Phase 3." />
+        </div>
+      </div>
+    );
+  }
+  if (view === "chart") {
+    return (
+      <div className="flex h-full items-center justify-center p-8">
+        <div className="w-full max-w-md">
+          <EmptyState title="Chart — bientôt" hint="La matrice de déploiement par étapes arrive à la Phase 3." />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="relative flex h-full flex-col">
-      <div className="absolute left-1/2 top-4 z-10 flex -translate-x-1/2 rounded-lg border border-[var(--border)] bg-[var(--bg-elev)] p-1 text-sm">
-        {(["constellation", "grid"] as View[]).map((v) => (
-          <button
-            key={v}
-            onClick={() => setView(v)}
-            aria-pressed={view === v}
-            className={cn(
-              "rounded-md px-3 py-1 transition-colors",
-              view === v ? "bg-[var(--bg-panel)] text-[var(--text)]" : "text-[var(--text-muted)] hover:text-[var(--text)]"
-            )}
-          >
-            {v === "constellation" ? "Constellation" : "Grille"}
-          </button>
-        ))}
-      </div>
-      <div className="min-h-0 flex-1">
-        {view === "constellation" ? <SkillMap initialSkill={initialSkill} /> : <StageGrid />}
-      </div>
+    <div data-lowfx={lowFx ? "true" : "false"} className="relative h-full w-full">
+      {focusedSector ? (
+        <SectorView
+          slug={focusedSector}
+          onBack={() => setFocusedSector(null)}
+          onFocusSector={setFocusedSector}
+          onSelectJob={setSelected}
+          selectedSlug={selected?.slug}
+          lowFx={lowFx}
+        />
+      ) : (
+        <ConstellationWheel
+          onFocusSector={setFocusedSector}
+          onSelectJob={setSelected}
+          selectedSlug={selected?.slug}
+          lowFx={lowFx}
+        />
+      )}
+      {/* Panel provisoire — remplacé par le vrai JobPanel au plan 02-02. */}
+      <SkillPanel skill={selected} onClose={() => setSelected(null)} />
     </div>
   );
 }
