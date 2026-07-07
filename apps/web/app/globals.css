@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/* ── SkillTree-OS design tokens (thème capturé : sombre premium bleuté) ──
+   Thème sombre par défaut ; .light bascule. Contraste AA visé sur les deux. */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", "Times New Roman", ui-serif, Georgia, serif;
+
+  /* accents par secteur (hubs lumineux de la constellation) */
+  --color-sector-operations: #4dd0c7;
+  --color-sector-intelligence: #7aa2ff;
+  --color-sector-customer: #ff8fa3;
+  --color-sector-backoffice: #f2c744;
+  --color-sector-sales: #ff9d5c;
+  --color-sector-deals: #e2564f;
+  --color-sector-marketing: #b98cff;
+}
+
+:root {
+  --bg: #060810;
+  --bg-elev: #0c1020;
+  --bg-panel: #10152a;
+  --border: #1e2540;
+  --border-soft: #171d33;
+  --text: #eef1fb;
+  --text-muted: #9aa3c4;
+  --text-faint: #5e6789;
+  --accent: #7aa2ff;
+  --node: #e8ecfb;
+  --link: #2b3358;
+  --ring: #7aa2ff;
+  --radius: 0.75rem;
+}
+
+:root.light {
+  --bg: #f6f7fb;
+  --bg-elev: #ffffff;
+  --bg-panel: #ffffff;
+  --border: #e2e6f0;
+  --border-soft: #eef0f6;
+  --text: #10142a;
+  --text-muted: #545c78;
+  --text-faint: #8a92ad;
+  --accent: #3b62d6;
+  --node: #2a3355;
+  --link: #c7cee0;
+  --ring: #3b62d6;
+}
+
+@layer base {
+  * { border-color: var(--border-soft); }
+  html { color-scheme: dark; }
+  html.light { color-scheme: light; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* halo radial derrière la constellation */
+  .map-bg {
+    background:
+      radial-gradient(1200px 800px at 50% 45%, rgba(122,162,255,0.06), transparent 60%),
+      radial-gradient(900px 600px at 50% 55%, rgba(226,86,79,0.04), transparent 55%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+}
+
+@utility display { font-family: var(--font-display); letter-spacing: 0.12em; }

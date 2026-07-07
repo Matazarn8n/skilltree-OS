@@ -1,0 +1,5 @@
+.env.md
+.env
+node_modules/
+captures/
+.next/

@@ -1,0 +1,101 @@
+import type { LessonContent } from "@/lib/lesson-types";
+
+const lesson: LessonContent = {
+  title: "Installer et configurer Claude Code",
+  estMin: 15,
+  dek: "Fais tourner Claude Code dans VS Code · la configuration que tu utiliseras pour chaque build de SkillTree. Mac, Windows ou Linux. Aucun bagage technique requis.",
+  blocks: [
+    {
+      type: "p",
+      text: "Claude Code est la console depuis laquelle tu fais tourner ton activité. Avant de pouvoir installer un seul skill depuis la carte ou monter un command center, il te le faut sur ta machine et authentifié. Ça prend environ quinze minutes.",
+    },
+    {
+      type: "callout",
+      variant: "tip",
+      title: "Tu viens de ChatGPT ?",
+      text: "Tu ne perds pas les mois de contexte que ChatGPT a sur toi. Dans ChatGPT, lance : « Dis-moi absolument tout ce que tu as appris sur moi. Développe tout au maximum, puis mets tout dans un bloc de code en JSON brut · préférences, style de communication, contexte de travail, projets. » Copie la sortie, puis colle-la dans ton CLAUDE.md (leçon suivante). Des années de personnalisation transférées en un geste.",
+    },
+    { type: "h2", text: "La configuration recommandée : Claude Code dans VS Code" },
+    {
+      type: "p",
+      text: "Tu peux faire tourner Claude Code dans le terminal système, mais la configuration qu'on recommande est en extension de VS Code. Tu obtiens un vrai éditeur à côté du panneau Claude Code · fichiers, code et Claude dans une seule vue, sans changer de fenêtre.",
+    },
+    { type: "h3", text: "Étape 1 · Installe VS Code (si tu ne l'as pas déjà)" },
+    { type: "p", text: "Télécharge gratuitement depuis code.visualstudio.com. Fonctionne sur Mac, Windows et Linux." },
+    { type: "h3", text: "Étape 2 · Installe l'extension Claude Code" },
+    {
+      type: "ol",
+      items: [
+        "Ouvre VS Code",
+        "Clique sur l'icône Extensions dans la barre latérale gauche (ou Cmd+Shift+X sur Mac, Ctrl+Shift+X sur Windows)",
+        "Cherche « Claude Code »",
+        "Clique sur Installer",
+        "Une fois installé, clique sur l'icône Claude Code dans ta barre latérale pour ouvrir le panneau",
+        "Connecte-toi avec ton compte Anthropic quand on te le demande",
+      ],
+    },
+    { type: "p", text: "Pourquoi VS Code plutôt que le terminal :" },
+    {
+      type: "ul",
+      items: [
+        "Tes fichiers et le panneau Claude Code côte à côte · aucun changement de fenêtre",
+        "Plus facile de relire les diffs, éditer des fichiers et gérer ton projet pendant que Claude travaille",
+        "L'interface qu'on suppose pour chaque build de SkillTree",
+      ],
+    },
+    { type: "p", text: "Tu peux quand même utiliser le terminal si tu préfères · chaque commande fonctionne à l'identique. VS Code est juste le point de départ le plus propre." },
+    { type: "h2", text: "Avant de commencer" },
+    { type: "p", text: "Il te faut :" },
+    {
+      type: "ul",
+      items: [
+        "Un compte Anthropic payant. Claude Pro (20 $/mois) suffit pour démarrer. Claude Max (100–200 $/mois) si tu prévois un usage quotidien intensif.",
+        "VS Code installé (recommandé) ou un terminal. Sur Mac le terminal est l'app Terminal (recherche Spotlight). Sur Windows, utilise PowerShell.",
+      ],
+    },
+    { type: "p", text: "C'est tout. Pas de Node.js, pas de bagage en code, rien d'autre." },
+    { type: "h2", text: "Installer Claude Code" },
+    { type: "p", text: "L'installeur natif est la meilleure voie · une commande, aucune dépendance, mise à jour automatique." },
+    { type: "p", text: "Mac ou Linux · ouvre ton terminal et lance :" },
+    { type: "code", lang: "bash", code: "curl -fsSL https://claude.ai/install.sh | bash" },
+    { type: "p", text: "Windows · ouvre PowerShell et lance :" },
+    { type: "code", lang: "powershell", code: "irm https://claude.ai/install.ps1 | iex" },
+    {
+      type: "p",
+      text: "L'installeur télécharge tout, le configure, et ajoute claude à ton PATH système. Ferme ton terminal et ouvre-en un nouveau une fois terminé.",
+    },
+    { type: "h2", text: "Vérifie que c'est installé" },
+    { type: "p", text: "Dans une nouvelle fenêtre de terminal, lance :" },
+    { type: "code", lang: "bash", code: "claude --version" },
+    { type: "p", text: "Tu devrais voir un numéro de version. Si tu obtiens « command not found », ferme complètement le terminal et ouvre-en un nouveau." },
+    { type: "h2", text: "Authentifie-toi" },
+    { type: "p", text: "Lance :" },
+    { type: "code", lang: "bash", code: "claude" },
+    {
+      type: "p",
+      text: "La première fois, ça ouvre ton navigateur et te demande de te connecter à ton compte Anthropic. Suis les instructions. Une fois connecté, reviens au terminal · il sera authentifié automatiquement. Tes identifiants sont stockés localement, tu n'auras pas à refaire ça.",
+    },
+    { type: "h2", text: "Confirme que ça fonctionne" },
+    { type: "p", text: "Une fois authentifié, tu verras le prompt Claude Code. Tape :" },
+    { type: "code", lang: "text", code: "Hey Claude, qu'est-ce que tu sais faire ?" },
+    { type: "p", text: "S'il répond, c'est bon. C'est Claude Code qui tourne sur ta machine." },
+    { type: "h2", text: "Erreurs courantes et corrections" },
+    { type: "h3", text: "« Command not found » après l'installation" },
+    { type: "p", text: "Ferme complètement le terminal et ouvre une nouvelle fenêtre. La mise à jour du PATH ne s'applique qu'au redémarrage du terminal." },
+    { type: "h3", text: "Le navigateur ne s'est pas ouvert pour l'authentification" },
+    { type: "p", text: "Relance claude. Si ça ne s'ouvre toujours pas, copie l'URL affichée dans le terminal et colle-la manuellement dans ton navigateur." },
+    { type: "h3", text: "Erreurs de permission sur Mac" },
+    { type: "p", text: "N'utilise pas sudo. Le fix le plus courant est de fermer et rouvrir le terminal, puis relancer la commande d'installation." },
+    { type: "h3", text: "Windows : erreur « execution policy » dans PowerShell" },
+    { type: "p", text: "Lance d'abord ceci :" },
+    { type: "code", lang: "powershell", code: "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser" },
+    { type: "p", text: "puis réessaie la commande d'installation." },
+    {
+      type: "callout",
+      variant: "tip",
+      text: "Si tu tombes sur une erreur non couverte ici, fais une capture d'écran et demande à Claude de la réparer · colle la capture directement dans une discussion Claude.ai. C'est le même workflow de debug que tu utiliseras pour tout le reste.",
+    },
+  ],
+};
+
+export default lesson;

@@ -1,0 +1,1723 @@
+[
+  {
+    "sector": "Sales",
+    "sub": "targeting · outreach · sequencing",
+    "color": "#FF9D5C",
+    "intro": "The top of the funnel · finding the right companies, learning enough about them to be worth a reply, and reaching out at scale without sounding like a robot. This is the department most businesses try to hire their way out of. It is the one agents change first, because every job here is research, writing, and timing · and machines never get tired of any of it.",
+    "functions": [
+      {
+        "name": "Targeting",
+        "jobs": [
+          {
+            "name": "ICP Definition",
+            "desc": "Define and refine ideal customer profiles per vertical · firmographics, pain patterns, buying triggers.",
+            "skills": [
+              "icp-profiler",
+              "vertical-scorer",
+              "pain-pattern-library"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Market Mapping",
+            "desc": "Map the total addressable companies in a target vertical before a campaign.",
+            "skills": [
+              "tam-mapper",
+              "vertical-census"
+            ],
+            "integrations": [
+              "Exa",
+              "Apollo"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Trigger Detection",
+            "desc": "Watch for buying signals · hiring, funding, tech changes, leadership moves.",
+            "skills": [
+              "hiring-signal-watcher",
+              "funding-tracker",
+              "tech-change-detector"
+            ],
+            "integrations": [
+              "Exa",
+              "Apify"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Lookalike Modeling",
+            "desc": "Build new target lists off the shape of your closed-won accounts.",
+            "skills": [
+              "lookalike-builder",
+              "pattern-extractor"
+            ],
+            "integrations": [
+              "Apollo"
+            ],
+            "level": "assisted"
+          }
+        ]
+      },
+      {
+        "name": "Lead Sourcing",
+        "jobs": [
+          {
+            "name": "Database Mining",
+            "desc": "Pull targeted company and contact lists from structured databases.",
+            "skills": [
+              "apollo-query-builder",
+              "saved-search-runner"
+            ],
+            "integrations": [
+              "Apollo"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Web & Maps Scraping",
+            "desc": "Scrape local businesses, directories, and niche sources for leads.",
+            "skills": [
+              "maps-scraper",
+              "directory-harvester"
+            ],
+            "integrations": [
+              "Apify"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Social Mining",
+            "desc": "Harvest engaged audiences · post commenters, followers, group members.",
+            "skills": [
+              "comment-harvester",
+              "engagement-miner",
+              "profile-collector"
+            ],
+            "integrations": [
+              "Apify",
+              "HeyReach"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "List Building",
+            "desc": "Merge, dedupe, and segment raw leads into campaign-ready lists.",
+            "skills": [
+              "list-deduper",
+              "segmenter",
+              "csv-normalizer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Enrichment",
+        "jobs": [
+          {
+            "name": "Contact Enrichment",
+            "desc": "Find and append emails, phones, and LinkedIn profiles to every lead.",
+            "skills": [
+              "email-finder",
+              "phone-appender",
+              "linkedin-matcher"
+            ],
+            "integrations": [
+              "Apollo",
+              "Apify"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Email Verification",
+            "desc": "Validate every address before it ever gets a send.",
+            "skills": [
+              "smtp-verifier",
+              "catch-all-detector"
+            ],
+            "integrations": [
+              "Instantly"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Account Enrichment",
+            "desc": "Layer firmographics, tech stack, and headcount trends onto target accounts.",
+            "skills": [
+              "firmographic-appender",
+              "tech-stack-detector",
+              "growth-signal-scorer"
+            ],
+            "integrations": [
+              "Exa",
+              "Firecrawl"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Fit Scoring",
+            "desc": "Score every lead against ICP so outreach spends effort where it converts.",
+            "skills": [
+              "fit-scorer",
+              "tier-assigner",
+              "disqualifier"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Outreach Writing",
+        "jobs": [
+          {
+            "name": "Personalization Research",
+            "desc": "Build a personalization dossier per prospect · hooks, context, common ground.",
+            "skills": [
+              "prospect-dossier",
+              "hook-finder",
+              "common-ground-scanner"
+            ],
+            "integrations": [
+              "Exa",
+              "Firecrawl"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Cold Email Drafting",
+            "desc": "Write multi-step cold email sequences tuned to the vertical and offer.",
+            "skills": [
+              "sequence-writer",
+              "subject-line-generator",
+              "spintax-builder"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "LinkedIn Messaging",
+            "desc": "Draft connection notes and DM sequences that read human.",
+            "skills": [
+              "connection-note-writer",
+              "dm-sequencer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Proof Matching",
+            "desc": "Match the right case study to each prospect’s industry and problem.",
+            "skills": [
+              "case-study-matcher",
+              "proof-point-selector"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Cold-Call Scripting",
+            "desc": "Call and voicemail scripts with branching objection handling that read human.",
+            "skills": [
+              "call-scripter",
+              "objection-brancher"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Video Prospecting",
+            "desc": "Personalized video scripts · the hook, the personal line, the CTA, under 90 seconds.",
+            "skills": [
+              "video-scripter",
+              "personalization-writer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Sequencing & Send",
+        "jobs": [
+          {
+            "name": "Campaign Orchestration",
+            "desc": "Build multi-channel cadences · email, LinkedIn, phone touches in order.",
+            "skills": [
+              "cadence-builder",
+              "channel-router"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Campaign Launch",
+            "desc": "Push finished campaigns into sending platforms with correct settings.",
+            "skills": [
+              "instantly-syncer",
+              "heyreach-syncer"
+            ],
+            "integrations": [
+              "Instantly",
+              "HeyReach"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Deliverability",
+            "desc": "Keep domains healthy · warmup, spam testing, inbox rotation.",
+            "skills": [
+              "warmup-monitor",
+              "spam-score-tester",
+              "domain-health-auditor"
+            ],
+            "integrations": [
+              "Instantly"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Send Optimization",
+            "desc": "Schedule sends by timezone and pace volume to protect reply rates.",
+            "skills": [
+              "timezone-scheduler",
+              "volume-pacer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sector": "Deals",
+    "sub": "replies · calls · closing · pipeline",
+    "color": "#EF4444",
+    "intro": "What happens after someone raises their hand · the reply gets read and routed, the meeting gets booked, the proposal gets written, the pipeline stays honest. Speed wins deals here, and speed is exactly what a human team loses as volume grows. The agents answer in minutes, draft before the next call, and never let a deal go quiet without flagging it.",
+    "functions": [
+      {
+        "name": "Reply Handling",
+        "jobs": [
+          {
+            "name": "Reply Classification",
+            "desc": "Read every reply and tag it · interested, objection, referral, not now, never.",
+            "skills": [
+              "intent-classifier",
+              "sentiment-tagger",
+              "auto-labeler"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Objection Response",
+            "desc": "Draft responses to common objections from a tuned library.",
+            "skills": [
+              "objection-library",
+              "response-drafter"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Hot-Lead Routing",
+            "desc": "Route interested replies to the calendar and the pipeline instantly.",
+            "skills": [
+              "hot-lead-alerter",
+              "crm-promoter"
+            ],
+            "integrations": [
+              "Attio"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Meeting Booking",
+            "desc": "Propose slots, book calls, chase no-shows.",
+            "skills": [
+              "slot-proposer",
+              "cal-booker",
+              "no-show-recoverer"
+            ],
+            "integrations": [
+              "Cal.com"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Referral Capture",
+            "desc": "Spot the \"talk to my colleague\" replies and action the warm intro.",
+            "skills": [
+              "referral-spotter",
+              "intro-router"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Inbound",
+        "jobs": [
+          {
+            "name": "Speed-to-Lead",
+            "desc": "Acknowledge and engage every inbound lead within minutes.",
+            "skills": [
+              "instant-responder",
+              "intake-acknowledger"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Lead Qualification",
+            "desc": "Parse intake forms and score inbound leads before a human looks.",
+            "skills": [
+              "qual-scorer",
+              "intake-parser",
+              "budget-detector"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Comment-CTA Fulfillment",
+            "desc": "Detect keyword comments on content and deliver the promised asset by DM.",
+            "skills": [
+              "keyword-listener",
+              "dm-fulfiller"
+            ],
+            "integrations": [
+              "Instagram API"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Inbox Triage",
+            "desc": "Sort inbound email and DMs · client, lead, brand deal, noise.",
+            "skills": [
+              "inbox-triager",
+              "priority-router"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Call Cycle",
+        "jobs": [
+          {
+            "name": "Pre-Call Briefing",
+            "desc": "Build a brief before every call · who, company, history, objectives, talking points.",
+            "skills": [
+              "prep-brief-builder",
+              "attendee-researcher"
+            ],
+            "integrations": [
+              "Fireflies",
+              "Attio"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Call Capture",
+            "desc": "Record, transcribe, and file every meeting automatically.",
+            "skills": [
+              "transcript-ingester",
+              "meeting-filer"
+            ],
+            "integrations": [
+              "Fireflies"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Post-Call Debrief",
+            "desc": "Extract outcomes, action items, and deal updates from the transcript.",
+            "skills": [
+              "action-extractor",
+              "deal-updater",
+              "commitment-tracker"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Follow-Up Drafting",
+            "desc": "Draft the recap email with next steps before the prospect forgets the call.",
+            "skills": [
+              "recap-writer",
+              "next-step-drafter"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Objection Library",
+            "desc": "Mine every call for the objections that come up · build the rebuttals that win.",
+            "skills": [
+              "objection-miner",
+              "rebuttal-builder"
+            ],
+            "integrations": [
+              "Fireflies"
+            ],
+            "level": "assisted"
+          }
+        ]
+      },
+      {
+        "name": "Deal Artifacts",
+        "jobs": [
+          {
+            "name": "Demo Prototyping",
+            "desc": "Turn discovery notes into a working visual prototype before the next meeting.",
+            "skills": [
+              "dream-prototyper",
+              "sandbox-builder"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Proposal Generation",
+            "desc": "Generate branded proposals rendered to PDF from call context.",
+            "skills": [
+              "proposal-writer",
+              "pdf-renderer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Deal Room Assembly",
+            "desc": "Spin up tracked, password-gated deal rooms per prospect.",
+            "skills": [
+              "room-builder",
+              "magic-link-issuer",
+              "engagement-tracker"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Agreement Drafting",
+            "desc": "Produce the services agreement the moment a deal closes verbally.",
+            "skills": [
+              "contract-generator",
+              "esign-preparer"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Pricing Support",
+            "desc": "Model anchors, phase structures, and ROI comparisons per deal.",
+            "skills": [
+              "anchor-calculator",
+              "roi-modeler",
+              "phase-structurer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Pipeline Ops",
+        "jobs": [
+          {
+            "name": "CRM Hygiene",
+            "desc": "Keep records deduped, fields normalized, stages honest.",
+            "skills": [
+              "record-deduper",
+              "field-normalizer",
+              "stage-auditor"
+            ],
+            "integrations": [
+              "Attio"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Pipeline Reporting",
+            "desc": "Weekly pipeline state · what moved, what stalled, what closes next.",
+            "skills": [
+              "pipeline-reporter",
+              "funnel-analyzer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Forecasting",
+            "desc": "Probability-weight the pipeline into a revenue forecast.",
+            "skills": [
+              "close-probability-scorer",
+              "revenue-forecaster"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Reactivation",
+            "desc": "Revive dormant deals and win back lost ones on a schedule.",
+            "skills": [
+              "dormant-deal-reviver",
+              "winback-sequencer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Win/Loss Analysis",
+            "desc": "Tag why deals close or die; feed patterns back into targeting.",
+            "skills": [
+              "loss-tagger",
+              "pattern-miner"
+            ],
+            "integrations": [],
+            "level": "manual"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sector": "Marketing",
+    "sub": "content · brand · distribution",
+    "color": "#A78BFA",
+    "intro": "The engine that makes you known · reading what works, making more of it, and pushing one good idea across every surface before the trend moves. Most teams post and pray. This department measures every piece against the median, doubles down on the winners, and turns a single reel into nine assets · so output stops depending on whoever felt inspired that week.",
+    "functions": [
+      {
+        "name": "Insights",
+        "jobs": [
+          {
+            "name": "Performance Mining",
+            "desc": "Rank your own content corpus · what worked, what to re-hash.",
+            "skills": [
+              "corpus-ranker",
+              "rehash-finder",
+              "era-analyzer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Trend Monitoring",
+            "desc": "Watch the niche for breaking topics and rising formats.",
+            "skills": [
+              "news-watcher",
+              "format-spotter"
+            ],
+            "integrations": [
+              "Exa"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Competitor Analysis",
+            "desc": "Scrape and transcribe competitor content; extract hook patterns.",
+            "skills": [
+              "reel-transcriber",
+              "hook-pattern-miner"
+            ],
+            "integrations": [
+              "Apify",
+              "Deepgram"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Audience Analysis",
+            "desc": "Mine comments and DMs for questions, objections, and content ideas.",
+            "skills": [
+              "comment-miner",
+              "question-clusterer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Creation",
+        "jobs": [
+          {
+            "name": "Hook Writing",
+            "desc": "Generate and rank hooks per platform from proven patterns.",
+            "skills": [
+              "hook-generator",
+              "hook-ranker"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Script Writing",
+            "desc": "Full reel and video scripts in the house voice.",
+            "skills": [
+              "script-writer",
+              "voice-matcher"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Caption Writing",
+            "desc": "Platform-correct captions with CTA placement rules baked in.",
+            "skills": [
+              "caption-writer",
+              "cta-placer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Carousel Production",
+            "desc": "Design and export branded carousel slides.",
+            "skills": [
+              "carousel-builder",
+              "slide-exporter"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Video Production",
+            "desc": "Programmatic video · overlays, captions, motion graphics on recordings.",
+            "skills": [
+              "reel-compositor",
+              "caption-syncer",
+              "overlay-animator"
+            ],
+            "integrations": [
+              "Remotion"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Image Generation",
+            "desc": "Brand-consistent images from reference libraries.",
+            "skills": [
+              "brand-image-generator",
+              "character-consistency"
+            ],
+            "integrations": [
+              "FAL"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Thumbnail & Cover Design",
+            "desc": "Scroll-stopping thumbnails and covers tuned to earn the click.",
+            "skills": [
+              "thumbnail-designer",
+              "cover-tester"
+            ],
+            "integrations": [
+              "FAL"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Ad Creative",
+            "desc": "Generate and iterate paid-ad variations · hooks, angles, formats.",
+            "skills": [
+              "ad-variation-builder",
+              "angle-tester"
+            ],
+            "integrations": [
+              "FAL"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Landing Page Copy",
+            "desc": "Conversion copy for the whole page · hero, proof, offer, FAQ, CTA.",
+            "skills": [
+              "page-copywriter",
+              "offer-framer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Deck Production",
+            "desc": "Webinar and talk decks in the brand design system.",
+            "skills": [
+              "deck-builder",
+              "slide-templater"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Repurposing",
+        "jobs": [
+          {
+            "name": "Cross-Platform Adaptation",
+            "desc": "One idea → native formats for every platform.",
+            "skills": [
+              "format-adapter",
+              "platform-translator"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Clip Extraction",
+            "desc": "Cut long recordings into short-form clips worth posting.",
+            "skills": [
+              "clip-finder",
+              "highlight-extractor"
+            ],
+            "integrations": [
+              "Deepgram"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Lead-Magnet Builds",
+            "desc": "Turn content themes into gated guides and landing pages.",
+            "skills": [
+              "guide-builder",
+              "gated-page-generator"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Distribution",
+        "jobs": [
+          {
+            "name": "Publishing",
+            "desc": "Schedule and post across platforms via API.",
+            "skills": [
+              "post-scheduler",
+              "api-publisher"
+            ],
+            "integrations": [
+              "Zernio"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Newsletter & Broadcast",
+            "desc": "Design and send the weekly email in the brand system.",
+            "skills": [
+              "newsletter-builder",
+              "broadcast-sender"
+            ],
+            "integrations": [
+              "Beehiiv",
+              "Resend"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "SEO & GEO",
+            "desc": "Make the site legible to search engines and LLMs.",
+            "skills": [
+              "schema-marker",
+              "llms-txt-maintainer",
+              "sitemap-builder"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "OG & Share Surface",
+            "desc": "Every page ships with share-ready open-graph imagery.",
+            "skills": [
+              "og-image-generator"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Brand Deals",
+        "jobs": [
+          {
+            "name": "Deal Scripting",
+            "desc": "Sponsored scripts in the proven format, per brand brief.",
+            "skills": [
+              "brand-script-writer",
+              "claim-fact-checker"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Approval Docs",
+            "desc": "Brand-safe formatted docs for sponsor sign-off.",
+            "skills": [
+              "approval-doc-generator"
+            ],
+            "integrations": [
+              "Google Docs"
+            ],
+            "level": "autonomous"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sector": "Operations",
+    "sub": "onboarding · builds · client ops",
+    "color": "#5EEAD4",
+    "intro": "Where promises become delivery · onboarding a new client, wiring the systems, testing the work, and reporting status before anyone has to ask. Delivery dies in week one or it doesn’t. This department makes the first week feel like the tenth, catches the broken batch before the client sees it, and sends the Friday update that keeps trust alive through the quiet stretches.",
+    "functions": [
+      {
+        "name": "Onboarding",
+        "jobs": [
+          {
+            "name": "Kickoff Pack",
+            "desc": "Welcome email, access checklist, and project scaffold the day a deal closes.",
+            "skills": [
+              "kickoff-generator",
+              "access-checklister"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Access Collection",
+            "desc": "Chase and verify every credential and API key needed to build.",
+            "skills": [
+              "credential-chaser",
+              "access-verifier"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Project Scaffolding",
+            "desc": "Stand up the repo, context files, and plan for a new engagement.",
+            "skills": [
+              "repo-scaffolder",
+              "context-writer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Build Ops",
+        "jobs": [
+          {
+            "name": "Document Extraction",
+            "desc": "High-volume structured extraction from client documents.",
+            "skills": [
+              "extraction-pipeline",
+              "schema-mapper",
+              "accuracy-benchmarker"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Integration Builds",
+            "desc": "Wire client systems together · CRMs, calendars, transcripts, payments.",
+            "skills": [
+              "api-integrator",
+              "webhook-wirer"
+            ],
+            "integrations": [
+              "Inngest"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Data Migration",
+            "desc": "Move and clean data between systems without losing or mangling a row.",
+            "skills": [
+              "migration-runner",
+              "field-mapper",
+              "dedupe-validator"
+            ],
+            "integrations": [
+              "Inngest"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Portal Provisioning",
+            "desc": "Spin up client-scoped delivery portals with live status.",
+            "skills": [
+              "portal-provisioner",
+              "portal-theming"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "QA & Verification",
+            "desc": "Verify every build against real data before the client sees it.",
+            "skills": [
+              "output-verifier",
+              "regression-checker"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Agent Evaluation",
+            "desc": "Test agent outputs against a benchmark before they touch real work.",
+            "skills": [
+              "eval-harness",
+              "regression-checker"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          }
+        ]
+      },
+      {
+        "name": "Reliability",
+        "jobs": [
+          {
+            "name": "Monitoring & Alerting",
+            "desc": "Watch every automation for failures and silent stalls · know before the client does.",
+            "skills": [
+              "uptime-watcher",
+              "failure-alerter"
+            ],
+            "integrations": [
+              "Inngest"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Cost & Usage Tracking",
+            "desc": "Token and API spend tracked against budget · no surprise bills.",
+            "skills": [
+              "spend-tracker",
+              "budget-guard"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Incident Response",
+            "desc": "When an automation breaks · triage, root-cause, fix, and write the note.",
+            "skills": [
+              "incident-triager",
+              "rootcause-finder",
+              "postmortem-writer"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          }
+        ]
+      },
+      {
+        "name": "Client Comms",
+        "jobs": [
+          {
+            "name": "Status Updates",
+            "desc": "Clients see progress without asking for it.",
+            "skills": [
+              "status-poster",
+              "milestone-notifier"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Meeting Follow-Ups",
+            "desc": "Client call transcripts → action items → assigned and tracked.",
+            "skills": [
+              "followup-processor",
+              "action-assigner"
+            ],
+            "integrations": [
+              "Fireflies"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Portal Sync",
+            "desc": "Session summaries and deliverables flow into the client portal automatically.",
+            "skills": [
+              "portal-syncer",
+              "deliverable-publisher"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Knowledge",
+        "jobs": [
+          {
+            "name": "Transcript Processing",
+            "desc": "Every meeting becomes searchable, structured context.",
+            "skills": [
+              "transcript-structurer",
+              "entity-extractor"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Context Maintenance",
+            "desc": "Per-client context files stay current as work happens.",
+            "skills": [
+              "context-updater",
+              "memory-writer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "SOP Generation",
+            "desc": "Turn delivered work into reusable playbooks.",
+            "skills": [
+              "sop-writer",
+              "playbook-extractor"
+            ],
+            "integrations": [],
+            "level": "manual"
+          },
+          {
+            "name": "Handoff Docs",
+            "desc": "Clean documentation when a system ships to the client.",
+            "skills": [
+              "handoff-writer",
+              "runbook-generator"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sector": "Intelligence",
+    "sub": "companies · people · markets",
+    "color": "#7DD3FC",
+    "intro": "The floor that makes everyone else sharper · company dossiers before every call, the trends worth filming, the competitors you can’t afford to be surprised by. Research is cheap and being wrong is expensive. This department turns two-day digging jobs into twenty-minute briefs, so no one upstairs ever walks into a room guessing.",
+    "functions": [
+      {
+        "name": "Companies",
+        "jobs": [
+          {
+            "name": "Company Deep-Dive",
+            "desc": "Financials, growth signals, org structure, strategic posture.",
+            "skills": [
+              "company-profiler",
+              "signal-collector"
+            ],
+            "integrations": [
+              "Exa",
+              "Firecrawl"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Tech-Stack Detection",
+            "desc": "What a target company runs, and where the gaps are.",
+            "skills": [
+              "stack-detector",
+              "gap-analyzer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Funding & Financials Lookup",
+            "desc": "Rounds, investors, revenue estimates, filings · who just got budget.",
+            "skills": [
+              "funding-tracker",
+              "financials-reader"
+            ],
+            "integrations": [
+              "Exa"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Buying-Committee Mapping",
+            "desc": "Who actually decides · economic buyer, champion, blockers, their roles.",
+            "skills": [
+              "committee-mapper",
+              "role-classifier"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          }
+        ]
+      },
+      {
+        "name": "People",
+        "jobs": [
+          {
+            "name": "Person Research",
+            "desc": "Background, content trail, interests, mutual ground for any contact.",
+            "skills": [
+              "person-profiler",
+              "content-trail-scanner"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Network Mapping",
+            "desc": "Who knows whom · paths into a target account.",
+            "skills": [
+              "connection-mapper"
+            ],
+            "integrations": [],
+            "level": "manual"
+          },
+          {
+            "name": "Warm-Path Finding",
+            "desc": "The shortest real intro path into a target account · who can connect you.",
+            "skills": [
+              "path-finder",
+              "intro-drafter"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          }
+        ]
+      },
+      {
+        "name": "Markets",
+        "jobs": [
+          {
+            "name": "Competitor Teardown",
+            "desc": "Pricing, positioning, strengths, weaknesses, exploitable gaps.",
+            "skills": [
+              "competitor-teardown",
+              "positioning-mapper"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Vertical Analysis",
+            "desc": "Is this vertical worth entering · demand, budgets, buying behavior.",
+            "skills": [
+              "vertical-analyzer",
+              "opportunity-scorer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Pricing Research",
+            "desc": "What the market charges, anchors, and packaging patterns.",
+            "skills": [
+              "pricing-scanner",
+              "packaging-analyzer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "TAM / Market Sizing",
+            "desc": "How many companies actually fit · the real size of the prize.",
+            "skills": [
+              "tam-sizer",
+              "segment-counter"
+            ],
+            "integrations": [
+              "Exa",
+              "Apollo"
+            ],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Monitoring",
+        "jobs": [
+          {
+            "name": "Account Monitoring",
+            "desc": "Watch a target list for funding, hiring, leadership, and tech changes · ongoing.",
+            "skills": [
+              "account-watcher",
+              "change-detector"
+            ],
+            "integrations": [
+              "Exa",
+              "Firecrawl"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "News & Mention Tracking",
+            "desc": "Every mention of your brand, competitors, and topics · as it lands.",
+            "skills": [
+              "mention-tracker",
+              "news-watcher"
+            ],
+            "integrations": [
+              "Exa"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Alert Routing",
+            "desc": "The signals that matter reach the right person · the noise gets filtered.",
+            "skills": [
+              "signal-scorer",
+              "alert-router"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Synthesis",
+        "jobs": [
+          {
+            "name": "Research Reports",
+            "desc": "Any question → structured, cited report with diagrams.",
+            "skills": [
+              "report-builder",
+              "diagram-generator",
+              "source-citer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Data Visualization",
+            "desc": "Turn a pile of research into charts and diagrams that explain themselves.",
+            "skills": [
+              "chart-builder",
+              "diagram-generator"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Adversarial Verification",
+            "desc": "Claims get attacked before they get believed.",
+            "skills": [
+              "claim-verifier",
+              "source-cross-checker"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sector": "Customer",
+    "sub": "support · success · community",
+    "color": "#FB7185",
+    "intro": "Everything that happens after the sale · answering the repeat questions, watching for the accounts about to slip, and keeping the community alive. Churn rarely comes from bad work · it comes from silence. This department deflects the tickets that don’t need a human, spots the amber before it goes red, and renews accounts months early.",
+    "functions": [
+      {
+        "name": "Support",
+        "jobs": [
+          {
+            "name": "Ticket Triage",
+            "desc": "Classify, prioritize, and route every support request the moment it lands.",
+            "skills": [
+              "ticket-classifier",
+              "priority-router",
+              "sla-watcher"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "FAQ & Self-Serve",
+            "desc": "Answer the questions that repeat · and turn them into living help content.",
+            "skills": [
+              "faq-responder",
+              "help-article-writer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Escalations",
+            "desc": "Spot the angry, the churn-risk, and the edge case · and get a human there fast.",
+            "skills": [
+              "sentiment-flagger",
+              "escalation-router"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Macro Authoring",
+            "desc": "Turn the tickets that repeat into canned, on-brand responses agents reuse.",
+            "skills": [
+              "macro-writer",
+              "response-templater"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Success",
+        "jobs": [
+          {
+            "name": "Onboarding Journeys",
+            "desc": "Guide every new customer through activation, step by step.",
+            "skills": [
+              "journey-sequencer",
+              "activation-tracker"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Health Scoring",
+            "desc": "Score every account on usage, sentiment, and engagement · before renewal season.",
+            "skills": [
+              "health-scorer",
+              "churn-predictor"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Churn Prediction",
+            "desc": "Predict which accounts are about to slip · before the usage even dips.",
+            "skills": [
+              "churn-modeler",
+              "risk-forecaster"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Renewals & Expansion",
+            "desc": "Time renewal conversations and spot upsell openings.",
+            "skills": [
+              "renewal-scheduler",
+              "expansion-spotter"
+            ],
+            "integrations": [],
+            "level": "manual"
+          },
+          {
+            "name": "Advocacy & Referrals",
+            "desc": "Turn your happiest customers into referrals, reviews, and case studies.",
+            "skills": [
+              "advocate-finder",
+              "referral-asker"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "QBR Prep",
+            "desc": "Build the quarterly business review from real account data.",
+            "skills": [
+              "qbr-builder",
+              "value-recap-writer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Community",
+        "jobs": [
+          {
+            "name": "Engagement & Replies",
+            "desc": "Every member question and mention gets a response in the house voice.",
+            "skills": [
+              "community-responder",
+              "mention-watcher"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Moderation",
+            "desc": "Keep the space clean · spam, conduct, and noise handled quietly.",
+            "skills": [
+              "spam-filter",
+              "conduct-monitor"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Member Spotlights",
+            "desc": "Find and celebrate member wins · the retention engine.",
+            "skills": [
+              "win-detector",
+              "spotlight-writer"
+            ],
+            "integrations": [],
+            "level": "manual"
+          },
+          {
+            "name": "Event Coordination",
+            "desc": "Run the AMAs, calls, and spotlights on a cadence the community can count on.",
+            "skills": [
+              "event-scheduler",
+              "session-runner"
+            ],
+            "integrations": [
+              "Cal.com"
+            ],
+            "level": "manual"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sector": "Back Office",
+    "sub": "money in · books · office · people",
+    "color": "#FACC15",
+    "intro": "The unglamorous floor that keeps the lights on · invoices out and money in, the numbers reporting themselves every Monday, contracts and records that never go missing. Nobody starts a company to chase late payments. This department runs the admin on a schedule so the founder stops being the bottleneck for getting paid.",
+    "functions": [
+      {
+        "name": "Money In",
+        "jobs": [
+          {
+            "name": "Invoice Generation",
+            "desc": "Branded invoices per entity, currency, and tax treatment.",
+            "skills": [
+              "invoice-generator",
+              "entity-router"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Payment Tracking",
+            "desc": "Know what’s paid, due, and late · without opening a bank app.",
+            "skills": [
+              "payment-watcher",
+              "reconciler"
+            ],
+            "integrations": [
+              "Stripe",
+              "Wise"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Collections",
+            "desc": "Overdue invoices get chased politely and persistently.",
+            "skills": [
+              "overdue-nudger",
+              "escalation-sequencer"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          }
+        ]
+      },
+      {
+        "name": "Reporting",
+        "jobs": [
+          {
+            "name": "Revenue Reporting",
+            "desc": "Monthly revenue truth across entities and currencies.",
+            "skills": [
+              "revenue-reporter",
+              "currency-normalizer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Goal Pacing",
+            "desc": "Tracking against the income target, with pace forecasts.",
+            "skills": [
+              "goal-pacer",
+              "runway-projector"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Finance Ops",
+        "jobs": [
+          {
+            "name": "Cash-Flow Forecasting",
+            "desc": "Project cash in and out · know your runway before it becomes an emergency.",
+            "skills": [
+              "cashflow-projector",
+              "runway-calculator",
+              "scenario-modeler"
+            ],
+            "integrations": [
+              "Xero",
+              "Stripe"
+            ],
+            "level": "assisted"
+          },
+          {
+            "name": "Budget Tracking",
+            "desc": "Spend vs budget by category, with overruns flagged early.",
+            "skills": [
+              "budget-tracker",
+              "variance-flagger"
+            ],
+            "integrations": [
+              "Xero"
+            ],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Records",
+        "jobs": [
+          {
+            "name": "CRM Sync",
+            "desc": "Deals, contacts, and statuses stay current everywhere.",
+            "skills": [
+              "crm-syncer",
+              "two-way-updater"
+            ],
+            "integrations": [
+              "Attio"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Expense Categorization",
+            "desc": "Spend categorized for the accountant before they ask.",
+            "skills": [
+              "expense-categorizer"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Document Filing & Retrieval",
+            "desc": "Every document named, filed, and findable in ten seconds.",
+            "skills": [
+              "document-filer",
+              "retrieval-indexer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "Contract Lifecycle",
+            "desc": "Renewals, expiries, and obligations tracked so nothing sneaks up.",
+            "skills": [
+              "contract-tracker",
+              "renewal-notifier"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Entity Compliance",
+            "desc": "Filings and obligations per entity, tracked and scheduled.",
+            "skills": [
+              "compliance-calendar",
+              "filing-tracker"
+            ],
+            "integrations": [],
+            "level": "manual"
+          }
+        ]
+      },
+      {
+        "name": "Office",
+        "jobs": [
+          {
+            "name": "Calendar Management",
+            "desc": "Scheduling, conflicts, buffers, and timezone math handled.",
+            "skills": [
+              "calendar-manager",
+              "conflict-resolver"
+            ],
+            "integrations": [
+              "Cal.com"
+            ],
+            "level": "autonomous"
+          },
+          {
+            "name": "Email Triage",
+            "desc": "The inbox sorted by what actually needs the human.",
+            "skills": [
+              "email-triager",
+              "draft-responder"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          }
+        ]
+      },
+      {
+        "name": "Talent",
+        "jobs": [
+          {
+            "name": "Candidate Sourcing",
+            "desc": "Find and rank candidates for open roles across platforms.",
+            "skills": [
+              "candidate-finder",
+              "profile-ranker"
+            ],
+            "integrations": [],
+            "level": "manual"
+          },
+          {
+            "name": "Screening & Scheduling",
+            "desc": "First-pass screens and interview logistics, handled.",
+            "skills": [
+              "screen-summarizer",
+              "interview-scheduler"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          },
+          {
+            "name": "Onboarding & Training",
+            "desc": "New hires get the playbooks, access, and 30-day plan automatically.",
+            "skills": [
+              "hire-onboarder",
+              "training-sequencer"
+            ],
+            "integrations": [],
+            "level": "autonomous"
+          },
+          {
+            "name": "HR & Policy Assistant",
+            "desc": "Answer staff policy questions from the real handbook · leave, expenses, onboarding admin.",
+            "skills": [
+              "policy-answerer",
+              "handbook-keeper"
+            ],
+            "integrations": [],
+            "level": "assisted"
+          }
+        ]
+      }
+    ]
+  }
+]

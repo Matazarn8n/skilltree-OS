@@ -1,0 +1,100 @@
+import type { LessonContent } from "@/lib/lesson-types";
+
+const lesson: LessonContent = {
+  title: "Prompter ton Brain",
+  estMin: 9,
+  dek: "Prompter n'a rien à voir avec des mots magiques. C'est donner à Claude assez de contexte pour qu'il n'y ait qu'une seule façon raisonnable d'interpréter ta demande. Avec un Brain derrière, l'essentiel de ce contexte est déjà chargé.",
+  blocks: [
+    { type: "p", text: "Tu as construit le Brain. Voici comment lui parler pour que la sortie tombe vraiment juste." },
+    { type: "h2", text: "La vérité honnête sur le prompting" },
+    { type: "p", text: "Le prompting est surestimé. L'idée qu'il existe des formules secrètes qui débloquent des sorties nettement meilleures relève surtout du marketing." },
+    {
+      type: "p",
+      text: "Ce qui compte réellement est plus simple : donner à Claude assez de contexte pour qu'il ne puisse interpréter ta demande que d'une seule façon. S'il y a de l'ambiguïté dans ce que tu as demandé, Claude la comble avec des suppositions · généralement raisonnables, rarement exactement ce que tu voulais.",
+    },
+    { type: "p", text: "La compétence, ce n'est pas le prompting. C'est la clarté. Et un Brain fait l'essentiel du travail lourd, parce que le contexte permanent · qui tu es, tes clients, ta voix, tes processus · est déjà là. Ton prompt n'a plus qu'à fournir ce qui est spécifique à la tâche." },
+    {
+      type: "callout",
+      variant: "key",
+      title: "La clarté bat les mots magiques",
+      text: "Il n'y a pas de formule secrète. La seule chose qui améliore fiablement la qualité de sortie, c'est de réduire l'ambiguïté · donner à Claude assez de contexte pour qu'il n'y ait exactement qu'une seule façon raisonnable de lire ta demande. Un Brain est une machine à clarté : il fournit le contexte permanent pour que ton prompt n'ait qu'à porter ce qui est nouveau.",
+    },
+    { type: "h2", text: "Le principe contexte-d'abord" },
+    { type: "p", text: "Avant d'écrire une seule instruction, demande : est-ce que Claude sait assez pour bien faire ça ? Le contexte, c'est :" },
+    {
+      type: "ul",
+      items: [
+        "Qui tu es et ce que tu essaies d'accomplir",
+        "À quoi sert la sortie et pour qui",
+        "Dans quel format doit être la sortie",
+        "Quelles contraintes existent · longueur, ton, choses à éviter",
+        "Tout contexte qui change ce à quoi ressemble « bien »",
+      ],
+    },
+    { type: "p", text: "La plupart des prompts échouent non pas parce que l'instruction était mauvaise, mais parce que ce contexte manquait." },
+    { type: "p", text: "Mauvais prompt :" },
+    { type: "code", lang: "text", code: "Écris un cold email à ce prospect." },
+    { type: "p", text: "Meilleur prompt :" },
+    {
+      type: "code",
+      lang: "text",
+      code:
+        "Écris un cold email à [nom], VP Sales chez [entreprise].\nIl dirige une équipe commerciale de 15 personnes qui fait de l'outbound manuel.\nNotre angle : on construit de l'automatisation outbound qui remplace le travail manuel.\nMoins de 5 phrases. Un seul CTA : répondre à cet email.\nTon : direct, de pair à pair, sans jargon.",
+    },
+    { type: "p", text: "Même tâche, sortie complètement différente. La différence, c'est le contexte, pas la structure. Avec un Brain connecté, les éléments entre crochets et ton ton viennent souvent automatiquement de ta base de connaissance · tu n'as qu'à pointer Claude vers la page." },
+    { type: "h2", text: "Anticipe où ça va se perdre" },
+    { type: "p", text: "La deuxième couche, c'est de penser comme Claude. Où sont les ambiguïtés ? Où pourrait-il raisonnablement partir dans une direction différente de celle que tu veux ? Adresse-les en amont :" },
+    {
+      type: "ul",
+      items: [
+        "Si le ton compte, précise-le. « Professionnel » veut dire des choses différentes selon les gens. « Court, direct, comme un texto d'un fondateur » est sans ambiguïté.",
+        "Si le format compte, décris-le. Puces vs prose vs tableau vs liste numérotée.",
+        "Si la longueur compte, dis-le. « Moins de 100 mots. » « Deux à trois paragraphes. »",
+        "S'il y a des choses à éviter, nomme-les. « Pas de jargon type levier ou synergie. Pas de points d'exclamation. »",
+      ],
+    },
+    { type: "h2", text: "Donne-lui le bon cadre" },
+    { type: "p", text: "Claude répond bien quand on lui dit qui il est dans un contexte précis. Pas du roleplay · charger le bon cadre de référence." },
+    { type: "p", text: "« Tu es un consultant senior en systèmes IA qui relit cette proposition » produit une sortie différente de l'absence de cadre. Ça charge l'expertise pertinente. Cadres utiles :" },
+    {
+      type: "ul",
+      items: [
+        "« Relis ceci comme un client sceptique qui s'est déjà fait avoir par des prestataires »",
+        "« Écris ceci comme un fondateur qui parle à un pair, pas comme un commercial »",
+        "« Analyse ceci comme un CFO qui cherche le ROI »",
+        "« Édite ceci pour matcher le ton de l'exemple ci-dessous »",
+      ],
+    },
+    { type: "h2", text: "Montre-lui un exemple" },
+    { type: "p", text: "Les exemples battent les instructions. Si tu veux un style, un ton ou un format précis, colle quelque chose qui l'incarne parfaitement et dis « écris dans ce style ». C'est là que le Brain rapporte encore une fois · ton vault est plein d'exemples. Pointe Claude vers l'email qui a marché, le post qui a performé, la proposition que le client a adorée. Il fait du pattern-matching à partir du vrai bien plus précisément qu'à partir d'une description." },
+    { type: "h2", text: "Patterns de prompt utiles" },
+    { type: "p", text: "Ce ne sont pas des astuces. Juste des façons de donner à Claude ce dont il a besoin." },
+    { type: "p", text: "Avant/après :" },
+    {
+      type: "code",
+      lang: "text",
+      code: "Voici ce que j'ai actuellement : [colle]\nVoici ce que je veux que ça devienne : [décris]\nFais ce changement, en gardant tout le reste identique.",
+    },
+    { type: "p", text: "Contrainte :" },
+    { type: "code", lang: "text", code: "Fais X.\nContraintes : [liste-les]\nÀ ne pas faire : [liste ce qu'il faut éviter]" },
+    { type: "p", text: "Exemple :" },
+    { type: "code", lang: "text", code: "Voici un exemple de la sortie que je veux : [colle l'exemple]\nFais maintenant pareil pour : [ton entrée réelle]" },
+    { type: "p", text: "Rôle :" },
+    { type: "code", lang: "text", code: "Tu es [rôle/perspective précis].\n[Contexte sur la situation]\n[Ce que tu veux]" },
+    { type: "p", text: "Itération · quand la sortie est presque bonne mais pas tout à fait, ne dis pas « améliore-la ». Dis ce qui ne va pas :" },
+    {
+      type: "code",
+      lang: "text",
+      code: "Bon début. Trois changements :\n1. [changement précis]\n2. [changement précis]\n3. [changement précis]\nGarde tout le reste identique.",
+    },
+    { type: "h2", text: "Quand le problème est le raisonnement, pas le prompt" },
+    { type: "p", text: "Parfois le prompt est bon et Claude ne réfléchit juste pas assez fort. Avant de passer vingt minutes à peaufiner, essaie :" },
+    { type: "code", lang: "text", code: "/effort high" },
+    { type: "p", text: "Ou ajoute « réfléchis bien » ou « ultrathink ». Si la sortie fait un bond, le problème était la profondeur de raisonnement, pas la qualité du prompt." },
+    { type: "h2", text: "La seule règle qui couvre tout" },
+    { type: "p", text: "Relis ton prompt avant de l'envoyer. Si quelqu'un d'intelligent le lisait sans aucun contexte, pourrait-il l'interpréter différemment de ce que tu veux ? Si oui, ajoute le contexte qui retire l'ambiguïté." },
+    { type: "p", text: "C'est tout. C'est ça le prompting. Le Brain, c'est ce qui fait que « zéro contexte » arrête d'être vrai." },
+  ],
+};
+
+export default lesson;

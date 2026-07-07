@@ -1,0 +1,51 @@
+{
+  "hub": "Company Knowledge Base",
+  "sectors": 7,
+  "functions": 34,
+  "jobs": 137,
+  "skillFiles": 78,
+  "sectorBreakdown": [
+    {
+      "sector": "Sales",
+      "functions": 5,
+      "jobs": 22
+    },
+    {
+      "sector": "Deals",
+      "functions": 5,
+      "jobs": 24
+    },
+    {
+      "sector": "Marketing",
+      "functions": 5,
+      "jobs": 23
+    },
+    {
+      "sector": "Operations",
+      "functions": 5,
+      "jobs": 19
+    },
+    {
+      "sector": "Intelligence",
+      "functions": 5,
+      "jobs": 17
+    },
+    {
+      "sector": "Customer",
+      "functions": 3,
+      "jobs": 14
+    },
+    {
+      "sector": "Back Office",
+      "functions": 6,
+      "jobs": 18
+    }
+  ],
+  "counts": {
+    "TREE_jobs": 137,
+    "PLAYBOOK_entries": 137,
+    "PLAYBOOK_entries_without_tree_job": [],
+    "SKILL_META_entries": 78,
+    "SKILL_PREVIEWS_entries": 78
+  }
+}

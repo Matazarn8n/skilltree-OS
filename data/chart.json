@@ -1,0 +1,1710 @@
+{
+  "source": "captures/chart/*.json (agent B, 7/7 sectors)",
+  "sector_count": 7,
+  "total_jobs": 165,
+  "total_human_led": 36,
+  "sectors": {
+    "Back Office": {
+      "summary": "10 of 22 jobs run autonomously · 6 assisted · 6 stay human-led.",
+      "jobs": [
+        {
+          "name": "Hiring Decisions",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "AI can source and screen, but the actual call on who joins the team is a founder's read on character and fit that stays human.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Entity Compliance",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Filings and obligations per entity, tracked and scheduled.",
+          "skills": [
+            "Records Administrator"
+          ]
+        },
+        {
+          "name": "Compliance Sign-Off",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Final responsibility for legal filings and entity obligations carries personal liability, so a human signs off even when the calendar is automated.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Candidate Sourcing",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Find and rank candidates for open roles across platforms.",
+          "skills": [
+            "Talent Coordinator"
+          ]
+        },
+        {
+          "name": "Banking Relationships",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Opening accounts, negotiating terms, and the trust with banks and the accountant are relationship calls a person owns.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Spend Authority",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "What the business actually spends money on, and where to cut, is a strategic taste call that the founder keeps despite full visibility being automated.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Expense Categorization",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Spend categorized for the accountant before they ask.",
+          "skills": [
+            "Financial Reporting Analyst"
+          ]
+        },
+        {
+          "name": "Contract Lifecycle",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Renewals, expiries, and obligations tracked so nothing sneaks up.",
+          "skills": [
+            "Contracts Coordinator"
+          ]
+        },
+        {
+          "name": "Screening & Scheduling",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "First-pass screens and interview logistics, handled.",
+          "skills": [
+            "Talent Coordinator"
+          ]
+        },
+        {
+          "name": "HR & Policy Assistant",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Answer staff policy questions from the real handbook · leave, expenses, onboarding admin.",
+          "skills": [
+            "People Operations Assistant"
+          ]
+        },
+        {
+          "name": "Collections",
+          "level": "assisted",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Overdue invoices get chased politely and persistently.",
+          "skills": [
+            "Billing Manager"
+          ]
+        },
+        {
+          "name": "Cash-Flow Forecasting",
+          "level": "assisted",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Project cash in and out · know your runway before it becomes an emergency.",
+          "skills": [
+            "Finance Operations Analyst"
+          ]
+        },
+        {
+          "name": "Document Filing & Retrieval",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Every document named, filed, and findable in ten seconds.",
+          "skills": [
+            "Records Administrator"
+          ]
+        },
+        {
+          "name": "Payment Tracking",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Know what's paid, due, and late · without opening a bank app.",
+          "skills": [
+            "Billing Manager"
+          ]
+        },
+        {
+          "name": "Revenue Reporting",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Monthly revenue truth across entities and currencies.",
+          "skills": [
+            "Financial Reporting Analyst"
+          ]
+        },
+        {
+          "name": "Budget Tracking",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Spend vs budget by category, with overruns flagged early.",
+          "skills": [
+            "Finance Operations Analyst"
+          ]
+        },
+        {
+          "name": "CRM Sync",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Deals, contacts, and statuses stay current everywhere.",
+          "skills": [
+            "Records Administrator"
+          ]
+        },
+        {
+          "name": "Email Triage",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "The inbox sorted by what actually needs the human.",
+          "skills": [
+            "Inbox Manager"
+          ]
+        },
+        {
+          "name": "Invoice Generation",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Branded invoices per entity, currency, and tax treatment.",
+          "skills": [
+            "Billing Manager"
+          ]
+        },
+        {
+          "name": "Onboarding & Training",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "New hires get the playbooks, access, and 30-day plan automatically.",
+          "skills": [
+            "Talent Coordinator"
+          ]
+        },
+        {
+          "name": "Goal Pacing",
+          "level": "autonomous",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Tracking against the income target, with pace forecasts.",
+          "skills": [
+            "Financial Reporting Analyst"
+          ]
+        },
+        {
+          "name": "Calendar Management",
+          "level": "autonomous",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Scheduling, conflicts, buffers, and timezone math handled.",
+          "skills": [
+            "Executive Assistant"
+          ]
+        }
+      ],
+      "job_count": 22,
+      "human_led": 6
+    },
+    "Customer": {
+      "summary": "5 of 18 jobs run autonomously · 6 assisted · 7 stay human-led.",
+      "jobs": [
+        {
+          "name": "Renewal Negotiation",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "The actual renewal and upsell conversation is a relationship and a deal, not a workflow. AI can time and tee it up, but a person owns the price, the terms, and the trust.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Renewals & Expansion",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Time renewal conversations and spot upsell openings.",
+          "skills": [
+            "Customer Success Manager"
+          ]
+        },
+        {
+          "name": "Strategic Accounts",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "The handful of accounts that define the business need a named human owner who knows their politics and roadmap · these relationships are the moat, not a queue item.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Member Spotlights",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Find and celebrate member wins · the retention engine.",
+          "skills": [
+            "Community Manager"
+          ]
+        },
+        {
+          "name": "Community Voice",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "The personality, culture, and judgment calls that make a community feel alive can't be templated · a human sets the tone and decides which moments to celebrate.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Event Coordination",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Run the AMAs, calls, and spotlights on a cadence the community can count on.",
+          "skills": [
+            "Community Manager"
+          ]
+        },
+        {
+          "name": "Save Calls",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "When an account is genuinely about to churn, the rescue is a human-to-human conversation · AI surfaces the risk, but a person makes the save.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Ticket Triage",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Classify, prioritize, and route every support request the moment it lands.",
+          "skills": [
+            "Support Operations Manager"
+          ]
+        },
+        {
+          "name": "Escalations",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Spot the angry, the churn-risk, and the edge case · and get a human there fast.",
+          "skills": [
+            "Support Operations Manager"
+          ]
+        },
+        {
+          "name": "Health Scoring",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Score every account on usage, sentiment, and engagement · before renewal season.",
+          "skills": [
+            "Customer Success Manager"
+          ]
+        },
+        {
+          "name": "Moderation",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Keep the space clean · spam, conduct, and noise handled quietly.",
+          "skills": [
+            "Community Manager"
+          ]
+        },
+        {
+          "name": "Advocacy & Referrals",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Turn your happiest customers into referrals, reviews, and case studies.",
+          "skills": [
+            "Customer Success Manager"
+          ]
+        },
+        {
+          "name": "Churn Prediction",
+          "level": "assisted",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Predict which accounts are about to slip · before the usage even dips.",
+          "skills": [
+            "Customer Success Manager"
+          ]
+        },
+        {
+          "name": "FAQ & Self-Serve",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Answer the questions that repeat · and turn them into living help content.",
+          "skills": [
+            "Support Answerer",
+            "Help Content Writer"
+          ]
+        },
+        {
+          "name": "Macro Authoring",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Turn the tickets that repeat into canned, on-brand responses agents reuse.",
+          "skills": [
+            "Support Operations Manager"
+          ]
+        },
+        {
+          "name": "QBR Prep",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Build the quarterly business review from real account data.",
+          "skills": [
+            "Customer Success Manager"
+          ]
+        },
+        {
+          "name": "Engagement & Replies",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Every member question and mention gets a response in the house voice.",
+          "skills": [
+            "Community Manager"
+          ]
+        },
+        {
+          "name": "Onboarding Journeys",
+          "level": "autonomous",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Guide every new customer through activation, step by step.",
+          "skills": [
+            "Customer Success Manager"
+          ]
+        }
+      ],
+      "job_count": 18,
+      "human_led": 7
+    },
+    "Deals": {
+      "summary": "19 of 28 jobs run autonomously · 4 assisted · 5 stay human-led.",
+      "jobs": [
+        {
+          "name": "Closing the Deal",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "The actual ask, the room read, and the final yes stay with a person. AI preps the artifacts and the brief, but trust is transferred human to human.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Win/Loss Analysis",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Tag why deals close or die; feed patterns back into targeting.",
+          "skills": [
+            "Reactivation Specialist"
+          ]
+        },
+        {
+          "name": "Discounting & Concessions",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "What to give away to win a deal is a strategic call with margin and precedent at stake. The model can suggest anchors, but the concession is the founder's to make.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Strategic Account Calls",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Which whale to chase, which deal to walk from, and how hard to push live in a person's read of the long game, not in pipeline math.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Proposal Final Sign-Off",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Nothing branded reaches a prospect without a human eye on the framing, the price, and the promise. Taste and accountability stay with Ahmed.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Objection Library",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Mine every call for the objections that come up · build the rebuttals that win.",
+          "skills": [
+            "Deal Debrief Analyst"
+          ]
+        },
+        {
+          "name": "Objection Response",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Draft responses to common objections from a tuned library.",
+          "skills": [
+            "Outbound Inbox Manager"
+          ]
+        },
+        {
+          "name": "Agreement Drafting",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Produce the services agreement the moment a deal closes verbally.",
+          "skills": [
+            "Contracts Coordinator"
+          ]
+        },
+        {
+          "name": "Forecasting",
+          "level": "assisted",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Probability-weight the pipeline into a revenue forecast.",
+          "skills": [
+            "Pipeline Operations Manager"
+          ]
+        },
+        {
+          "name": "Reply Classification",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Read every reply and tag it · interested, objection, referral, not now, never.",
+          "skills": [
+            "Outbound Inbox Manager"
+          ]
+        },
+        {
+          "name": "Hot-Lead Routing",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Route interested replies to the calendar and the pipeline instantly.",
+          "skills": [
+            "Outbound Inbox Manager"
+          ]
+        },
+        {
+          "name": "Referral Capture",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Spot the \"talk to my colleague\" replies and action the warm intro.",
+          "skills": [
+            "Inbound Response Manager"
+          ]
+        },
+        {
+          "name": "Lead Qualification",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Parse intake forms and score inbound leads before a human looks.",
+          "skills": [
+            "Inbound Response Manager"
+          ]
+        },
+        {
+          "name": "Inbox Triage",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Sort inbound email and DMs · client, lead, brand deal, noise.",
+          "skills": [
+            "Inbound Response Manager"
+          ]
+        },
+        {
+          "name": "Call Capture",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Record, transcribe, and file every meeting automatically.",
+          "skills": [
+            "Meeting Intelligence Engineer"
+          ]
+        },
+        {
+          "name": "Post-Call Debrief",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Extract outcomes, action items, and deal updates from the transcript.",
+          "skills": [
+            "Deal Debrief Analyst"
+          ]
+        },
+        {
+          "name": "CRM Hygiene",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Keep records deduped, fields normalized, stages honest.",
+          "skills": [
+            "Pipeline Operations Manager"
+          ]
+        },
+        {
+          "name": "Pipeline Reporting",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Weekly pipeline state · what moved, what stalled, what closes next.",
+          "skills": [
+            "Pipeline Operations Manager"
+          ]
+        },
+        {
+          "name": "Meeting Booking",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Propose slots, book calls, chase no-shows.",
+          "skills": [
+            "Meeting Booking Coordinator"
+          ]
+        },
+        {
+          "name": "Speed-to-Lead",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Acknowledge and engage every inbound lead within minutes.",
+          "skills": [
+            "Inbound Response Manager"
+          ]
+        },
+        {
+          "name": "Comment-CTA Fulfillment",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Detect keyword comments on content and deliver the promised asset by DM.",
+          "skills": [
+            "DM Fulfillment Specialist"
+          ]
+        },
+        {
+          "name": "Pre-Call Briefing",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Build a brief before every call · who, company, history, objectives, talking points.",
+          "skills": [
+            "Call Prep Researcher"
+          ]
+        },
+        {
+          "name": "Follow-Up Drafting",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Draft the recap email with next steps before the prospect forgets the call.",
+          "skills": [
+            "Deal Debrief Analyst"
+          ]
+        },
+        {
+          "name": "Demo Prototyping",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Turn discovery notes into a working visual prototype before the next meeting.",
+          "skills": [
+            "Solutions Engineer"
+          ]
+        },
+        {
+          "name": "Proposal Generation",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Generate branded proposals rendered to PDF from call context.",
+          "skills": [
+            "Proposal Writer"
+          ]
+        },
+        {
+          "name": "Pricing Support",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Model anchors, phase structures, and ROI comparisons per deal.",
+          "skills": [
+            "Pricing Analyst"
+          ]
+        },
+        {
+          "name": "Deal Room Assembly",
+          "level": "autonomous",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Spin up tracked, password-gated deal rooms per prospect.",
+          "skills": [
+            "Deal Room Producer"
+          ]
+        },
+        {
+          "name": "Reactivation",
+          "level": "autonomous",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Revive dormant deals and win back lost ones on a schedule.",
+          "skills": [
+            "Reactivation Specialist"
+          ]
+        }
+      ],
+      "job_count": 28,
+      "human_led": 5
+    },
+    "Intelligence": {
+      "summary": "12 of 21 jobs run autonomously · 4 assisted · 5 stay human-led.",
+      "jobs": [
+        {
+          "name": "What to research next",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Deciding which accounts, verticals, and questions are worth the dig is a bet on where the business is going. AI answers the question; a human picks which questions matter.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Network Mapping",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Who knows whom · paths into a target account.",
+          "skills": [
+            "Relationship Mapper"
+          ]
+        },
+        {
+          "name": "Reading between the lines",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Knowing what a funding round or org reshuffle actually means for a deal is pattern-matching born of scars. The signal is automated; the so-what stays human.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Making the warm intro",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "AI can find the shortest path into an account, but the actual ask trades on a personal relationship and reputation no agent can spend.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Trusting the call",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "When verified research still contradicts a gut read, someone has to own the final judgment before money or reputation rides on it.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Buying-Committee Mapping",
+          "level": "assisted",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Who actually decides · economic buyer, champion, blockers, their roles.",
+          "skills": [
+            "Relationship Mapper"
+          ]
+        },
+        {
+          "name": "Warm-Path Finding",
+          "level": "assisted",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "The shortest real intro path into a target account · who can connect you.",
+          "skills": [
+            "Relationship Mapper"
+          ]
+        },
+        {
+          "name": "Account Monitoring",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Watch a target list for funding, hiring, leadership, and tech changes · ongoing.",
+          "skills": [
+            "Signal Monitoring Analyst"
+          ]
+        },
+        {
+          "name": "News & Mention Tracking",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Every mention of your brand, competitors, and topics · as it lands.",
+          "skills": [
+            "Signal Monitoring Analyst"
+          ]
+        },
+        {
+          "name": "Company Deep-Dive",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Financials, growth signals, org structure, strategic posture.",
+          "skills": [
+            "Company Research Analyst"
+          ]
+        },
+        {
+          "name": "Tech-Stack Detection",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "What a target company runs, and where the gaps are.",
+          "skills": [
+            "Company Research Analyst"
+          ]
+        },
+        {
+          "name": "Funding & Financials Lookup",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Rounds, investors, revenue estimates, filings · who just got budget.",
+          "skills": [
+            "Company Research Analyst"
+          ]
+        },
+        {
+          "name": "Person Research",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Background, content trail, interests, mutual ground for any contact.",
+          "skills": [
+            "Prospect Research Analyst"
+          ]
+        },
+        {
+          "name": "Pricing Research",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "What the market charges, anchors, and packaging patterns.",
+          "skills": [
+            "Competitive Intelligence Analyst"
+          ]
+        },
+        {
+          "name": "TAM / Market Sizing",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "How many companies actually fit · the real size of the prize.",
+          "skills": [
+            "Market Mapper"
+          ]
+        },
+        {
+          "name": "Competitor Teardown",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Pricing, positioning, strengths, weaknesses, exploitable gaps.",
+          "skills": [
+            "Competitive Intelligence Analyst"
+          ]
+        },
+        {
+          "name": "Vertical Analysis",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Is this vertical worth entering · demand, budgets, buying behavior.",
+          "skills": [
+            "Vertical Analyst"
+          ]
+        },
+        {
+          "name": "Alert Routing",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "The signals that matter reach the right person · the noise gets filtered.",
+          "skills": [
+            "Signal Monitoring Analyst"
+          ]
+        },
+        {
+          "name": "Research Reports",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Any question → structured, cited report with diagrams.",
+          "skills": [
+            "skill in progress"
+          ]
+        },
+        {
+          "name": "Data Visualization",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Turn a pile of research into charts and diagrams that explain themselves.",
+          "skills": [
+            "Business Data Analyst"
+          ]
+        },
+        {
+          "name": "Adversarial Verification",
+          "level": "autonomous",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Claims get attacked before they get believed.",
+          "skills": [
+            "Red Team Reviewer"
+          ]
+        }
+      ],
+      "job_count": 21,
+      "human_led": 5
+    },
+    "Marketing": {
+      "summary": "18 of 27 jobs run autonomously · 5 assisted · 4 stay human-led.",
+      "jobs": [
+        {
+          "name": "Brand Voice & Taste",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "The final call on whether a piece sounds like Ahmed and earns the post. AI drafts to the pattern, but the line between on-brand and off stays a human judgment.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Content Strategy & Bets",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Which narratives to chase, which pillars to push this quarter, and which trends to ignore. The big directional bets that the whole engine then executes against.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Sponsor Relationships",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Negotiating deals and protecting trust with brand partners. The handshake, the pushback, and the long-term relationship can't be automated.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Final Publish Approval",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "The go/no-go before anything reaches the audience under Ahmed's name. Reputation risk means a human signs off on what actually ships.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Image Generation",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Brand-consistent images from reference libraries.",
+          "skills": [
+            "Brand Visual Designer",
+            "Personal Brand Designer"
+          ]
+        },
+        {
+          "name": "Thumbnail & Cover Design",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Scroll-stopping thumbnails and covers tuned to earn the click.",
+          "skills": [
+            "Brand Visual Designer"
+          ]
+        },
+        {
+          "name": "Ad Creative",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Generate and iterate paid-ad variations · hooks, angles, formats.",
+          "skills": [
+            "Creative Strategist"
+          ]
+        },
+        {
+          "name": "Clip Extraction",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Cut long recordings into short-form clips worth posting.",
+          "skills": [
+            "Video Editor"
+          ]
+        },
+        {
+          "name": "Publishing",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Schedule and post across platforms via API.",
+          "skills": [
+            "Publishing Manager"
+          ]
+        },
+        {
+          "name": "Performance Mining",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Rank your own content corpus · what worked, what to re-hash.",
+          "skills": [
+            "Content Performance Analyst"
+          ]
+        },
+        {
+          "name": "Trend Monitoring",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Watch the niche for breaking topics and rising formats.",
+          "skills": [
+            "Trend Analyst"
+          ]
+        },
+        {
+          "name": "Competitor Analysis",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Scrape and transcribe competitor content; extract hook patterns.",
+          "skills": [
+            "Instagram Content Analyst",
+            "TikTok Content Analyst"
+          ]
+        },
+        {
+          "name": "Audience Analysis",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Mine comments and DMs for questions, objections, and content ideas.",
+          "skills": [
+            "Content Performance Analyst"
+          ]
+        },
+        {
+          "name": "Hook Writing",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Generate and rank hooks per platform from proven patterns.",
+          "skills": [
+            "Creative Strategist"
+          ]
+        },
+        {
+          "name": "Script Writing",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Full reel and video scripts in the house voice.",
+          "skills": [
+            "Scriptwriter"
+          ]
+        },
+        {
+          "name": "Caption Writing",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Platform-correct captions with CTA placement rules baked in.",
+          "skills": [
+            "Social Copywriter"
+          ]
+        },
+        {
+          "name": "Carousel Production",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Design and export branded carousel slides.",
+          "skills": [
+            "Carousel Designer"
+          ]
+        },
+        {
+          "name": "Video Production",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Programmatic video · overlays, captions, motion graphics on recordings.",
+          "skills": [
+            "Video Editor"
+          ]
+        },
+        {
+          "name": "Landing Page Copy",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Conversion copy for the whole page · hero, proof, offer, FAQ, CTA.",
+          "skills": [
+            "Conversion Copywriter"
+          ]
+        },
+        {
+          "name": "Deck Production",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Webinar and talk decks in the brand design system.",
+          "skills": [
+            "Presentation Designer"
+          ]
+        },
+        {
+          "name": "Cross-Platform Adaptation",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "One idea → native formats for every platform.",
+          "skills": [
+            "Content Repurposing Manager"
+          ]
+        },
+        {
+          "name": "Lead-Magnet Builds",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Turn content themes into gated guides and landing pages.",
+          "skills": [
+            "Lead Magnet Producer"
+          ]
+        },
+        {
+          "name": "Newsletter & Broadcast",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Design and send the weekly email in the brand system.",
+          "skills": [
+            "Newsletter Editor"
+          ]
+        },
+        {
+          "name": "SEO & GEO",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Make the site legible to search engines and LLMs.",
+          "skills": [
+            "SEO Engineer"
+          ]
+        },
+        {
+          "name": "OG & Share Surface",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Every page ships with share-ready open-graph imagery.",
+          "skills": [
+            "SEO Engineer"
+          ]
+        },
+        {
+          "name": "Deal Scripting",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Sponsored scripts in the proven format, per brand brief.",
+          "skills": [
+            "Brand Deal Producer"
+          ]
+        },
+        {
+          "name": "Approval Docs",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Brand-safe formatted docs for sponsor sign-off.",
+          "skills": [
+            "Brand Deal Producer"
+          ]
+        }
+      ],
+      "job_count": 27,
+      "human_led": 4
+    },
+    "Operations": {
+      "summary": "11 of 23 jobs run autonomously · 7 assisted · 5 stay human-led.",
+      "jobs": [
+        {
+          "name": "Scope & Trade-off Calls",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Deciding what to build, what to cut, and where the line of done sits is a commercial judgment call that shapes margin and the relationship. AI scaffolds and ships, but a human owns the scope.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "SOP Generation",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Turn delivered work into reusable playbooks.",
+          "skills": [
+            "Playbook Writer"
+          ]
+        },
+        {
+          "name": "Client Trust & Escalations",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "When delivery slips or an incident hits a real client, the apology, the reset, and the hard conversation stay human. Trust through the quiet stretches is held by a person, not a status bot.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Architecture Decisions",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Choosing the stack, the integration shape, and the data model for a build is a one-way-door decision. AI executes the pattern, but the architecture taste stays with the operator.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Final Ship Approval",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "The last look before a system goes live to a paying client is a reputation call. QA flags and verifies, but the sign-off that it's good enough to ship belongs to a human.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Access Collection",
+          "level": "assisted",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Chase and verify every credential and API key needed to build.",
+          "skills": [
+            "Client Onboarding Manager"
+          ]
+        },
+        {
+          "name": "Data Migration",
+          "level": "assisted",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Move and clean data between systems without losing or mangling a row.",
+          "skills": [
+            "Integration Engineer"
+          ]
+        },
+        {
+          "name": "Handoff Docs",
+          "level": "assisted",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Clean documentation when a system ships to the client.",
+          "skills": [
+            "Playbook Writer"
+          ]
+        },
+        {
+          "name": "QA & Verification",
+          "level": "assisted",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Verify every build against real data before the client sees it.",
+          "skills": [
+            "QA Engineer"
+          ]
+        },
+        {
+          "name": "Agent Evaluation",
+          "level": "assisted",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Test agent outputs against a benchmark before they touch real work.",
+          "skills": [
+            "QA Engineer"
+          ]
+        },
+        {
+          "name": "Monitoring & Alerting",
+          "level": "assisted",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Watch every automation for failures and silent stalls · know before the client does.",
+          "skills": [
+            "Reliability Engineer"
+          ]
+        },
+        {
+          "name": "Incident Response",
+          "level": "assisted",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "When an automation breaks · triage, root-cause, fix, and write the note.",
+          "skills": [
+            "Reliability Engineer"
+          ]
+        },
+        {
+          "name": "Project Scaffolding",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Stand up the repo, context files, and plan for a new engagement.",
+          "skills": [
+            "Client Onboarding Manager"
+          ]
+        },
+        {
+          "name": "Integration Builds",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Wire client systems together · CRMs, calendars, transcripts, payments.",
+          "skills": [
+            "Integration Engineer"
+          ]
+        },
+        {
+          "name": "Transcript Processing",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Every meeting becomes searchable, structured context.",
+          "skills": [
+            "Meeting Intelligence Engineer"
+          ]
+        },
+        {
+          "name": "Context Maintenance",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Per-client context files stay current as work happens.",
+          "skills": [
+            "Company Knowledge Base"
+          ]
+        },
+        {
+          "name": "Document Extraction",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "High-volume structured extraction from client documents.",
+          "skills": [
+            "Document Extraction Engineer"
+          ]
+        },
+        {
+          "name": "Cost & Usage Tracking",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Token and API spend tracked against budget · no surprise bills.",
+          "skills": [
+            "Reliability Engineer"
+          ]
+        },
+        {
+          "name": "Meeting Follow-Ups",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Client call transcripts → action items → assigned and tracked.",
+          "skills": [
+            "Follow-Up Coordinator"
+          ]
+        },
+        {
+          "name": "Portal Sync",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Session summaries and deliverables flow into the client portal automatically.",
+          "skills": [
+            "Client Portal Manager"
+          ]
+        },
+        {
+          "name": "Kickoff Pack",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Welcome email, access checklist, and project scaffold the day a deal closes.",
+          "skills": [
+            "Client Onboarding Manager"
+          ]
+        },
+        {
+          "name": "Portal Provisioning",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Spin up client-scoped delivery portals with live status.",
+          "skills": [
+            "Client Portal Manager"
+          ]
+        },
+        {
+          "name": "Status Updates",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Clients see progress without asking for it.",
+          "skills": [
+            "Delivery Status Reporter"
+          ]
+        }
+      ],
+      "job_count": 23,
+      "human_led": 5
+    },
+    "Sales": {
+      "summary": "19 of 26 jobs run autonomously · 3 assisted · 4 stay human-led.",
+      "jobs": [
+        {
+          "name": "Offer & positioning",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "The core promise · who you serve, the problem you solve, and how you frame the value. Sharp positioning is a judgment call that sets the ceiling on everything downstream.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Key-account relationships",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Trust, rapport, and the long game with the accounts that matter most. People buy from people · this stays human by design.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Brand-voice & final approvals",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "The final read before anything ships · tone, taste, and the call on whether it sounds like you. AI drafts, you sign off.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Deal strategy on big accounts",
+          "level": "human-led",
+          "stage": null,
+          "meta": "Ongoing",
+          "desc": "Reading the room, sequencing stakeholders, and shaping the deal on the accounts where the number is large enough to warrant a human owner.",
+          "skills": [
+            "A person owns this"
+          ]
+        },
+        {
+          "name": "Lookalike Modeling",
+          "level": "assisted",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Build new target lists off the shape of your closed-won accounts.",
+          "skills": [
+            "Lead Scoring Analyst"
+          ]
+        },
+        {
+          "name": "Trigger Detection",
+          "level": "assisted",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Watch for buying signals · hiring, funding, tech changes, leadership moves.",
+          "skills": [
+            "Buying Signals Analyst"
+          ]
+        },
+        {
+          "name": "Deliverability",
+          "level": "assisted",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Keep domains healthy · warmup, spam testing, inbox rotation.",
+          "skills": [
+            "Deliverability Manager"
+          ]
+        },
+        {
+          "name": "ICP Definition",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Define and refine ideal customer profiles per vertical · firmographics, pain patterns, buying triggers.",
+          "skills": [
+            "ICP Strategist"
+          ]
+        },
+        {
+          "name": "Market Mapping",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Map the total addressable companies in a target vertical before a campaign.",
+          "skills": [
+            "Market Mapper"
+          ]
+        },
+        {
+          "name": "Database Mining",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Pull targeted company and contact lists from structured databases.",
+          "skills": [
+            "Lead Sourcing Manager"
+          ]
+        },
+        {
+          "name": "Web & Maps Scraping",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Scrape local businesses, directories, and niche sources for leads.",
+          "skills": [
+            "Lead Sourcing Manager"
+          ]
+        },
+        {
+          "name": "Social Mining",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Harvest engaged audiences · post commenters, followers, group members.",
+          "skills": [
+            "Social Prospecting Specialist"
+          ]
+        },
+        {
+          "name": "List Building",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Merge, dedupe, and segment raw leads into campaign-ready lists.",
+          "skills": [
+            "Lead Sourcing Manager"
+          ]
+        },
+        {
+          "name": "Contact Enrichment",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Find and append emails, phones, and LinkedIn profiles to every lead.",
+          "skills": [
+            "Data Enrichment Specialist"
+          ]
+        },
+        {
+          "name": "Email Verification",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Validate every address before it ever gets a send.",
+          "skills": [
+            "Data Enrichment Specialist"
+          ]
+        },
+        {
+          "name": "Account Enrichment",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Layer firmographics, tech stack, and headcount trends onto target accounts.",
+          "skills": [
+            "Data Enrichment Specialist"
+          ]
+        },
+        {
+          "name": "Personalization Research",
+          "level": "autonomous",
+          "stage": 1,
+          "meta": "1 · Foundation",
+          "desc": "Build a personalization dossier per prospect · hooks, context, common ground.",
+          "skills": [
+            "Prospect Research Analyst"
+          ]
+        },
+        {
+          "name": "Fit Scoring",
+          "level": "autonomous",
+          "stage": 2,
+          "meta": "2 · Capture",
+          "desc": "Score every lead against ICP so outreach spends effort where it converts.",
+          "skills": [
+            "Lead Scoring Analyst"
+          ]
+        },
+        {
+          "name": "Cold Email Drafting",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Write multi-step cold email sequences tuned to the vertical and offer.",
+          "skills": [
+            "Cold Email Copywriter"
+          ]
+        },
+        {
+          "name": "LinkedIn Messaging",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Draft connection notes and DM sequences that read human.",
+          "skills": [
+            "LinkedIn Outreach Specialist"
+          ]
+        },
+        {
+          "name": "Proof Matching",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Match the right case study to each prospect industry and problem.",
+          "skills": [
+            "Case Study Curator"
+          ]
+        },
+        {
+          "name": "Cold-Call Scripting",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Call and voicemail scripts with branching objection handling that read human.",
+          "skills": [
+            "Outbound Scriptwriter"
+          ]
+        },
+        {
+          "name": "Video Prospecting",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Personalized video scripts · the hook, the personal line, the CTA, under 90 seconds.",
+          "skills": [
+            "Outbound Scriptwriter"
+          ]
+        },
+        {
+          "name": "Campaign Launch",
+          "level": "autonomous",
+          "stage": 3,
+          "meta": "3 · Generate",
+          "desc": "Push finished campaigns into sending platforms with correct settings.",
+          "skills": [
+            "Campaign Operations Manager"
+          ]
+        },
+        {
+          "name": "Campaign Orchestration",
+          "level": "autonomous",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Build multi-channel cadences · email, LinkedIn, phone touches in order.",
+          "skills": [
+            "Campaign Operations Manager"
+          ]
+        },
+        {
+          "name": "Send Optimization",
+          "level": "autonomous",
+          "stage": 4,
+          "meta": "4 · Orchestrate",
+          "desc": "Schedule sends by timezone and pace volume to protect reply rates.",
+          "skills": [
+            "Campaign Operations Manager"
+          ]
+        }
+      ],
+      "job_count": 26,
+      "human_led": 4
+    }
+  }
+}

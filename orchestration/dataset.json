@@ -1,0 +1,55 @@
+{
+  "project": "skilltree-OS",
+  "source_product": "Altari (altari.ai/skilltree) · skilltree-hub.vercel.app",
+  "phase": "1 complete (A,B,C,D) -> 2 aggregated",
+  "dataset": {
+    "data/tree.json": {
+      "desc": "7 secteurs -> fonctions -> jobs",
+      "sha": "d019d7097c26"
+    },
+    "data/skills.json": {
+      "desc": "137 jobs: desc,skills,integrations,req,level,stage,ladder,human,replaces,notes,files",
+      "sha": "156ce274a304"
+    },
+    "data/skill_files.json": {
+      "desc": "78 skills: title,what,needs,previewMd",
+      "sha": "525e9460c2a4"
+    },
+    "data/dashboards.json": {
+      "desc": "6 command centers (stats,tables) reconstruits du PRNG client",
+      "sha": "7babb024fc44"
+    },
+    "data/summary.json": {
+      "sha": "da4ac4ad836c"
+    }
+  },
+  "captures": {
+    "skill_files_full/*.md": 78,
+    "lessons (texte+png)": 23,
+    "dashboards/*_full.png": 7,
+    "chart/*.json (secteurs)": 7,
+    "map_zoom/*.png": 7,
+    "map_panel/*.png": 31,
+    "dynamic/*.png": 23,
+    "raw sources (js/html)": 15
+  },
+  "counts": {
+    "sectors": 7,
+    "jobs_map": 137,
+    "jobs_chart": 165,
+    "skill_files": 78,
+    "dashboards": 6,
+    "lessons": 18
+  },
+  "reconcile_notes": [
+    "CHART compte 165 jobs (Sales 26, Deals 28, Marketing 27, Operations 23, Intelligence 21, Customer 18, Back Office 22) vs map/skills.json 137 : CHART inclut des jobs human-led additionnels par departement. A unifier au build (source de verite = skills.json + jobs CHART supplementaires taggés level=human-led).",
+    "dashboards = generes client-side (PRNG seed 20260611, date figee 2026-06-11) : au build, remplacer par vraies donnees user ou garder demo deterministe.",
+    "stage(1-4) vient de chart_html (DEPTS/STAGES), pas app-map ; mergé dans skills.json 137/137.",
+    "0 skill file orphelin : 77 slugs references par jobs, 78 md complets presents."
+  ],
+  "gates": {
+    "G1": "pass (A,B,C,D verifies disque)",
+    "G2": "pass (comptes conformes, 0 orphelin)",
+    "G3": "fable5_prompt.md ecrit"
+  }
+}
