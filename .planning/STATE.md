@@ -10,27 +10,27 @@ See: .planning/PROJECT.md (updated 2026-07-08)
 ## Current Position
 
 Phase: 1 of 6 (Fondations data + scaffold)
-Plan: 0 of 1 in current phase
-Status: Ready to plan
-Last activity: 2026-07-08 — Roadmap créée (6 phases, 30 reqs mappés, 100% coverage)
+Plan: 1 of 1 in current phase
+Status: Phase 1 complete — ready for next phase (2 — Constellation Map)
+Last activity: 2026-07-08 — 01-01-PLAN.md exécuté (3 tâches, 4 commits), preuve rendu réel (build vert + DOM assert + screenshots)
 
-Progress: [░░░░░░░░░░] 0% (0/11 plans)
+Progress: [█░░░░░░░░░] 9% (1/11 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: — min
-- Total execution time: — hours
+- Total plans completed: 1
+- Average duration: ~25 min
+- Total execution time: ~0.4 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 1 | 1 | ~25min | ~25min |
 
 **Recent Trend:**
-- Last 5 plans: —
+- Last 5 plans: 01-01 (~25min)
 - Trend: —
 
 *Updated after each plan completion*
@@ -46,6 +46,11 @@ Recent decisions affecting current work:
 - D2: Vérité = skills.json 137 ; extras CHART tagués `origin='chart'`.
 - D9: Ids jobs = slugs anglais stables, FR = affichage ; req résolus au build, échec = échec build.
 
+**Décisions Plan 01-01 (Phase 1) :**
+- Sortie build_catalog.mjs verrouillée = `apps/web/lib/catalog/{catalog.json,types.ts}` (types.ts généré, bandeau ne-pas-éditer) ; `lib/types.ts` devient un simple ré-export.
+- `apps/web/lib/catalog/index.ts` = accesseur unique du catalogue (remplace `lib/data.ts`, supprimé) ; 10/10 sites de consommation rebranchés.
+- Ligne PASS d'assert-graph.mjs reformattée aux 8 tokens exacts (`jobs=`/`chart_total=`/`chart_human=`) sans toucher aux invariants internes.
+
 ### Pending Todos
 
 None yet.
@@ -57,5 +62,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-07-08
-Stopped at: ROADMAP.md + STATE.md écrits, traceability REQUIREMENTS.md mise à jour (30/30 mappés)
-Resume file: None — prochaine étape `/gsd:plan-phase 1`
+Stopped at: 01-01-PLAN.md (Phase 1) exécuté et vérifié — voir .planning/phases/01-fondations-data-scaffold/01-01-SUMMARY.md
+Resume file: None — prochaine étape `/gsd:plan-phase 2`
