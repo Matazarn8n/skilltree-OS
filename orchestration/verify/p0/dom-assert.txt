@@ -1,0 +1,33 @@
+Phase 01 Plan 01 — Task 3 DOM assertions (rendu réel, prod server localhost:3010)
+Généré le : 2026-07-08T00:30 (heure locale conteneur)
+
+=== assert-graph ===
+Commande : node tools/assert-graph.mjs | tail -1
+Sortie   : [assert-graph] PASS sectors=7 functions=34 jobs=137 skills=78 chart_total=165 chart_human=36 req_unresolved=0 orphans=0
+PASS
+
+=== /hub ===
+Commande : curl -s http://localhost:3010/hub
+- Compte catalogue dynamique (SKILL_FILES.length=78) présent à côté de "skills en ligne"
+  (rendu React en enfants séparés par un commentaire d'hydratation : `78<!-- --> skills en ligne`) : PASS
+  grep -oE "78[^0-9]{0,20}skills en ligne" hub.html -> match trouvé
+- Titre de module réel "Commence ici" présent (x4 occurrences, header + carte module + liens) : PASS
+- 0 slug inventé du prototype (cartographie-marche|definition-icp|minage-base|scoring-leads|brouillon-froid) : PASS
+  grep -Eio "cartographie-marche|definition-icp|minage-base|scoring-leads|brouillon-froid" hub.html -> 0 match (exit=1)
+
+=== /modules ===
+Commande : curl -s -o /dev/null -w "%{http_code}" http://localhost:3010/modules
+- HTTP 200 : PASS
+- Titre de module réel "Commence ici" présent (x4 occurrences) : PASS
+- 0 slug inventé du prototype : PASS (0 match, grep exit=1)
+
+=== /map (preuve job réel niveau catalogue) ===
+Commande : curl -s http://localhost:3010/map
+- Nom de job anglais réel du catalogue trouvé : "Market Mapping" (x2 occurrences)
+- Egalement trouvé : "ICP Definition" (x2 occurrences)
+- Rendu par StageGrid/CommandBar depuis @/lib/catalog (SKILLS/SECTORS/sectorOf, rewire Task 2) : PASS
+
+=== Résumé ===
+Toutes les assertions ci-dessus : PASS.
+Aucun slug inventé (`cartographie-marche`, `definition-icp`, `minage-base`, `scoring-leads`, `brouillon-froid`) détecté sur /hub ni /modules.
+Job réel catalogue ("Market Mapping") confirmé rendu sur /map.
