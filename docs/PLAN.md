@@ -3,7 +3,7 @@
 > Roadmap exécutable, pilotée par `docs/ARCHITECTURE.md` (décisions D1-D9). Chaque phase : {objectif, livrable, modèle+effort GSD, dépendances, critère de succès VÉRIFIABLE}. Porte G5 par phase : livrable **observé** (screenshot/DOM/compteur), jamais un build vert seul. Commits atomiques par phase. Après P0+P1 : P2, P3, P4, P5, P5.1 = **fan-out Sonnet parallèle** (aucune dépendance croisée), revue Fable/Opus avant intégration.
 
 ## Références partagées (contrat pour tous les agents)
-- Données : `data/tree.json`, `data/skills.json` (137 jobs, vérité), `data/skill_files.json` + `captures/skill_files_full/*.md` (78), `data/dashboards.json` (6), `captures/chart/*.json` (7 secteurs).
+- Données : `data/tree.json`, `data/skills.json` (137 jobs, vérité), `data/skill_files.json` + `captures/skill_files_full/*.md` (78), `data/dashboards.json` (6), `data/chart.json` (corrigé 2026-07-07 : 7/7 secteurs, 165 jobs, 36 human-led ; `Sales.stages=[]` → fallback `stage_name` skills.json).
 - Visuels de référence : `captures/dashboards/*_full.png`, `captures/chart/*__matrix.png|__expanded.png`, `captures/map_zoom/*.png`, `captures/map_panel/*.png`, `captures/lessons/*`, `captures/dynamic/*`.
 - Règles : contenu FR **réécrit** (jamais verbatim) ; chaque écran gère loading/vide/erreur ; a11y (clavier, AA, `prefers-reduced-motion`) ; deux régimes de données jamais mélangés (catalogue statique vs state user).
 - Vérification : `cd apps/web && pnpm build && pnpm typecheck` obligatoire mais **insuffisant** — chaque critère ci-dessous s'observe sur rendu réel (Playwright screenshot ou DOM assert contre le dev server).
@@ -13,8 +13,8 @@
 ## P0 — Consolidation données + rebranchage scaffold
 - **Objectif** : une seule source de vérité catalogue générée + le prototype `apps/web` adopté (tracké git) et branché dessus (D1, D2, D9).
 - **Livrable** :
-  1. `tools/build_catalog.mjs` : lit `data/*` + `captures/chart/*.json` → émet `apps/web/lib/catalog/` (JSON typé + `types.ts`) : sectors(7), functions(34), jobs(137, id=slugify(nom source), req résolus en ids, stage 1-4 + stage_name, ladder, level), skills(78, lié aux md), chart (137 + extras `level='human'` `origin='chart'`, stages Sales réparés depuis capture), dashboards(6).
-  2. `tools/assert-graph.mjs` (appelé par build) : échec si comptes ≠ manifeste, req non résolu, skill sans md, incohérence summaries CHART.
+  1. `tools/build_catalog.mjs` : lit `data/*.json` (chart.json corrigé = source CHART directe) → émet `apps/web/lib/catalog/` (JSON typé + `types.ts`) : sectors(7), functions(34), jobs(137, id=slugify(nom source), req résolus en ids, stage 1-4 + stage_name, ladder, level), skills(78, lié aux md), chart (165 dont extras `origin='chart'`, stages Sales dérivés de `stage_name` skills.json), dashboards(6).
+  2. `tools/assert-graph.mjs` (appelé par build) : échec si comptes ≠ manifeste (137/78/7 + chart 165/human 36), req non résolu, skill sans md, incohérence summaries CHART.
   3. `apps/web` : suppression de `lib/data.ts` hardcodé, pages branchées sur `lib/catalog/`, `d3-force` retiré des deps si inutilisé, tout tracké git.
 - **Modèle+effort** : sonnet-4-6 / medium (script + rewire) ; revue fable-5.
 - **Dépend de** : — (dataset G2 déjà pass).

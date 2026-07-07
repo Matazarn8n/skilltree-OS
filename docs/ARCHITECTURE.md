@@ -7,7 +7,7 @@
 | Actif | État | Conséquence |
 |---|---|---|
 | `data/tree.json` (7 secteurs, 34 fonctions, 137 jobs), `data/skills.json` (137 jobs enrichis, stage 1-4 + stage_name mergés), `data/skill_files.json` (78 skills), `data/dashboards.json` (6 command centers, PRNG exécuté, déterministe seed 20260611), `captures/skill_files_full/*.md` (78) | ✅ vérifié (comptes conformes, 0 orphelin) | Source de vérité catalogue |
-| `data/chart.json` | ⚠️ **incomplet** : 6/7 secteurs (Sales absent — présent dans `captures/chart/sales.json`, 26 jobs mais `stages:[]`) ; jobs human-led absents (0 `level=human` alors que dataset.json annonce des extras CHART) | Réconciliation obligatoire en P0 (voir §7) |
+| `data/chart.json` | ✅ **corrigé 2026-07-07** (reconsolidé depuis `captures/chart/*.json`, agent B) : 7/7 secteurs, 165 jobs, 36 human-led. Reste : `Sales.stages=[]` (trou de capture) → fallback `stage_name` de `skills.json` en P0 | Source CHART directe (voir §7) |
 | `apps/web/` prototype Next 15 + React 19 + Tailwind 4 (non-tracké git) | ⚠️ partiel : 9 routes + ~30 composants + design tokens + **18 leçons FR déjà réécrites** (`content/lessons/`, 3 modules × {8,5,5}) ; mais `lib/data.ts` = ~20 skills inventés à la main, map = StageGrid (pas la roue), aucune lecture de `data/*.json` | **Adopter + rebrancher** (D1), pas refondre |
 | `supabase/schema.sql` | ⚠️ obsolète : modélise les inventions du prototype (`skill_stage enum('foundation','capture','generate','orchestrate')`, `status`, `install_count` en catalogue) — diverge de la vraie donnée (stage 1-4 nommé par secteur, level `manual/assisted/autonomous/human`, catalogue statique hors DB) | Refonte en P6 sur le modèle §5 |
 
@@ -159,13 +159,13 @@ Règle absolue : routes catalogue ne touchent **jamais** la DB ; routes user ne 
 
 ## 7. Réconciliation des données (tranchée, à exécuter en P0)
 
-Constat disque : `data/chart.json` = 6 secteurs (Sales manquant), 115 jobs, **0 job `level=human`** — alors que `dataset.json` annonce CHART=165 avec extras human-led, et `captures/chart/sales.json` contient bien les 26 jobs Sales (mais `stages:[]`).
+Historique : la consolidation initiale de `data/chart.json` était ratée (6/7 secteurs, 0 human-led) — la capture agent B (`captures/chart/*.json`) avait tout. **Corrigé 2026-07-07** : `data/chart.json` reconsolidé = 7/7 secteurs, 165 jobs, 36 human-led. Trou résiduel : `Sales.stages=[]` (manquant dans la capture même).
 
 **Décision (D2 opérationnalisée)** — le build P0 :
 1. Prend `skills.json` (137) comme base : id, stage 1-4, stage_name, level, ladder, req, skills, files.
-2. Recompose la vue CHART depuis `captures/chart/*.json` (7 fichiers secteur, dont sales) ; tout job CHART absent des 137 → ajouté `level='human'`, `origin='chart'`, visible vue CHART uniquement.
-3. Répare les stages Sales depuis `captures/chart/sales.json`/source brute ; si irrécupérable → stage `null` + rendu « à trancher » plutôt qu'une invention.
-4. `assert-graph.mjs` fait échouer le build si : jobs≠137 base, skills≠78, secteurs≠7, `req` non résolu, slug skill sans fichier md, ou total CHART recomposé incohérent avec les summaries par secteur (« N of M jobs »).
+2. Lit la vue CHART directement dans `data/chart.json` (165) ; tout job CHART absent des 137 → `level='human'`, `origin='chart'`, visible vue CHART uniquement (attendu : 165−137=28 extras, à recouper avec les 36 human-led — un human-led peut aussi exister dans la map).
+3. Stages Sales : `chart.json` en a 0 → dériver les 4 noms de stage Sales depuis `stage_name` de `skills.json` (mergé 137/137) ; si ambigu → stage `null` rendu « à trancher », jamais une invention.
+4. `assert-graph.mjs` fait échouer le build si : jobs≠137 base, skills≠78, secteurs≠7, `req` non résolu, slug skill sans fichier md, total CHART≠165 ou human-led≠36, ou incohérence avec les summaries par secteur (« N of M jobs »).
 
 Dashboards : `data/dashboards.json` (PRNG exécuté, reproductible) = source directe de la vue DASHBOARDS (D3), aucun re-scrape nécessaire.
 
