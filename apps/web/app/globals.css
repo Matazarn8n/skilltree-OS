@@ -6,14 +6,14 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", "Times New Roman", ui-serif, Georgia, serif;
 
-  /* accents par secteur (hubs lumineux de la constellation) */
-  --color-sector-operations: #4dd0c7;
-  --color-sector-intelligence: #7aa2ff;
-  --color-sector-customer: #ff8fa3;
-  --color-sector-backoffice: #f2c744;
+  /* accents par secteur (hubs lumineux de la constellation) — hex exacts data/tree.json (D9) */
+  --color-sector-operations: #5eead4;
+  --color-sector-intelligence: #7dd3fc;
+  --color-sector-customer: #fb7185;
+  --color-sector-backoffice: #facc15;
   --color-sector-sales: #ff9d5c;
-  --color-sector-deals: #e2564f;
-  --color-sector-marketing: #b98cff;
+  --color-sector-deals: #ef4444;
+  --color-sector-marketing: #a78bfa;
 }
 
 :root {

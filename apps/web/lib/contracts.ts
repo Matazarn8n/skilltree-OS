@@ -1,24 +1,35 @@
 import { z } from "zod";
 
 // Contrats API partagés front/back (source de vérité des payloads). Zod = validation + types.
+// Miroir de lib/types.ts, lui-même généré depuis apps/web/lib/catalog/catalog.json.
 export const SectorSlug = z.enum([
-  "operations", "intelligence", "customer", "backoffice", "sales", "deals", "marketing",
+  "sales", "deals", "marketing", "operations", "intelligence", "customer", "backoffice",
 ]);
-export const SkillStatus = z.enum(["live", "drop", "soon"]);
-export const SkillStage = z.enum(["foundation", "capture", "generate", "orchestrate"]);
+export const JobLevel = z.enum(["autonomous", "assisted", "human-led"]);
+export const JobOrigin = z.enum(["map", "chart"]);
+
+export const JobRef = z.object({ slug: z.string(), name: z.string() });
+export const SkillFileRef = z.object({ slug: z.string(), label: z.string() });
+export const JobLadder = z.object({ manual: z.string(), assisted: z.string(), autonomous: z.string() });
 
 export const SkillDTO = z.object({
   slug: z.string(),
   name: z.string(),
   sector: SectorSlug,
-  summary: z.string(),
-  autonomy: z.boolean(),
-  status: SkillStatus,
-  stage: SkillStage,
-  installCount: z.number().int().nonnegative(),
-  publishedDaysAgo: z.number().int().optional(),
-  requires: z.array(z.string()).optional(),
-  icon: z.string(),
+  function: z.string().nullable(),
+  desc: z.string(),
+  skills: z.array(z.string()),
+  integrations: z.array(z.string()),
+  level: JobLevel,
+  stage: z.number().int().min(1).max(4).nullable(),
+  stageName: z.string().nullable(),
+  ladder: JobLadder.nullable(),
+  replaces: z.string().nullable(),
+  notes: z.string().nullable(),
+  human: z.string().nullable(),
+  requires: z.array(JobRef),
+  files: z.array(SkillFileRef),
+  origin: JobOrigin,
 });
 
 export const SectorDTO = z.object({
