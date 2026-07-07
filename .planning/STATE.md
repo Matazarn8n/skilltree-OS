@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-07-08)
 
 ## Current Position
 
-Phase: 2 of 6 (Hero constellation)
-Plan: 1 of 2 in current phase — 02-01 complete
-Status: 02-01 exécuté et vérifié — prochain plan 02-02 (JobPanel + preuves MAP-03/04)
-Last activity: 2026-07-08 — 02-01-PLAN.md exécuté (3 tâches + 1 fix, 4 commits), preuve rendu réel (137 data-node curl+Playwright, aller-retour secteur cliqué, wheel.png)
+Phase: 2 of 6 (Hero constellation) — COMPLETE + VERIFIED (passed 4/4)
+Plan: 2 of 2 in current phase — 02-02 complete
+Status: Phase 2 terminée. Prochain : Phase 3 (5 plans fan-out parallèle) — /gsd:plan-phase 3.
+Last activity: 2026-07-08 — 02-02 exécuté (JobPanel FR + a11y/LOWFX + verify_p1.py 15/15 PASS, 4 commits 65f373d→85ef7c9), vérif indépendante gsd-verifier passed 4/4. ⚠️ push origin main EN ATTENTE (bloqué par classifier auto-mode, à débloquer par l'user).
 
-Progress: [██░░░░░░░░] 18% (2/11 plans)
+Progress: [███░░░░░░░] 27% (3/11 plans)
 
 ## Performance Metrics
 
