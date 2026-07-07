@@ -1,4 +1,4 @@
-import { SECTORS, SKILLS, skillBySlug } from "./data";
+import { SECTORS, SKILLS, skillBySlug } from "./catalog";
 import type { Skill, Sector } from "./types";
 
 /**
@@ -21,9 +21,9 @@ export async function getSkill(slug: string): Promise<Skill | null> {
   return skillBySlug(slug) ?? null;
 }
 
-// "My tree" : sous-ensemble installé. Sans auth réelle -> heuristique démo (skills 'live' populaires).
+// "My tree" : sous-ensemble installé. Sans auth réelle -> heuristique démo (jobs autonomes).
 // En prod : SELECT skill_id FROM user_skills WHERE user_id = auth.uid() (RLS).
 export async function getMyTree(userId?: string): Promise<Skill[]> {
   void userId;
-  return SKILLS.filter((s) => s.status === "live" && s.installCount > 30);
+  return SKILLS.filter((s) => s.level === "autonomous");
 }

@@ -1,4 +1,4 @@
-import { SECTORS, SKILLS } from "./data";
+import { SECTORS, SKILLS } from "./catalog";
 import type { Skill } from "./types";
 
 export interface NodePos { skill: Skill; x: number; y: number; }
@@ -26,8 +26,9 @@ export function computeLayout(width = 1200, height = 900) {
     skills.forEach((skill, idx) => {
       const t = skills.length === 1 ? 0.5 : idx / (skills.length - 1);
       const a = base - spread / 2 + t * spread;
-      // rayon échelonné par étape pour lisibilité (foundation près du hub -> orchestrate loin)
-      const stageR = { foundation: 70, capture: 120, generate: 165, orchestrate: 205 }[skill.stage];
+      // rayon échelonné par étape (1 Foundation, proche du hub -> 4 Orchestrate, loin)
+      const STAGE_R: Record<number, number> = { 1: 70, 2: 120, 3: 165, 4: 205 };
+      const stageR = (skill.stage && STAGE_R[skill.stage]) || 140; // 140 = repli si pas de stage
       const jitter = ((idx * 37) % 23) - 11;      // déterministe
       const r = stageR + jitter;
       const n: NodePos = { skill, x: hub.x + Math.cos(a) * r, y: hub.y + Math.sin(a) * r };
@@ -43,7 +44,7 @@ export function computeLayout(width = 1200, height = 900) {
       edges.push({ from: { x: hub.x, y: hub.y }, to: { x: n.x, y: n.y }, colorVar: hub.colorVar });
     } else {
       for (const r of reqs) {
-        const p = posBySlug.get(r);
+        const p = posBySlug.get(r.slug);
         if (p) edges.push({ from: { x: p.x, y: p.y }, to: { x: n.x, y: n.y }, colorVar: hub.colorVar });
       }
     }

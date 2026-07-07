@@ -1,4 +1,4 @@
-import { MODULES } from "./data";
+import { MODULES } from "./catalog";
 import type { LessonMeta, ModuleMeta } from "./types";
 import type { LessonContent } from "./lesson-types";
 

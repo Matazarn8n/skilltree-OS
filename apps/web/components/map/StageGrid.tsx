@@ -1,16 +1,16 @@
 "use client";
 import { useState } from "react";
-import { SKILLS, SECTORS, sectorOf } from "@/lib/data";
-import type { Skill, SkillStage } from "@/lib/types";
+import { SKILLS, SECTORS, sectorOf } from "@/lib/catalog";
+import type { Skill } from "@/lib/types";
 import { AutonomyBadge } from "@/components/skill/AutonomyBadge";
 import { SkillPanel } from "@/components/skill/SkillPanel";
 import { cn } from "@/lib/utils";
 
-const STAGES: { key: SkillStage; label: string }[] = [
-  { key: "foundation", label: "Fondation" },
-  { key: "capture", label: "Capture" },
-  { key: "generate", label: "Génération" },
-  { key: "orchestrate", label: "Orchestration" },
+const STAGES: { key: number; label: string }[] = [
+  { key: 1, label: "Fondation" },
+  { key: 2, label: "Capture" },
+  { key: 3, label: "Génération" },
+  { key: 4, label: "Orchestration" },
 ];
 
 // Vue alternative de la carte : grille des skills par étape (comme la vue "Sales" du produit).
@@ -56,8 +56,8 @@ export function StageGrid() {
                       <span className="text-[10px] uppercase tracking-wide text-[var(--text-faint)]">{sec.name}</span>
                     </div>
                     <span className="text-sm font-medium text-[var(--text)]">{s.name}</span>
-                    <span className="line-clamp-2 text-xs text-[var(--text-muted)]">{s.summary}</span>
-                    <AutonomyBadge on={s.autonomy} />
+                    <span className="line-clamp-2 text-xs text-[var(--text-muted)]">{s.desc}</span>
+                    <AutonomyBadge on={s.level === "autonomous"} />
                   </button>
                 );
               })}

@@ -1,4 +1,4 @@
-import { FRESH_DROPS, MOST_INSTALLED, MODULES } from "@/lib/data";
+import { FRESH_DROPS, MOST_INSTALLED, MODULES, SKILL_FILES } from "@/lib/catalog";
 import { SkillCard } from "@/components/skill/SkillCard";
 import { ModuleCard } from "@/components/hub/ModuleCard";
 import { FirstWeekChecklist } from "@/components/hub/FirstWeekChecklist";
@@ -12,7 +12,7 @@ export default function HubPage() {
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-10">
       <header>
         <h1 className="display text-2xl leading-snug text-[var(--text)] md:text-3xl">
-          13 skills en ligne · nouveaux drops cette semaine · reprends où tu t&apos;es arrêté
+          {SKILL_FILES.length} skills en ligne · nouveaux drops cette semaine · reprends où tu t&apos;es arrêté
         </h1>
       </header>
 

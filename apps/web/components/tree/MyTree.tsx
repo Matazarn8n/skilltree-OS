@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { SKILLS } from "@/lib/data";
+import { SKILLS } from "@/lib/catalog";
 
 // Vue "Mon arbre" : connecter sa machine (commande factice + copier), stats de sync,
 // puis un audit simulé qui dérive un sous-ensemble déterministe de SKILLS ("installés").
@@ -11,12 +11,11 @@ const SYNC_COMMAND = "git clone https://github.com/skilltree-os/tree-sync.git &&
 
 type AuditState = "idle" | "loading" | "done";
 
-// Détection déterministe (pas de Math.random) : les skills live les plus installés
-// simulent ce qui serait détecté sur la machine connectée.
+// Détection déterministe (pas de Math.random, pas de compteur d'installs inventé) :
+// les jobs déjà autonomes (niveau réel du catalogue) simulent ce qui serait détecté
+// sur la machine connectée, triés par nom pour un ordre stable.
 function detectInstalled() {
-  return SKILLS.filter((s) => s.status === "live" && s.installCount >= 25).sort(
-    (a, b) => b.installCount - a.installCount
-  );
+  return SKILLS.filter((s) => s.level === "autonomous").sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function MyTree() {
@@ -121,7 +120,7 @@ export function MyTree() {
               {detected.map((s) => (
                 <li key={s.slug} className="flex items-center justify-between py-2 text-sm">
                   <span className="text-[var(--text)]">{s.name}</span>
-                  <span className="text-xs text-[var(--text-faint)]">{s.installCount} installs</span>
+                  <span className="text-xs text-[var(--text-faint)]">Autonome</span>
                 </li>
               ))}
             </ul>

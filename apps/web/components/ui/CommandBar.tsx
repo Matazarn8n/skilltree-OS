@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { SKILLS } from "@/lib/data";
+import { SKILLS } from "@/lib/catalog";
 
 // Recherche globale ⌘K : skills + raccourcis. Stub client (en prod : endpoint /api/search).
 export function CommandBar() {
@@ -21,7 +21,7 @@ export function CommandBar() {
   useEffect(() => { if (open) inputRef.current?.focus(); }, [open]);
 
   const results = q.trim()
-    ? SKILLS.filter((s) => (s.name + s.summary).toLowerCase().includes(q.toLowerCase())).slice(0, 8)
+    ? SKILLS.filter((s) => (s.name + s.desc).toLowerCase().includes(q.toLowerCase())).slice(0, 8)
     : [];
 
   return (
@@ -60,7 +60,7 @@ export function CommandBar() {
                     className="flex w-full flex-col items-start gap-0.5 px-4 py-2.5 text-left hover:bg-[var(--bg-elev)]"
                   >
                     <span className="text-sm text-[var(--text)]">{s.name}</span>
-                    <span className="line-clamp-1 text-xs text-[var(--text-muted)]">{s.summary}</span>
+                    <span className="line-clamp-1 text-xs text-[var(--text-muted)]">{s.desc}</span>
                   </button>
                 </li>
               ))}

@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import { computeLayout } from "@/lib/map-layout";
-import { skillBySlug } from "@/lib/data";
+import { skillBySlug } from "@/lib/catalog";
 import type { Skill } from "@/lib/types";
 import { SkillPanel } from "@/components/skill/SkillPanel";
 
