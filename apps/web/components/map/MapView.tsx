@@ -5,7 +5,7 @@ import type { SectorSlug, Skill } from "@/lib/types";
 import { useLowFx } from "@/lib/constellation/useLowFx";
 import { ConstellationWheel } from "@/components/constellation/ConstellationWheel";
 import { SectorView } from "@/components/constellation/SectorView";
-import { SkillPanel } from "@/components/skill/SkillPanel";
+import { JobPanel } from "@/components/constellation/JobPanel";
 import { EmptyState } from "@/components/ui/EmptyState";
 
 export type MapViewKind = "map" | "dashboards" | "chart";
@@ -57,8 +57,11 @@ export function MapView({ view = "map", initialSkill }: { view?: MapViewKind; in
           lowFx={lowFx}
         />
       )}
-      {/* Panel provisoire — remplacé par le vrai JobPanel au plan 02-02. */}
-      <SkillPanel skill={selected} onClose={() => setSelected(null)} />
+      <JobPanel
+        job={selected}
+        onClose={() => setSelected(null)}
+        onNavigate={(slug) => setSelected(skillBySlug(slug) ?? selected)}
+      />
     </div>
   );
 }

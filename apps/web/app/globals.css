@@ -64,7 +64,16 @@
       radial-gradient(900px 600px at 50% 55%, rgba(226,86,79,0.04), transparent 55%);
   }
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  /* LOWFX (<700px) : mêmes garanties « zéro mouvement » que reduced-motion (MAP-04). */
+  [data-lowfx="true"] *, [data-lowfx="true"] *::before, [data-lowfx="true"] *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
 }
 

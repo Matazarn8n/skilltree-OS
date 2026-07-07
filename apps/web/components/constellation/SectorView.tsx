@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { SECTORS, SKILLS, sectorOf } from "@/lib/catalog";
 import type { SectorSlug, Skill } from "@/lib/types";
 import { computeSectorLayout, SIZE } from "@/lib/constellation/geometry";
@@ -19,6 +19,16 @@ export function SectorView({
 }) {
   const layout = useMemo(() => computeSectorLayout(SECTORS, SKILLS, slug), [slug]);
   const pct = (v: number) => `${(v / SIZE) * 100}%`;
+
+  // Échap contextuel : retour all-departments — mais seulement si aucun panel job n'est
+  // ouvert (le JobPanel gère sa propre fermeture ; selectedSlug encore posé = panel ouvert).
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && !selectedSlug) onBack();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selectedSlug, onBack]);
   const sector = layout.sector;
   const prevSector = sectorOf(layout.prev);
   const nextSector = sectorOf(layout.next);
@@ -99,7 +109,7 @@ export function SectorView({
               <span className="h-3 w-3 rounded-full" style={{ backgroundColor: sector.colorVar }} />
             </span>
             <p className="display mt-2 text-[15px] uppercase text-[var(--text)]">{sector.name}</p>
-            <p className="mt-0.5 text-[8px] lowercase tracking-wider text-[var(--text-faint)]">{sector.tagline}</p>
+            <p className="mt-0.5 text-[9px] lowercase tracking-wider text-[var(--text-muted)]">{sector.tagline}</p>
           </div>
 
           {/* labels de fonction au bout des branches */}

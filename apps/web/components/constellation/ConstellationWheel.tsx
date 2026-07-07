@@ -1,6 +1,6 @@
 "use client";
 import { useMemo } from "react";
-import { SECTORS, SKILLS, sectorOf } from "@/lib/catalog";
+import { SECTORS, SKILLS, bySector } from "@/lib/catalog";
 import type { SectorSlug, Skill } from "@/lib/types";
 import { computeWheelLayout, SIZE } from "@/lib/constellation/geometry";
 import { cn } from "@/lib/utils";
@@ -39,14 +39,14 @@ export function ConstellationWheel({
         </svg>
 
         {/* calque HTML : hub + 7 secteurs + 137 boutons, ordre DOM secteur→fonction→job */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0" role="group" aria-label="Constellation des 137 jobs">
           <HubCore particles={layout.particles} lowFx={lowFx} />
 
           {layout.sectors.map((s) => (
             <div key={s.sector.slug}>
               <button
                 type="button"
-                aria-label={`Secteur ${s.sector.name} — ouvrir la vue secteur`}
+                aria-label={`Secteur ${s.sector.name} — ${bySector(s.sector.slug).length} jobs`}
                 onClick={() => onFocusSector(s.sector.slug)}
                 className={cn(
                   "absolute flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 outline-none",
@@ -66,24 +66,27 @@ export function ConstellationWheel({
                 style={{ left: pct(s.labelX), top: pct(s.labelY) }}
               >
                 <p className="display text-[13px] uppercase text-[var(--text)]">{s.sector.name}</p>
-                <p className="mt-0.5 text-[8px] lowercase tracking-wider text-[var(--text-faint)]">{s.sector.tagline}</p>
+                <p className="mt-0.5 text-[9px] lowercase tracking-wider text-[var(--text-muted)]">{s.sector.tagline}</p>
               </div>
-            </div>
-          ))}
 
-          {layout.nodes.map((n) => (
-            <JobNode
-              key={n.job.slug}
-              job={n.job}
-              sectorName={sectorOf(n.job.sector).name}
-              color={sectorOf(n.job.sector).colorVar}
-              x={n.x}
-              y={n.y}
-              showLabel={false /* densité 137 : le label visuel attend la vue secteur, l'aria-label porte le nom */}
-              active={selectedSlug === n.job.slug}
-              lowFx={lowFx}
-              onSelect={onSelectJob}
-            />
+              {/* jobs du secteur juste après son bouton → tab order = secteur PUIS ses jobs */}
+              {layout.nodes
+                .filter((n) => n.job.sector === s.sector.slug)
+                .map((n) => (
+                  <JobNode
+                    key={n.job.slug}
+                    job={n.job}
+                    sectorName={s.sector.name}
+                    color={s.sector.colorVar}
+                    x={n.x}
+                    y={n.y}
+                    showLabel={false /* densité 137 : le label visuel attend la vue secteur, l'aria-label porte le nom */}
+                    active={selectedSlug === n.job.slug}
+                    lowFx={lowFx}
+                    onSelect={onSelectJob}
+                  />
+                ))}
+            </div>
           ))}
         </div>
       </div>
