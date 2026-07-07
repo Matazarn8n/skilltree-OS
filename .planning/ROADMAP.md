@@ -43,10 +43,11 @@ Plans:
   2. Assert DOM : 137 nœuds focusables, `aria-label` non vides ; Tab parcourt secteur→job et Enter ouvre le JobPanel d'un job réel (level, desc, BREAKS INTO, BUILDS ON cliquable, WHAT IT REPLACES, LADDER 3 niveaux, THE HUMAN, fichier skill).
   3. Émulation `prefers-reduced-motion` → 0 animation (assert computed style) ; viewport 390px → mode LOWFX actif.
   4. Switcher MAP · DASHBOARDS · CHART piloté par `?view=`, shareable (placeholders EmptyState derrière). Preuves dans `orchestration/verify/p1/`.
-**Plans**: 1 plan
+**Plans**: 2 plans (séquencés wave 1 → wave 2 : géométrie/roue/shell d'abord, panel/a11y/preuves ensuite — un seul plan dépassait le budget contexte : ~10 fichiers, 2 préoccupations distinctes)
 
 Plans:
-- [ ] 02-01: components/constellation (Wheel/Sector/Branch/Node/JobPanel) + ViewSwitcher + a11y/LOWFX (P1)
+- [ ] 02-01-PLAN.md — Géométrie trigo pure (W_STEP=360/7, 2 layouts) + ConstellationWheel/SectorView/JobNode/HubCore + ViewSwitcher `?view=` + suppression StageGrid/SkillMap + smoke 137 boutons
+- [ ] 02-02-PLAN.md — JobPanel complet FR (BREAKS INTO / BUILDS ON cliquable / LADDER / THE HUMAN) + a11y clavier + LOWFX/reduced-motion + suite Playwright `orchestration/verify/p1/`
 
 ### Phase 3: Vues & modules UI
 **Goal**: Toutes les vues et modules restants, fidèles aux captures, branchés sur le catalogue et des interfaces stub locales (`install`, `progress`, `draftBrain`) en attendant le backend. 5 plans en fan-out Sonnet parallèle (aucune dépendance croisée).
