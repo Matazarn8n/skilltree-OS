@@ -87,13 +87,42 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (rempli par la roadmap) | | |
+| DATA-01 | Phase 1 — Fondations data + scaffold | Pending |
+| DATA-02 | Phase 1 — Fondations data + scaffold | Pending |
+| DATA-03 | Phase 1 — Fondations data + scaffold | Pending |
+| MAP-01 | Phase 2 — Hero constellation | Pending |
+| MAP-02 | Phase 2 — Hero constellation | Pending |
+| MAP-03 | Phase 2 — Hero constellation | Pending |
+| MAP-04 | Phase 2 — Hero constellation | Pending |
+| MAP-05 | Phase 2 — Hero constellation | Pending |
+| HUB-01 | Phase 3 — Vues & modules UI | Pending |
+| HUB-02 | Phase 3 — Vues & modules UI | Pending |
+| HUB-03 | Phase 3 — Vues & modules UI | Pending |
+| MOD-01 | Phase 3 — Vues & modules UI | Pending |
+| MOD-02 | Phase 3 — Vues & modules UI | Pending |
+| BRAIN-01 | Phase 3 — Vues & modules UI | Pending |
+| BRAIN-02 | Phase 3 — Vues & modules UI | Pending |
+| BRAIN-03 | Phase 3 — Vues & modules UI | Pending |
+| TREE-01 | Phase 3 — Vues & modules UI | Pending |
+| COMM-01 | Phase 3 — Vues & modules UI | Pending |
+| SET-01 | Phase 3 — Vues & modules UI | Pending |
+| DASH-01 | Phase 3 — Vues & modules UI | Pending |
+| CHART-01 | Phase 3 — Vues & modules UI | Pending |
+| CHART-02 | Phase 3 — Vues & modules UI | Pending |
+| BACK-01 | Phase 4 — Backend | Pending |
+| BACK-02 | Phase 4 — Backend | Pending |
+| BACK-03 | Phase 4 — Backend | Pending |
+| BACK-04 | Phase 4 — Backend | Pending |
+| BACK-05 | Phase 4 — Backend | Pending |
+| ONB-01 | Phase 5 — Onboarding | Pending |
+| ONB-02 | Phase 5 — Onboarding | Pending |
+| QA-01 | Phase 6 — Revue & gel v1 | Pending |
 
 **Coverage:**
-- v1 requirements: 27 total
-- Mapped to phases: 0
-- Unmapped: 27 ⚠️
+- v1 requirements: 30 total (le header initial annonçait 27 — recomptage réel = 30 IDs distincts)
+- Mapped to phases: 30
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-07-08*
-*Last updated: 2026-07-08 after initial definition*
+*Last updated: 2026-07-08 after roadmap creation (traceability, 30/30 mapped)*
