@@ -1,0 +1,30 @@
+# Preuve DOM — Phase 3 / Plan 03-02 (Modules) — rendu réel Playwright chromium
+
+Serveur : `cd apps/web && pnpm build && npx next start -p 3011` (build exit=0, prebuild assert-graph inclus).
+Runner : PORT=3011 /home/nuveo/.higgsfield-login-venv/bin/python tools/verify_p3.py
+Viewport desktop 1440×900.
+
+## Couverture 18/18
+Voir orchestration/verify/p3/coverage.md (17 alignées, 1 complétée : start-here/tool-stack §Meetings).
+
+## Checks (mesures citées)
+
+[PASS] compteur initial start-here :: 0 / 8 leçons terminées
+[PASS] compteur avance après marquage (X → X+1) :: 0 / 8 leçons terminées  →  1 / 8 leçons terminées
+[PASS] 1 étape marquée done dans le stepper :: done_steps=1
+[PASS] bouton Marquer comme terminé aria-pressed=true :: aria-pressed=true
+[PASS] persistance reload (compteur reste X+1 + clé localStorage présente) :: compteur_après_reload=1 / 8 leçons terminées localStorage[skilltree.progress.v1]={"start-here/welcome":true}
+[PASS] navigation complète start-here (8 leçons) → transition module suivant (foundations) :: 10 pages parcourues, dernière=http://localhost:3011/modules/foundations/install-claude-code
+[PASS] leçon longue structurée (sections + code + callout) :: h2=6 code=3 callout=1
+    anti-verbatim [start-here/tool-stack (section Meetings complétée)] : 604 fenêtres-8-mots (capture EN) testées contre le texte FR (tool-stack.ts) → 0 trouvée(s) : []
+[PASS] anti-verbatim ×2 — start-here/tool-stack (section Meetings complétée) :: 0 fenêtre de 8 mots identique attendue, trouvé=0
+    anti-verbatim [foundations/claude-md (leçon longue de référence)] : 667 fenêtres-8-mots (capture EN) testées contre le texte FR (claude-md.ts) → 0 trouvée(s) : []
+[PASS] anti-verbatim ×2 — foundations/claude-md (leçon longue de référence) :: 0 fenêtre de 8 mots identique attendue, trouvé=0
+
+## Anti-verbatim ×2 — verdicts
+
+- start-here/tool-stack (section Meetings complétée) : PASS — 0 fenêtre de 8 mots identique
+- foundations/claude-md (leçon longue de référence) : PASS — 0 fenêtre de 8 mots identique
+
+## Fidélité lesson-long.png
+foundations/claude-md vs captures/lessons/modules_foundations_claude_md.png : mêmes 6 sections (Ce qu'est CLAUDE.md / Deux types / Quoi inclure vs laisser / /init / Template / Config globale), callout "Idée clé", 3 blocs code — structure fidèle, prose FR neuve.
