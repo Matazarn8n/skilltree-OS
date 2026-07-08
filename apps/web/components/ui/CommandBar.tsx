@@ -1,27 +1,54 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import { SKILLS } from "@/lib/catalog";
+import { InstallModal } from "@/components/hub/InstallModal";
+import type { SkillFileContent } from "@/lib/skill-files";
 
-// Recherche globale ⌘K : skills + raccourcis. Stub client (en prod : endpoint /api/search).
-export function CommandBar() {
+export interface CommandBarProps {
+  /** Les 78 fiches skills résolues côté serveur (Server Component parent — jamais de
+   *  lecture fs ici, ce composant est "use client"). Clé = slug de la fiche. */
+  skillFiles: Record<string, SkillFileContent>;
+}
+
+// Recherche globale ⌘K : les 78 skills installables (content/skills/*.md), pas les jobs
+// de la roue Map (registre différent — cf. lib/hub-data.ts). Un résultat cliqué ouvre
+// l'InstallModal sur ce skill (au lieu de router.push('/map?skill=') comme avant ce plan).
+export function CommandBar({ skillFiles }: CommandBarProps) {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
+  const [modalSlug, setModalSlug] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
+
+  const allFiles = Object.values(skillFiles);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setOpen((o) => !o); }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setOpen((o) => !o);
+      }
       if (e.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
-  useEffect(() => { if (open) inputRef.current?.focus(); }, [open]);
+  useEffect(() => {
+    if (open) inputRef.current?.focus();
+  }, [open]);
 
-  const results = q.trim()
-    ? SKILLS.filter((s) => (s.name + s.desc).toLowerCase().includes(q.toLowerCase())).slice(0, 8)
+  // Les cartes Hub (Fresh drops / Featured / Most installed) déclenchent la même modale
+  // via cet event custom, pour ne pas dupliquer d'instance d'InstallModal sur la page.
+  useEffect(() => {
+    const onOpenInstall = (e: Event) => {
+      const slug = (e as CustomEvent<{ slug: string }>).detail?.slug;
+      if (slug) setModalSlug(slug);
+    };
+    window.addEventListener("skilltree:open-install", onOpenInstall);
+    return () => window.removeEventListener("skilltree:open-install", onOpenInstall);
+  }, []);
+
+  const needle = q.trim().toLowerCase();
+  const results = needle
+    ? allFiles.filter((f) => (f.title + " " + f.what).toLowerCase().includes(needle)).slice(0, 8)
     : [];
 
   return (
@@ -53,14 +80,14 @@ export function CommandBar() {
                   {q ? "Aucun skill trouvé." : "Tape pour chercher dans l'arbre."}
                 </li>
               )}
-              {results.map((s) => (
-                <li key={s.slug}>
+              {results.map((f) => (
+                <li key={f.slug}>
                   <button
-                    onClick={() => { router.push(`/map?skill=${s.slug}`); setOpen(false); }}
+                    onClick={() => { setModalSlug(f.slug); setOpen(false); }}
                     className="flex w-full flex-col items-start gap-0.5 px-4 py-2.5 text-left hover:bg-[var(--bg-elev)]"
                   >
-                    <span className="text-sm text-[var(--text)]">{s.name}</span>
-                    <span className="line-clamp-1 text-xs text-[var(--text-muted)]">{s.desc}</span>
+                    <span className="text-sm text-[var(--text)]">{f.title}</span>
+                    <span className="line-clamp-1 text-xs text-[var(--text-muted)]">{f.what}</span>
                   </button>
                 </li>
               ))}
@@ -68,6 +95,12 @@ export function CommandBar() {
           </div>
         </div>
       )}
+
+      <InstallModal
+        slug={modalSlug}
+        fiche={modalSlug ? (skillFiles[modalSlug] ?? null) : null}
+        onClose={() => setModalSlug(null)}
+      />
     </>
   );
 }
