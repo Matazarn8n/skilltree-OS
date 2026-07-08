@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-07-08)
 
 ## Current Position
 
-Phase: 3 of 6 (Vues & modules UI) — PLANIFIÉE + VÉRIFIÉE (plan-checker PASSED)
-Plan: 0 of 5 exécutés — prochaine étape /gsd:execute-phase 3 (fan-out wave 1)
-Status: Phase 2 poussée origin/main. Phase 3 planifiée (5 plans 03-01..03-05, 0 overlap, 14/14 requirements). Handoff exécution = docs/10_HANDOFF_PHASE3.md.
-Last activity: 2026-07-08 — Phase 3 planifiée (gsd-planner opus, commit 5c3de2d) + vérifiée (gsd-plan-checker PASSED). Phase 2 poussée (fda93d0). Note plan-checker : batch 78 fiches 03-01 = reprendre jamais tronquer.
+Phase: 3 of 6 (Vues & modules UI) — EN EXÉCUTION (fan-out wave 1, 5 exécuteurs parallèles)
+Plan: 03-02 (Modules) exécuté et vérifié — 03-01/03-03/03-04/03-05 en cours en parallèle (voir leurs SUMMARY respectifs)
+Status: Phase 2 poussée origin/main. Phase 3 planifiée (5 plans 03-01..03-05, 0 overlap, 14/14 requirements) puis mise en exécution fan-out. 03-02 (Modules) complet : coverage.md 18/18, stepper/reader branchés progress.ts, verify_p3.py 8/8 PASS.
+Last activity: 2026-07-08 — 03-02-PLAN.md exécuté (3 tâches, 3 commits 871b84b/1a2709b/4d6db09) + vérifié (build exit 0, verify_p3.py 8/8 PASS). Voir .planning/phases/03-vues-modules-ui/03-02-SUMMARY.md.
 
-Progress: [███░░░░░░░] 27% (3/8 plans exécutés ; Phase 3 = +5 planifiés)
+Progress: [███░░░░░░░] 27%+ (3/8 plans exécutés avant Phase 3 ; 03-02/5 plans Phase 3 confirmé exécuté, décompte final après fan-out complet)
 
 ## Performance Metrics
 
@@ -55,6 +55,9 @@ Recent decisions affecting current work:
 - [Phase 02-hero-constellation]: Géométrie constellation paramétrée (sectors/jobs en args) = source unique testable Node strip-types et importable Next
 - [Phase 02-hero-constellation]: SectorSlug 'back-office' (générateur + contracts corrigés — bug zod 500 latent sur /api/catalog)
 - [Phase 02-hero-constellation]: Roue : labels secteur radialement à R_MAX+45, labels jobs masqués en vue roue (aria-label les porte), R_SECTOR_MAX=1000
+- [Phase 03-vues-modules-ui Plan 02]: Stepper.tsx repurposé (module-selector statique → stepper de leçons dans un module, wired sur useProgress().isComplete/countDone) ; compteur X/N + aria-current="step" + clic navigue.
+- [Phase 03-vues-modules-ui Plan 02]: LessonReader.tsx a son propre bouton "Marquer comme terminé" (idempotent, sans navigation) distinct du bouton "terminé & continuer" de LessonNav — découple marquage/navigation pour une preuve Playwright non-racée.
+- [Phase 03-vues-modules-ui Plan 02]: 1 seul gap réel sur 18 leçons (start-here/tool-stack, section Meetings/Fireflies) — comblé en FR neuve, anti-verbatim vérifié.
 
 ### Pending Todos
 
@@ -67,5 +70,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-07-08
-Stopped at: 02-01-PLAN.md (Phase 2) exécuté et vérifié — voir .planning/phases/02-hero-constellation/02-01-SUMMARY.md
-Resume file: None — prochaine étape : exécuter 02-02-PLAN.md (JobPanel + preuves MAP-03/04)
+Stopped at: 03-02-PLAN.md (Phase 3, Modules) exécuté et vérifié — voir .planning/phases/03-vues-modules-ui/03-02-SUMMARY.md
+Resume file: None — les autres plans du fan-out (03-01/03-03/03-04/03-05) s'exécutent en parallèle ; après leur complétion, lire orchestration/verify/p{2,4,5,51}/ + les 4 SUMMARY restants, puis suivre docs/10_HANDOFF_PHASE3.md (revue fidélité tier-fort, gsd-verifier, push origin main).
