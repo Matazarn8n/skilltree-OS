@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-07-08)
 
 ## Current Position
 
-Phase: 3 of 6 (Vues & modules UI) — EN EXÉCUTION (fan-out wave 1, 5 exécuteurs parallèles)
-Plan: 03-02 (Modules) + 03-03 (Brain) + 03-04 (My Tree/Community/Settings) + 03-05 (Dashboards/Chart) exécutés et vérifiés — 03-01 (Hub) en cours en parallèle (voir son SUMMARY à venir)
-Status: Phase 2 poussée origin/main. Phase 3 planifiée (5 plans 03-01..03-05, 0 overlap, 14/14 requirements) puis mise en exécution fan-out. 03-02 (Modules) complet : coverage.md 18/18, stepper/reader branchés progress.ts, verify_p3.py 8/8 PASS. 03-03 (Brain) complet : wizard 8 sections, 2 chemins IA/manuel, draftBrain() stub, verify_p4.py 19/19 PASS. 03-04 (My Tree/Community/Settings) complet : TreeAudit réactif aux installs locaux (compteur 0→1 sans reload, contrat localStorage lu sans importer lib/installs.ts de 03-01), Community H1 ajouté, Settings sections labellisées, verify_p5.py 6/6 PASS. 03-05 (Dashboards/Chart) complet : CommandCenters (6 dashboards, seed 20260611) + RolloutMatrix (7 secteurs x 4 étapes x 3 niveaux, N of M recalculé via lib/chart.ts, jamais copié — 165/36 tombent du calcul, grep=0), les 2 derniers placeholders de MapView.tsx câblés, verify_p51.py 10/10 PASS.
-Last activity: 2026-07-08 — 03-05-PLAN.md exécuté (3 tâches, 3 commits 318663d/60aeffa/d20d2f9) + vérifié (build exit 0, verify_p51.py 10/10 PASS : chiffres dashboards=donnée, N of M Deals 19/28/4/5 + Sales 19/26/3/4, totaux 165/36, MAP toujours 137). Voir .planning/phases/03-vues-modules-ui/03-05-SUMMARY.md.
+Phase: 3 of 6 (Vues & modules UI) — 5/5 PLANS EXÉCUTÉS (fan-out wave 1 complet)
+Plan: 03-01 (Hub) + 03-02 (Modules) + 03-03 (Brain) + 03-04 (My Tree/Community/Settings) + 03-05 (Dashboards/Chart) tous exécutés et vérifiés
+Status: Phase 2 poussée origin/main. Phase 3 planifiée (5 plans 03-01..03-05, 0 overlap, 14/14 requirements) puis mise en exécution fan-out — les 5 plans sont maintenant complets. 03-01 (Hub) complet : 6 sections /hub (GET STARTED progression X/5, Modules, Fresh drops+Featured, Most installed, Community pulse, Build logs), install(slug) local (lib/installs.ts, localStorage skilltree.installs.v1 + event skilltree:installs), InstallModal FR branchée sur ⌘K (CommandBar rebranché sur les 78 SKILL_FILES), 78/78 fiches skills réécrites en français (content/skills/*.md), verify_p2.py 12/12 PASS. 03-02 (Modules) complet : coverage.md 18/18, stepper/reader branchés progress.ts, verify_p3.py 8/8 PASS. 03-03 (Brain) complet : wizard 8 sections, 2 chemins IA/manuel, draftBrain() stub, verify_p4.py 19/19 PASS. 03-04 (My Tree/Community/Settings) complet : TreeAudit réactif aux installs locaux (compteur 0→1 sans reload, contrat localStorage lu sans importer lib/installs.ts de 03-01), Community H1 ajouté, Settings sections labellisées, verify_p5.py 6/6 PASS. 03-05 (Dashboards/Chart) complet : CommandCenters (6 dashboards, seed 20260611) + RolloutMatrix (7 secteurs x 4 étapes x 3 niveaux, N of M recalculé via lib/chart.ts, jamais copié — 165/36 tombent du calcul, grep=0), les 2 derniers placeholders de MapView.tsx câblés, verify_p51.py 10/10 PASS.
+Last activity: 2026-07-08 — 03-01-PLAN.md exécuté (3 tâches, commits ea90a57/9aa60d6/8ae1832 + correctif e37cd79) + vérifié (build exit 0, typecheck propre, verify_p2.py 12/12 PASS : 6 sections Hub, ⌘K→InstallModal→install(slug) persisté→réouverture "Installé", 78/78 fiches recomptées, anti-verbatim x3 ≤4 mots communs). Voir .planning/phases/03-vues-modules-ui/03-01-SUMMARY.md. Phase 3 fan-out wave 1 est maintenant COMPLET (5/5) — reste : gsd-verifier phase, revue fidélité tier-fort, push origin main (cf. docs/10_HANDOFF_PHASE3.md).
 
-Progress: [███░░░░░░░] 27%+ (3/8 plans exécutés avant Phase 3 ; 4/5 plans Phase 3 confirmés exécutés (03-02/03-03/03-04/03-05), 03-01 restant, décompte final après fan-out complet)
+Progress: [████░░░░░░] 35% (3/8 plans exécutés avant Phase 3 + 5/5 plans Phase 3 exécutés = 8 plans exécutés/dénominateur à recalculer avec le total réel du projet 6 phases)
 
 ## Performance Metrics
 
@@ -36,6 +36,7 @@ Progress: [███░░░░░░░] 27%+ (3/8 plans exécutés avant Phas
 
 *Updated after each plan completion*
 | Phase 02-hero-constellation P01 | 33min | 3 tasks | 17 files |
+| Phase 03-vues-modules-ui P01 | 55min | 3 tasks | 94 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,10 @@ Recent decisions affecting current work:
 - [Phase 03-vues-modules-ui Plan 05]: Ligne Human-led de la matrice CHART toujours badgée « En continu » (jamais un numéro d'étape), même pour les jobs `origin='map'` porteurs d'un `stage` réel — fidèle à la capture source où tous les human-led affichent Ongoing.
 - [Phase 03-vues-modules-ui Plan 05]: Anti-fabrication stricte même en commentaire — le grep de preuve (`165|36` sur lib/chart.ts) a détecté des chiffres cités en toutes lettres dans les commentaires d'intention ; reformulés par référence à `assert-graph.mjs EXPECT.*` plutôt que par valeur littérale.
 - [Phase 03-vues-modules-ui Plan 05]: Contention `.next`/port 3010 confirmée à nouveau (cf. Plan 03) quand plusieurs plans buildent/servent en même temps ; cette fois résolue par un `git worktree` jetable dédié (au lieu du retry loop de Plan 04) car le symptôme (hydratation morte, clics sans effet) nécessitait un process totalement isolé, pas juste un rebuild réussi.
+- [Phase 03-vues-modules-ui Plan 01]: `lib/skill-files.ts` (fs) ne doit JAMAIS être importé depuis un composant "use client" (bundle navigateur Next.js) — lu une seule fois dans un Server Component (`app/(app)/layout.tsx`), passé en props sérialisables aux Client Components. Pattern réutilisable pour toute future lecture fichier côté UI.
+- [Phase 03-vues-modules-ui Plan 01]: CommandBar rebranché sur `SKILL_FILES` (78 fiches installables), pas `SKILLS` (137 jobs Map) — deux registres de slugs différents ; `install(slug)`/`getSkillFile(slug)` doivent pointer sur celui de `content/skills/`.
+- [Phase 03-vues-modules-ui Plan 01]: Piège serveur stale confirmé une nouvelle fois : `pkill -f "next start"` ne tue pas le process (titre réel = "next-server"), toujours vérifier/tuer le PID exact via `ss -ltnp` avant de relancer une preuve.
+- [Phase 03-vues-modules-ui Plan 01]: Course d'écriture git entre exécuteurs parallèles (`branching_strategy=none`) : un `git add` de dossier peut scooper un fichier untracked d'un autre plan créé entre-temps — toujours vérifier `git show --stat` du commit juste après pour repérer un fichier hors scope, corriger par `git rm --cached` immédiat si besoin.
 
 ### Pending Todos
 
@@ -77,5 +82,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-07-08
-Stopped at: 03-05-PLAN.md (Phase 3, Dashboards + Chart) exécuté et vérifié — voir .planning/phases/03-vues-modules-ui/03-05-SUMMARY.md
-Resume file: None — seul 03-01 (Hub, batch 78 fiches) reste en cours en parallèle ; après sa complétion, lire orchestration/verify/p{1,2,3,4,5,51}/ + son SUMMARY, puis suivre docs/10_HANDOFF_PHASE3.md (revue fidélité tier-fort, gsd-verifier, push origin main).
+Stopped at: 03-01-PLAN.md (Phase 3, Hub) exécuté et vérifié — voir .planning/phases/03-vues-modules-ui/03-01-SUMMARY.md. Phase 3 fan-out wave 1 COMPLET (5/5 plans).
+Resume file: None — les 5 plans de Phase 3 sont exécutés et vérifiés. Prochaine étape : lire orchestration/verify/p{1,2,3,4,5,51}/ + les 5 SUMMARY, puis suivre docs/10_HANDOFF_PHASE3.md (revue fidélité tier-fort, gsd-verifier, boucler gaps si besoin, push origin main), puis planifier Phase 4.
