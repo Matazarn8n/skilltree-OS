@@ -132,6 +132,20 @@ function write(map: BrainMap) {
   }
 }
 
+/**
+ * Lecture synchrone directe (hors hook) — utilisée une seule fois au montage du
+ * wizard pour décider l'écran de départ (intake vs reprise), sans dépendre du
+ * cycle d'hydratation asynchrone de `useBrain()`.
+ */
+export function loadBrainMap(): BrainMap {
+  return read();
+}
+
+/** Première section dont le contenu est vide (ordre BRAIN_SECTIONS) ; -1 si les 8 sont remplies. */
+export function firstUnfilledIndex(map: BrainMap): number {
+  return BRAIN_SECTIONS.findIndex((s) => !(map[s.key]?.content ?? "").trim());
+}
+
 /** Hook client : lit/écrit le brain, se re-rend sur tout changement (même onglet ou autre onglet). */
 export function useBrain() {
   const [map, setMap] = useState<BrainMap>({});
