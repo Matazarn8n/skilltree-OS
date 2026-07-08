@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getOrderedModules, getLessons, totalLessonCount } from "@/lib/lessons";
-import { Stepper } from "@/components/lesson/Stepper";
 import { ModuleCard } from "@/components/lesson/ModuleCard";
 
 export const metadata: Metadata = { title: "SkillTree · Modules" };
@@ -16,14 +15,8 @@ export default function ModulesPage() {
         Modules · ton chemin vers une force de travail IA
       </h1>
       <p className="mt-3 text-base text-[var(--text-muted)]">
-        {modules.length} modules, {total} leçons.
+        {modules.length} modules, {total} leçons. Chaque carte affiche ta progression réelle.
       </p>
-
-      <div className="mt-8">
-        <Stepper
-          items={modules.map((m, i) => ({ key: m.slug, label: m.title, status: i === 0 ? "active" : "upcoming" }))}
-        />
-      </div>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {modules.map((m) => (

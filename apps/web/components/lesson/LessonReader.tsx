@@ -1,18 +1,35 @@
+"use client";
 import type { LessonBlock, LessonContent } from "@/lib/lesson-types";
 import { CodeBlock } from "./CodeBlock";
 import { Callout } from "./Callout";
+import { useProgress } from "@/lib/progress";
+import { cn } from "@/lib/utils";
 
 export interface LessonReaderProps {
   content: LessonContent;
+  moduleSlug: string;
+  lessonSlug: string;
   moduleTitle: string;
   moduleOrder: number; // 0-based order of the module
   lessonIndex: number; // 0-based position within the module
   totalInModule: number;
 }
 
-// Rend le corps d'une leçon : chapô + suite de blocs. Contenu statique (pas de state),
-// peut rester un Server Component — l'interactivité (nav, "terminé") vit dans LessonNav.
-export function LessonReader({ content, moduleTitle, moduleOrder, lessonIndex, totalInModule }: LessonReaderProps) {
+// Rend le corps d'une leçon : chapô + suite de blocs + bouton "Marquer comme terminé" (sans
+// navigation — laisse le lecteur sur place, le Stepper voisin se met à jour immédiatement via
+// useProgress()). LessonNav garde le bouton "terminé & continuer" pour l'enchaînement.
+export function LessonReader({
+  content,
+  moduleSlug,
+  lessonSlug,
+  moduleTitle,
+  moduleOrder,
+  lessonIndex,
+  totalInModule,
+}: LessonReaderProps) {
+  const { isComplete, markComplete } = useProgress();
+  const done = isComplete(moduleSlug, lessonSlug);
+
   return (
     <article className="mx-auto max-w-2xl px-6 py-10">
       <p className="text-[11px] uppercase tracking-widest text-[var(--text-faint)]">
@@ -20,7 +37,23 @@ export function LessonReader({ content, moduleTitle, moduleOrder, lessonIndex, t
         {totalInModule}
       </p>
       <h1 className="display mt-3 text-3xl font-semibold leading-tight text-[var(--text)] sm:text-4xl">{content.title}</h1>
-      <p className="mt-2 text-sm text-[var(--text-faint)]">{content.estMin} min de lecture</p>
+      <div className="mt-2 flex flex-wrap items-center gap-3">
+        <p className="text-sm text-[var(--text-faint)]">{content.estMin} min de lecture</p>
+        <button
+          type="button"
+          aria-pressed={done}
+          data-testid="mark-complete"
+          onClick={() => markComplete(moduleSlug, lessonSlug)}
+          className={cn(
+            "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]",
+            done
+              ? "border-[var(--accent)] bg-[var(--accent)] text-white"
+              : "border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--text)]"
+          )}
+        >
+          {done ? "✓ Terminé" : "Marquer comme terminé"}
+        </button>
+      </div>
       <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)]">{content.dek}</p>
 
       <div className="mt-8 flex flex-col gap-5">

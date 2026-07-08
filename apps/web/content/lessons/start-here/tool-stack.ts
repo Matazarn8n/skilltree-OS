@@ -72,6 +72,13 @@ const lesson: LessonContent = {
         "Supabase · base de données et backend open source. Bon pour les builds qui ont besoin de stocker et requêter des données.",
       ],
     },
+    { type: "h2", text: "Réunions" },
+    {
+      type: "ul",
+      items: [
+        "Fireflies · enregistreur et transcripteur de réunions par IA. Rejoint tes appels tout seul, produit des transcripts et des actions à faire, cherchables. Branché ici en MCP · Claude peut aller lire tes transcripts directement.",
+      ],
+    },
     {
       type: "p",
       text: "Note sur n8n : encore utile pour certaines intégrations, mais largement dépassé par Claude Code pour l'essentiel de ce qu'on couvre ici. Claude Code peut désormais orchestrer directement via des API sans avoir besoin d'un constructeur de workflow séparé. Si tu l'utilises déjà, ça fonctionne très bien à côté de Claude Code · mais ce n'est pas quelque chose à apprendre pour les builds ici.",
