@@ -63,11 +63,11 @@ Plans:
 **Plans**: 5 plans (fan-out parallèle)
 
 Plans:
-- [ ] 03-01: Hub — sections + ⌘K + InstallModal (P2, inclut batch réécriture 78 fiches skills FR)
-- [ ] 03-02: Modules — audit+compléments 18 leçons FR + stepper + progression locale (P3)
-- [ ] 03-03: Brain — wizard 8 sections + chemins ai/manual + save par section (P4)
-- [ ] 03-04: My Tree + Community + Settings (P5)
-- [ ] 03-05: Dashboards (6 command centers) + Chart (RolloutMatrix) (P5.1)
+- [ ] 03-01-PLAN.md — Hub : sections + ⌘K + InstallModal + install(slug) local + batch réécriture 78 fiches skills FR (P2)
+- [ ] 03-02-PLAN.md — Modules : audit 18/18 leçon↔capture + compléments FR + stepper + progression locale (P3)
+- [ ] 03-03-PLAN.md — Brain : wizard 8 sections + chemins ai/manual + save par section + draftBrain stub (P4)
+- [ ] 03-04-PLAN.md — My Tree + Community + Settings ; TreeAudit réactif aux installs (P5)
+- [ ] 03-05-PLAN.md — Dashboards (6 command centers) + Chart (RolloutMatrix, N of M recalculés) (P5.1)
 
 ### Phase 4: Backend
 **Goal**: State user réel : schéma Supabase + RLS + auth + routes user + LLM draft via gateway + Stripe-ready, remplaçant les stubs locaux de Phase 3 (D5, D7, D8).
