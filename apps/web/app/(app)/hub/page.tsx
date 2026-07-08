@@ -1,15 +1,24 @@
-import { FRESH_DROPS, MOST_INSTALLED, MODULES, SKILL_FILES } from "@/lib/catalog";
-import { SkillCard } from "@/components/skill/SkillCard";
+import { MODULES, SKILL_FILES } from "@/lib/catalog";
 import { ModuleCard } from "@/components/hub/ModuleCard";
 import { FirstWeekChecklist } from "@/components/hub/FirstWeekChecklist";
+import { FeaturedThisWeek } from "@/components/hub/FeaturedThisWeek";
+import { FreshDrops } from "@/components/hub/FreshDrops";
+import { MostInstalled } from "@/components/hub/MostInstalled";
 import { CommunityPulse } from "@/components/hub/CommunityPulse";
-import { EmptyState } from "@/components/ui/EmptyState";
+import { BuildLogs } from "@/components/hub/BuildLogs";
+import { featured, freshDrops, nextDrop, buildLogs } from "@/lib/hub-data";
+import { getAllSkillFiles } from "@/lib/skill-files";
 
 export const metadata = { title: "SkillTree · Hub" };
 
 export default function HubPage() {
+  const skillFiles = getAllSkillFiles();
+  const featuredSkill = skillFiles[featured().slug];
+  const nextDropSkill = nextDrop();
+  const dropSkills = freshDrops().map((d) => skillFiles[d.slug]);
+
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-10">
+    <div className="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-10">
       <header>
         <h1 className="display text-2xl leading-snug text-[var(--text)] md:text-3xl">
           {SKILL_FILES.length} skills en ligne · nouveaux drops cette semaine · reprends où tu t&apos;es arrêté
@@ -34,48 +43,45 @@ export default function HubPage() {
         </div>
       </section>
 
-      <section aria-labelledby="drops-heading" className="flex flex-col gap-4">
-        <h2 id="drops-heading" className="text-lg font-semibold text-[var(--text)]">
-          Fresh drops
-        </h2>
-        {FRESH_DROPS.length > 0 ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {FRESH_DROPS.map((skill) => (
-              <SkillCard key={skill.slug} skill={skill} variant="drop" />
-            ))}
-          </div>
-        ) : (
-          <EmptyState
-            title="Aucun nouveau drop cette semaine"
-            hint="Reviens bientôt : de nouveaux skills arrivent chaque semaine."
+      <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+        <section aria-labelledby="drops-heading" className="flex flex-col gap-4">
+          <h2 id="drops-heading" className="text-lg font-semibold text-[var(--text)]">
+            Fresh drops · Featured this week
+          </h2>
+          <FeaturedThisWeek
+            skill={featuredSkill}
+            nextDrop={nextDropSkill ? skillFiles[nextDropSkill.slug] : null}
           />
-        )}
-      </section>
+          <FreshDrops drops={dropSkills} />
+        </section>
 
-      <section aria-labelledby="installed-heading" className="flex flex-col gap-4">
-        <h2 id="installed-heading" className="text-lg font-semibold text-[var(--text)]">
-          Les plus installés
-        </h2>
-        {MOST_INSTALLED.length > 0 ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {MOST_INSTALLED.map((skill) => (
-              <SkillCard key={skill.slug} skill={skill} variant="compact" />
-            ))}
-          </div>
-        ) : (
-          <EmptyState
-            title="Pas encore de classement"
-            hint="Installe un skill pour lancer le classement de ta communauté."
-          />
-        )}
-      </section>
+        <aside className="flex flex-col gap-8">
+          <section aria-labelledby="installed-heading" className="flex flex-col gap-4">
+            <h3 id="installed-heading" className="text-base font-semibold text-[var(--text)]">
+              Les plus installés
+            </h3>
+            <MostInstalled skillFiles={skillFiles} />
+          </section>
 
-      <section aria-labelledby="pulse-heading" className="flex flex-col gap-4 pb-6">
-        <h2 id="pulse-heading" className="text-lg font-semibold text-[var(--text)]">
-          Pouls de la communauté
-        </h2>
-        <CommunityPulse />
-      </section>
+          <section aria-labelledby="pulse-heading" className="flex flex-col gap-4">
+            <h3 id="pulse-heading" className="text-base font-semibold text-[var(--text)]">
+              Pouls de la communauté
+            </h3>
+            <CommunityPulse />
+          </section>
+
+          <section aria-labelledby="logs-heading" className="flex flex-col gap-4 pb-6">
+            <h3 id="logs-heading" className="text-base font-semibold text-[var(--text)]">
+              Build logs
+            </h3>
+            <BuildLogs posts={buildLogs()} />
+          </section>
+        </aside>
+      </div>
+
+      <footer className="border-t border-[var(--border-soft)] pt-4 text-center text-xs text-[var(--text-faint)]">
+        SkillTree Hub · reconstruction perso. De nouveaux skills arrivent chaque semaine.
+      </footer>
     </div>
   );
 }
