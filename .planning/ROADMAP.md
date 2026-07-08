@@ -12,7 +12,7 @@ Reconstruction perso FR de SkillTree en 6 phases, dérivées du plan d'exécutio
 
 - [x] **Phase 1: Fondations data + scaffold** - Catalogue consolidé buildé + invariants assertés + prototype rebranché
 - [ ] **Phase 2: Hero constellation** - Roue-constellation 137 nœuds + ViewSwitcher, a11y + LOWFX
-- [ ] **Phase 3: Vues & modules UI** - Hub, Modules, Brain, Tree/Community/Settings, Dashboards/Chart (5 plans parallèles)
+- [x] **Phase 3: Vues & modules UI** - Hub, Modules, Brain, Tree/Community/Settings, Dashboards/Chart (5 plans parallèles) — COMPLETE + VERIFIED 2026-07-08 (gsd-verifier passed 5/5)
 - [ ] **Phase 4: Backend** - Supabase RLS + auth + routes user + LLM draft + Stripe-ready
 - [ ] **Phase 5: Onboarding** - Tour 6 étapes + sélection parcours + Cal.com
 - [ ] **Phase 6: Revue & gel v1** - Passe fidélité + a11y + chasse verbatim, tag v1-perso
@@ -132,7 +132,7 @@ P1 ─┬─ P2 ─┬─ P3.05 ─┐
 |-------|----------------|--------|-----------|
 | 1. Fondations data + scaffold | 0/1 | Not started | - |
 | 2. Hero constellation | 0/1 | Not started | - |
-| 3. Vues & modules UI | 0/5 | Not started | - |
+| 3. Vues & modules UI | 5/5 | Complete + Verified | 2026-07-08 |
 | 4. Backend | 0/2 | Not started | - |
 | 5. Onboarding | 0/1 | Not started | - |
 | 6. Revue & gel v1 | 0/1 | Not started | - |
