@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-07-08)
 
 ## Current Position
 
-Phase: 2 of 6 (Hero constellation) — COMPLETE + VERIFIED (passed 4/4)
-Plan: 2 of 2 in current phase — 02-02 complete
-Status: Phase 2 terminée. Prochain : Phase 3 (5 plans fan-out parallèle) — /gsd:plan-phase 3.
-Last activity: 2026-07-08 — 02-02 exécuté (JobPanel FR + a11y/LOWFX + verify_p1.py 15/15 PASS, 4 commits 65f373d→85ef7c9), vérif indépendante gsd-verifier passed 4/4. ⚠️ push origin main EN ATTENTE (bloqué par classifier auto-mode, à débloquer par l'user).
+Phase: 3 of 6 (Vues & modules UI) — PLANIFIÉE + VÉRIFIÉE (plan-checker PASSED)
+Plan: 0 of 5 exécutés — prochaine étape /gsd:execute-phase 3 (fan-out wave 1)
+Status: Phase 2 poussée origin/main. Phase 3 planifiée (5 plans 03-01..03-05, 0 overlap, 14/14 requirements). Handoff exécution = docs/10_HANDOFF_PHASE3.md.
+Last activity: 2026-07-08 — Phase 3 planifiée (gsd-planner opus, commit 5c3de2d) + vérifiée (gsd-plan-checker PASSED). Phase 2 poussée (fda93d0). Note plan-checker : batch 78 fiches 03-01 = reprendre jamais tronquer.
 
-Progress: [███░░░░░░░] 27% (3/11 plans)
+Progress: [███░░░░░░░] 27% (3/8 plans exécutés ; Phase 3 = +5 planifiés)
 
 ## Performance Metrics
 
