@@ -1,10 +1,10 @@
 import { CHART_JOBS } from "@/lib/catalog";
 import type { JobLevel, SectorSlug, Skill } from "@/lib/types";
 
-// Vue CHART (P5.1, CHART-01/02). Tout ce fichier RECALCULE depuis CHART_JOBS (165 jobs =
-// 137 map + 28 extras origin='chart', D2) — jamais de chiffre copié d'une capture. Les
-// totaux de contrôle (165 / 36 human-led) doivent tomber de ces fonctions, pas être écrits
-// en dur ici (cf. docs/ARCHITECTURE.md §7, assert-graph.mjs EXPECT).
+// Vue CHART (P5.1, CHART-01/02). Tout ce fichier RECALCULE depuis CHART_JOBS (jobs map +
+// extras origin='chart', D2) — jamais de chiffre copié d'une capture. Les totaux de contrôle
+// (cf. assert-graph.mjs EXPECT.jobsChart / EXPECT.humanLed) doivent tomber de ces fonctions,
+// jamais être écrits en dur ici (cf. docs/ARCHITECTURE.md §7).
 
 export interface SectorSummary {
   total: number;
@@ -38,8 +38,9 @@ export function summaryLabel(s: SectorSummary): string {
   return `${s.autonomous} jobs sur ${s.total} tournent en autonomie · ${s.assisted} assisté${s.assisted > 1 ? "s" : ""} · ${s.humanLed} rest${s.humanLed > 1 ? "ent" : "e"} piloté${s.humanLed > 1 ? "s" : ""} par un humain.`;
 }
 
-/** Totaux de contrôle tous secteurs confondus (attendu par assert-graph : 165 / 36). Recalculé
- *  depuis CHART_JOBS — ne JAMAIS coder ces nombres en dur (cf. grep de preuve du plan). */
+/** Totaux de contrôle tous secteurs confondus (comparés à assert-graph.mjs EXPECT.jobsChart /
+ *  EXPECT.humanLed par tools/verify_p51.py). Recalculé depuis CHART_JOBS — ne JAMAIS coder ces
+ *  nombres en dur ici (cf. grep de preuve du plan). */
 export function chartTotals(): { total: number; humanLed: number } {
   const total = CHART_JOBS.length;
   const humanLed = CHART_JOBS.filter((j) => j.level === "human-led").length;

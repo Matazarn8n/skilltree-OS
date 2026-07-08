@@ -6,7 +6,8 @@ import { useLowFx } from "@/lib/constellation/useLowFx";
 import { ConstellationWheel } from "@/components/constellation/ConstellationWheel";
 import { SectorView } from "@/components/constellation/SectorView";
 import { JobPanel } from "@/components/constellation/JobPanel";
-import { EmptyState } from "@/components/ui/EmptyState";
+import { CommandCenters } from "@/components/dashboards/CommandCenters";
+import { RolloutMatrix } from "@/components/chart/RolloutMatrix";
 
 export type MapViewKind = "map" | "dashboards" | "chart";
 
@@ -20,22 +21,10 @@ export function MapView({ view = "map", initialSkill }: { view?: MapViewKind; in
   const { lowFx } = useLowFx();
 
   if (view === "dashboards") {
-    return (
-      <div className="flex h-full items-center justify-center p-8">
-        <div className="w-full max-w-md">
-          <EmptyState title="Dashboards — bientôt" hint="Les command centers arrivent à la Phase 3." />
-        </div>
-      </div>
-    );
+    return <CommandCenters />;
   }
   if (view === "chart") {
-    return (
-      <div className="flex h-full items-center justify-center p-8">
-        <div className="w-full max-w-md">
-          <EmptyState title="Chart — bientôt" hint="La matrice de déploiement par étapes arrive à la Phase 3." />
-        </div>
-      </div>
-    );
+    return <RolloutMatrix />;
   }
 
   return (

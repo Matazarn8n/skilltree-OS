@@ -1,0 +1,39 @@
+# Preuve DOM — P5.1 Dashboards + Chart (plan 03-05) — rendu réel Playwright chromium
+
+Serveur : `cd apps/web && pnpm build && npx next start -p 3010` (build exit=0, prebuild assert-graph inclus).
+Runner : /home/nuveo/.higgsfield-login-venv/bin/python tools/verify_p51.py
+Viewport desktop 1440×900.
+
+Note d'exécution (fan-out wave 1, 5 exécuteurs parallèles sur le même worktree) : le port
+:3010 et `.next/` réels ont été observés instables pendant la fenêtre d'exécution (rebuilds
+concurrents des plans 03-01..03-04 écrasant les chunks en cours de service → 400 + hydratation
+morte, cf. piège connu du handoff). Pour obtenir une mesure non faussée, ce run a servi le
+build depuis un `git worktree` jetable checkouté sur le commit courant du plan (code
+strictement identique à celui commité ici, `node_modules`/`captures` symlinkés, aucune
+modification de logique) sur le même port 3010 mais un process/`.next` isolé des rebuilds
+sibling. Playwright réel, DOM réel, aucune valeur inventée — seule la contention d'infra du
+fan-out a été contournée. Le worktree a été supprimé après capture des preuves.
+
+## Fidélité visuelle
+dashboards.png vs captures/dashboards/meta-ads-paid-acquisition_full.png : stat tiles (icône/label/valeur XL/delta),
+tables campagnes, sélecteur période, nav prev/next.
+chart.png vs captures/chart/deals__matrix.png & sales__matrix.png : tabs 7 secteurs, 4 colonnes étape,
+3 bandes niveau, cartes job badge étape·points ou « En continu » pour Human-led.
+
+## Contrôle anti-fabrication
+catalog.json (relu indépendamment de ce script) : 165 jobs CHART au total, 36 human-led.
+`grep -n '165\|36' apps/web/lib/chart.ts` -> 0 lignes (vérifié ci-dessous) : les totaux tombent du calcul,
+jamais copiés depuis les captures chart/*.json ou le manifeste.
+
+## Checks (mesures citées)
+
+[PASS] Dashboards : 1er center (Meta Ads) chiffres = donnée :: valeurs attendues=['$31,587', '1,049', '$30.12', '0.94%', '$36.27', '1.93'] manquantes=[]
+[PASS] Dashboards : titre 1er center présent :: titre='Meta Ads · Paid Acquisition' présent=True
+[PASS] Dashboards : nav prev/next parcourt les 6 centers distincts :: vus=['Meta Ads · Paid Acquisition', 'HubSpot · Sales Pipeline', 'Xero · Finance', 'Instagram + TikTok · Content', 'Instantly + HeyReach · Outbound', 'Mission Control · Client Delivery'] distinct=6
+[PASS] Chart : 7 tabs secteurs dont Sales/Ventes :: count=7 tabs=['Ventes', 'Affaires', 'Marketing', 'Opérations', 'Intelligence', 'Clients', 'Back-office']
+[PASS] Chart : clic sur 2 tabs change le secteur actif sans erreur :: clicked=['Affaires', 'Opérations']
+[PASS] Chart : N of M recalculé secteur deals = résumé affiché :: attendu(auto=19/28 assisted=4 humanLed=5) affiché='19 jobs sur 28 tournent en autonomie · 4 assistés · 5 restent pilotés par un humain.'
+[PASS] Chart : N of M recalculé secteur sales = résumé affiché :: attendu(auto=19/26 assisted=3 humanLed=4) affiché='19 jobs sur 26 tournent en autonomie · 3 assistés · 4 restent pilotés par un humain.'
+[PASS] Chart : totaux recalculés 165/36 affichés et corrects :: total=165 humanLed=36 affiché='Tous secteurs confondus : 165 jobs référencés dans la vue CHART · 36 pilotés par un humain (recalculé depuis la donnée).'
+[PASS] lib/chart.ts : 0 occurrence de 165|36 en dur :: lignes trouvées=[]
+[PASS] Isolation MAP : 137 nœuds (extras chart absents) :: count=137
