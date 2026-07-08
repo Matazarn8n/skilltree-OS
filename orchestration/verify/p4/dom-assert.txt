@@ -1,0 +1,39 @@
+# Preuve DOM — Plan 03-03 (wizard Brain) — rendu réel Playwright chromium
+
+Serveur : `cd apps/web && pnpm build && npx next start -p 3010` (build exit=0).
+Runner : /home/nuveo/.higgsfield-login-venv/bin/python tools/verify_p4.py
+Viewport desktop 1440×900.
+
+## Fidélité visuelle
+brain-section.png (section ENTREPRISE 1/8, chemin manuel) vs captures/dynamic/brain_section_1.png :
+même structure (eyebrow + X/8, question, éditeur, Retour/Continuer, footnote) — eyebrow traduit
+FR (COMPANY→ENTREPRISE) et question traduite (« What's your company called? » → « Comment
+s'appelle ton entreprise ? »), fidèle en structure, prose neuve (pas de verbatim EN).
+brain-manual.png (écran d'entrée) vs captures/dynamic/brain_initial.png : mêmes deux chemins
+(IA / manuel), mêmes champs (site + notes libres), copy FR réécrite.
+Sections 2 à 8 : captures/dynamic/brain_section_2..8.json sont identiques à la section 1
+(la capture originale est restée bloquée sur la validation « Fill this in to continue » —
+aucune progression réelle capturée au-delà de l'écran 1) ; labels/questions 2-8 sont donc
+réécrits à partir de l'enum brain_section (docs/ARCHITECTURE.md §5), pas invention libre.
+
+## Checks (mesures citées)
+
+[PASS] écran d'entrée : CTA manuel présent :: bouton « Je l'écris moi-même » trouvé
+[PASS] écran d'entrée : CTA IA présent :: bouton « Rédiger ma base avec l'IA → » trouvé
+[PASS] section 1/8 : eyebrow attendu :: eyebrow='ENTREPRISE' attendu='ENTREPRISE'
+[PASS] section 2/8 : eyebrow attendu :: eyebrow='OFFRE' attendu='OFFRE'
+[PASS] section 3/8 : eyebrow attendu :: eyebrow='CLIENTS' attendu='CLIENTS'
+[PASS] section 4/8 : eyebrow attendu :: eyebrow='TON' attendu='TON'
+[PASS] section 5/8 : eyebrow attendu :: eyebrow='OPÉRATIONS' attendu='OPÉRATIONS'
+[PASS] section 6/8 : eyebrow attendu :: eyebrow='OUTILS' attendu='OUTILS'
+[PASS] section 7/8 : eyebrow attendu :: eyebrow='OBJECTIFS' attendu='OBJECTIFS'
+[PASS] section 8/8 : eyebrow attendu :: eyebrow='CONTRAINTES' attendu='CONTRAINTES'
+[PASS] 8 écrans distincts, eyebrow 1→8 :: séquence=['1 / 8', '2 / 8', '3 / 8', '4 / 8', '5 / 8', '6 / 8', '7 / 8', '8 / 8']
+[PASS] chemin manuel complet : écran de fin atteint :: texte de fin trouvé
+[PASS] 8 clés dans localStorage après le chemin manuel :: keys=8
+[PASS] marqueur présent dans localStorage avant reload :: content='ZZTEST-brain-entreprise'
+[PASS] reload : reprise sur l'écran de fin (8/8 déjà remplies) :: texte de fin présent après reload
+[PASS] reload : section 1 affiche le marqueur persistant :: step=1 / 8 textarea='ZZTEST-brain-entreprise'
+[PASS] badge source = Manuel (chemin manuel) :: badge='MANUEL'
+[PASS] chemin IA : sections pré-remplies, badge IA :: step=1 / 8 badge='IA' contenu_non_vide=True
+[PASS] chemin IA : 8 clés pré-remplies dans localStorage :: keys=8
