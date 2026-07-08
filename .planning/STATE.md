@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-07-08)
 ## Current Position
 
 Phase: 3 of 6 (Vues & modules UI) — EN EXÉCUTION (fan-out wave 1, 5 exécuteurs parallèles)
-Plan: 03-02 (Modules) + 03-03 (Brain) exécutés et vérifiés — 03-01/03-04/03-05 en cours en parallèle (voir leurs SUMMARY respectifs)
-Status: Phase 2 poussée origin/main. Phase 3 planifiée (5 plans 03-01..03-05, 0 overlap, 14/14 requirements) puis mise en exécution fan-out. 03-02 (Modules) complet : coverage.md 18/18, stepper/reader branchés progress.ts, verify_p3.py 8/8 PASS. 03-03 (Brain) complet : wizard 8 sections, 2 chemins IA/manuel, draftBrain() stub, verify_p4.py 19/19 PASS.
-Last activity: 2026-07-08 — 03-03-PLAN.md exécuté (3 tâches, 3 commits ecc8783/03c4a6e/95b3d85) + vérifié (build exit 0 dans un worktree isolé, verify_p4.py 19/19 PASS). Voir .planning/phases/03-vues-modules-ui/03-03-SUMMARY.md.
+Plan: 03-02 (Modules) + 03-03 (Brain) + 03-04 (My Tree/Community/Settings) exécutés et vérifiés — 03-01/03-05 en cours en parallèle (voir leurs SUMMARY respectifs)
+Status: Phase 2 poussée origin/main. Phase 3 planifiée (5 plans 03-01..03-05, 0 overlap, 14/14 requirements) puis mise en exécution fan-out. 03-02 (Modules) complet : coverage.md 18/18, stepper/reader branchés progress.ts, verify_p3.py 8/8 PASS. 03-03 (Brain) complet : wizard 8 sections, 2 chemins IA/manuel, draftBrain() stub, verify_p4.py 19/19 PASS. 03-04 (My Tree/Community/Settings) complet : TreeAudit réactif aux installs locaux (compteur 0→1 sans reload, contrat localStorage lu sans importer lib/installs.ts de 03-01), Community H1 ajouté, Settings sections labellisées, verify_p5.py 6/6 PASS.
+Last activity: 2026-07-08 — 03-04-PLAN.md exécuté (3 tâches, 3 commits 17bcce4/5db1a9e/7eb1090) + vérifié (build exit 0, verify_p5.py 6/6 PASS, dont compteur TreeAudit prouvé 0→1 sans reload). Voir .planning/phases/03-vues-modules-ui/03-04-SUMMARY.md.
 
 Progress: [███░░░░░░░] 27%+ (3/8 plans exécutés avant Phase 3 ; 03-02+03-03/5 plans Phase 3 confirmés exécutés, décompte final après fan-out complet)
 
@@ -60,6 +60,8 @@ Recent decisions affecting current work:
 - [Phase 03-vues-modules-ui Plan 02]: 1 seul gap réel sur 18 leçons (start-here/tool-stack, section Meetings/Fireflies) — comblé en FR neuve, anti-verbatim vérifié.
 - [Phase 03-vues-modules-ui Plan 03]: Eyebrows sections 2-8 traduits depuis l'enum `brain_section` (pas les captures — `brain_section_2..8.json` sont identiques à la section 1, capture originale bloquée sur validation, jamais progressée).
 - [Phase 03-vues-modules-ui Plan 03]: Vérification de build isolée dans un git worktree détaché + port dédié — le fan-out parallèle sur `apps/web/.next` partagé provoque des `ChunkLoadError` si plusieurs plans buildent/servent en même temps sur le même dossier.
+- [Phase 03-vues-modules-ui Plan 04]: TreeAudit lit le contrat localStorage `skilltree.installs.v1`/`skilltree:installs` (03-01) via un helper local, sans importer `lib/installs.ts` — couplage par clé/event, pas par code partagé, conforme au wave 1 sans dépendance de fichier.
+- [Phase 03-vues-modules-ui Plan 04]: Build partagé `apps/web/.next` en fan-out : un retry loop tolérant les échecs de build concurrents (autres agents mid-édition) + build/start immédiats l'un après l'autre suffit, pas besoin systématique de worktree isolé si on retente rapidement.
 
 ### Pending Todos
 
@@ -72,5 +74,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-07-08
-Stopped at: 03-03-PLAN.md (Phase 3, Brain) exécuté et vérifié — voir .planning/phases/03-vues-modules-ui/03-03-SUMMARY.md
-Resume file: None — les autres plans du fan-out (03-01/03-04/03-05) s'exécutent en parallèle ; après leur complétion, lire orchestration/verify/p{2,4,5,51}/ + les SUMMARY restants, puis suivre docs/10_HANDOFF_PHASE3.md (revue fidélité tier-fort, gsd-verifier, push origin main).
+Stopped at: 03-04-PLAN.md (Phase 3, My Tree/Community/Settings) exécuté et vérifié — voir .planning/phases/03-vues-modules-ui/03-04-SUMMARY.md
+Resume file: None — les autres plans du fan-out (03-01/03-05) s'exécutent en parallèle ; après leur complétion, lire orchestration/verify/p{1,3,4,5}/ + les SUMMARY restants, puis suivre docs/10_HANDOFF_PHASE3.md (revue fidélité tier-fort, gsd-verifier, push origin main).
