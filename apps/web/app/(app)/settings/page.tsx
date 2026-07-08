@@ -8,7 +8,7 @@ export const metadata = { title: "SkillTree · Réglages" };
 export default function SettingsPage() {
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6 px-6 py-8">
-      <h1 className="display text-lg text-[var(--text)]">RÉGLAGES</h1>
+      <h1 className="display text-2xl text-[var(--text)]">Réglages</h1>
 
       <SettingsSection title="Compte" description="Ton profil et ton abonnement.">
         <div className="flex flex-col gap-5">
