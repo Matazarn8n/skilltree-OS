@@ -1,0 +1,34 @@
+# Preuve DOM — Plan 03-01 (Hub + Install local + 78 fiches) — rendu réel Playwright chromium
+
+Serveur : `cd apps/web && pnpm build && npx next start -p 3010` (build exit=0, prebuild assert-graph inclus).
+Runner : /home/nuveo/.higgsfield-login-venv/bin/python tools/verify_p2.py
+Viewport desktop 1440x1400.
+
+## Fidélité visuelle
+hub.png vs captures/nav_hub.png : GET STARTED (progression X/5), Modules (3 cartes),
+Fresh drops + Featured this week, Most installed, Community pulse, Build logs — 6 sections
+dans le même ordre. Écart assumé : compteurs d'installs = état local réel de CET utilisateur
+(D3, pas un classement communautaire fabriqué) ; âges des drops étiquetés '(démo)'.
+
+## Checks (mesures citées)
+
+[PASS] content/skills/*.md compte réel :: count=78
+[PASS] 6 sections Hub présentes :: manquantes=[]
+[PASS] Most installed : EmptyState avant install :: empty_ok=True
+[PASS] ⌘K/Ctrl+K ouvre la recherche :: dialog visible
+[PASS] recherche « carrousel » -> résultats :: count=1
+[PASS] InstallModal complète (role=dialog) :: manquants=[]
+[PASS] localStorage skilltree.installs.v1 écrit :: raw={"carousel-designer":true}
+[PASS] bouton passe à « Installé » :: texte_bouton_contient='installé'
+[PASS] réouverture ⌘K même skill : état Installé persisté :: contains_installe=True
+[PASS] anti-verbatim carousel-designer (< 8 mots identiques) :: plus_longue_fenetre_commune=4 mots
+[PASS] anti-verbatim billing-manager (< 8 mots identiques) :: plus_longue_fenetre_commune=4 mots
+[PASS] anti-verbatim inbox-manager (< 8 mots identiques) :: plus_longue_fenetre_commune=4 mots
+OK — preuves écrites
+
+## Spot-check anti-verbatim (x3)
+  - carousel-designer : plus longue fenêtre commune FR/EN = 4 mots (< 8 -> PASS)
+  - billing-manager : plus longue fenêtre commune FR/EN = 4 mots (< 8 -> PASS)
+  - inbox-manager : plus longue fenêtre commune FR/EN = 4 mots (< 8 -> PASS)
+
+Premier résultat recherche « carrousel » lors du run : "Concepteur de carrousels\nTransforme n'importe quelle idée — un sujet, un script, une étude de cas, un post qui a marché — en architecture de carrousel complète : texte slide par slide, logique de swipe, et notes de mise en page prêtes pour ton système de design, Figma ou Canva."
