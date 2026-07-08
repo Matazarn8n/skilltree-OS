@@ -1,0 +1,21 @@
+# Preuve DOM — Phase 3 plan 04 (My Tree / Community / Settings) — rendu réel Playwright chromium
+
+Serveur : `cd apps/web && pnpm build && npx next start -p 3010` (build exit=0).
+Runner : /home/nuveo/.higgsfield-login-venv/bin/python tools/verify_p5.py
+Viewport desktop 1440x900.
+
+## Fidélité visuelle
+tree.png vs captures/nav_tree.png : Connecte ta machine, rangée de stats, Drops de la
+semaine, TreeAudit. community.png vs captures/nav_community.png : bandeau 100 premiers +
+feed de posts. settings.png vs captures/nav_settings.png : Compte/Sécurité/Facturation/
+Zone de danger, plan Membre 47 $/mois (D8 — 47 $ substitué au 49 $ de la capture par
+décision produit, cf. docs/ARCHITECTURE.md D8 + plan 03-04 truths).
+
+## Checks (mesures citées)
+
+[PASS] My Tree : ConnectMachine + stats + WeeklyDrops + TreeAudit présents :: connect=True sync_cmd=True stats=True audit=True drops=True
+[PASS] TreeAudit compteur avant install :: texte="Rien d'installé pour l'instant. Installe un skill depuis le Hub pour le voir apparaître ici." N=0
+[PASS] TreeAudit compteur après install (sans reload) : 0 -> 1 :: texte_avant="Rien d'installé pour l'instant. Installe un skill depuis le Hub pour le voir apparaître ici." texte_apres='1 skill installé, calculé depuis ta machine connectée.'
+[PASS] Rangée de stats reflète l'install (Installés = 1/N) :: valeur='1 / 137'
+[PASS] Community : H1 + bandeau 100 premiers + >=1 post :: heading=1 bandeau_100=True posts=6
+[PASS] Settings : Membre 47 $/mois + 4 sections :: membre_47=True sections_trouvees=4/4 (['Compte', 'Sécurité', 'Facturation', 'Zone de danger'])
