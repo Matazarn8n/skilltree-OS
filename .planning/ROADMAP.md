@@ -133,6 +133,6 @@ P1 ─┬─ P2 ─┬─ P3.05 ─┐
 | 1. Fondations data + scaffold | 0/1 | Not started | - |
 | 2. Hero constellation | 0/1 | Not started | - |
 | 3. Vues & modules UI | 5/5 | Complete + Verified | 2026-07-08 |
-| 4. Backend | 0/2 | Not started | - |
+| 4. Backend | 0/2 | Planned (plan-checker PASSED) | - |
 | 5. Onboarding | 0/1 | Not started | - |
 | 6. Revue & gel v1 | 0/1 | Not started | - |
