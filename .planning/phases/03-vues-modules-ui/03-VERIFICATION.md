@@ -3,6 +3,14 @@ phase: 03-vues-modules-ui
 verified: 2026-07-08T01:08:05Z
 status: passed
 score: 5/5 must-haves verified
+re_verification:
+  by: fable-5 (adversarial goal-backward re-check)
+  date: 2026-07-09
+  previous_status: passed
+  previous_score: 5/5
+  result: passed_confirmed
+  gaps_found: []
+  regressions: []
 ---
 
 # Phase 3: Vues & modules UI — Verification Report
@@ -101,3 +109,38 @@ Note: `gsd-tools.js verify artifacts/key-links` could not parse these PLAN.md fi
 
 *Verified: 2026-07-08T01:08:05Z*
 *Verifier: Claude (gsd-verifier)*
+
+## Re-verification (Fable 5) — 2026-07-09
+
+Adversarial goal-backward re-check at strongest tier, against the actual codebase AND a **live production render** (`pnpm build` exit 0 → `next start -p 3012` → Playwright sync, fresh browser contexts). The prior sonnet verification relied largely on artifacts; this pass re-executed every claim end-to-end. **Verdict: passed — confirmed, no gaps, no regressions.**
+
+### Per-criterion verdicts (all re-executed, not re-read)
+
+| # | Criterion | Verdict | Live/re-run evidence (2026-07-09) |
+|---|---|---|---|
+| 1 | Hub (03-01) | ✓ CONFIRMED | Live `/hub`: all 6 sections in rendered body (GET STARTED, Modules, Fresh drops · Featured, Les plus installés, **Pouls de la communauté** — FR label, why a naive "Community pulse" grep misses it —, Build logs). ⌘K → dialog opens → typed « carrousel » → result clicked → InstallModal (`role=dialog`, « Installer le skill → ») → click → `localStorage['skilltree.installs.v1']={"carousel-designer":true}` written live. `ls apps/web/content/skills/*.md`=78. Anti-verbatim: 4 RANDOM fiches (brand-deal-producer, data-enrichment-specialist, support-operations-manager, reliability-engineer) body-prose vs `captures/skill_files_full/*` → **0 identical 8-word windows** (normalized, frontmatter stripped). |
+| 2 | Modules (03-02) | ✓ CONFIRMED | `coverage.md` is a genuine 18-row matrix (20 pipe-rows incl. header) with per-lesson section-by-section comparison, honest verdicts (17 aligné dont 6 superset, 1 « à compléter (Meetings) »), and a documented anti-omission method. The Meetings fix is REAL in code: `content/lessons/start-here/tool-stack.ts` now has h2 « Réunions » + Fireflies item in reformulated FR. `find content/lessons -type f`=18. Stepper→`lib/progress.ts` wiring re-confirmed by grep + prior dom-assert (counter 0/8→1/8, reload persist). |
+| 3 | Brain (03-03) | ✓ CONFIRMED | Live `/brain`: intake screen with both paths (« Je l'écris moi-même » / « Rédiger ma base avec l'IA → »). Manual path clicked → wizard shows **only** ENTREPRISE eyebrow (0 of the other 7 visible simultaneously = true one-per-screen). Filled + saved → `localStorage['skilltree.brain.v1']={"company":{"content":"…XYZ123","source":"manual"}}` — source badge model correct. Reload in same context → badge MANUEL rendered (read-back works; wizard resumes at first unfilled section, expected UX). `draftBrain(input:{url?,notes?}): Record<BrainSectionKey,…>` — deterministic local stub, signature-stable, Phase-4 swap path documented in-file (lines 10-12, 198-200). |
+| 4 | Tree/Community/Settings (03-04) | ✓ CONFIRMED | Live `/tree`: counter « 0 / 137 » → set installs key + dispatch `skilltree:installs` via JS → « 1 / 137 » **without reload** (reactive). grep: `components/tree/` contains ZERO import of `lib/installs.ts` — local `useInstalledSlugs()` reads the same key/event (contract honored, no coupling). `settings/page.tsx:24` « Membre · 47 $/mois » present. Community feed component real (CommunityPulse + community page render). |
+| 5 | Dashboards+Chart (03-05) | ✓ CONFIRMED — strongest check of this pass | `grep -E '\b165\b|\b36\b' apps/web/lib/chart.ts` → 0 (exit 1). `chartTotals()`/`sectorSummary()` recompute from `CHART_JOBS` (imported from lib/catalog). **Live cross-total**: clicked all 7 sector tabs on `?view=chart`, parsed the rendered FR sentence per sector — Ventes 19/26/3/4, Affaires 19/28/4/5, Marketing 18/27/5/4, Opérations 11/23/7/5, Intelligence 12/21/4/5, Clients 5/18/6/7, Back-office 10/22/6/6 → **Σ total = 165, Σ human-led = 36**, exactly matching `assert-graph.mjs` PASS (`chart_total=165 chart_human=36 skills=78 jobs=137 sectors=7`, exit 0). Dashboards carousel cycled live: exactly **6 command centers** (Meta Ads, HubSpot, Xero, Instagram+TikTok, Instantly+HeyReach, Mission Control) + label « Démo déterministe · données seed 20260611 » rendered. `MapView.tsx` imports+renders `<CommandCenters/>`/`<RolloutMatrix/>` for `view==='dashboards'/'chart'` (placeholders genuinely replaced). **MAP stays 137**: live `/map` has 144 `button[aria-label]` = 7 sector labels (« Secteur Ventes — 22 jobs »…) + **exactly 137 job nodes** — no chart-extra leak. |
+
+### Cross-cutting
+
+- **Build**: full `pnpm build` (prebuild build:catalog + assert-graph + next build) exit 0, 14 routes, run to completion without piping.
+- **Anti-patterns**: grep `|| true` / empty catch / silent-fallback across all phase-3 libs+components (`installs.ts`, `brain.ts`, `chart.ts`, `skill-files.ts`, `hub-data.ts`, `components/{hub,tree,brain,dashboards,chart,lesson}`) → **0 hits**.
+- **D9**: job ids are stable English slugs (`icp-definition`, `market-mapping`…) — confirmed in `catalog.json`; FR is the display chrome (sector tabs Ventes/Affaires/…, level labels FR, recomputed FR sentences).
+- **Proof dirs**: `orchestration/verify/p{2,3,4,5,51}/` each contain `dom-assert.txt` + screenshots (11 PNGs total) — verified present.
+
+### What the first verifier missed
+
+Nothing material. Two observations for the record (neither is a phase-3 gap):
+
+1. **Job-level prose (name/desc/ladder) in `catalog.json` remains English** (e.g. « Map the total addressable companies… »). Consistent with D9 (English slugs/names as data), and the surfaces that display job prose (JobPanel) are **Phase 2** scope — but Phase 2 is still unchecked in ROADMAP while Phase 3 (which depends on its ViewSwitcher for P5.1) is done. The switcher exists and works; the Phase-6 fidelity/verbatim pass should decide whether job descs get a FR layer.
+2. Naive assertions on English section labels fail against the FR UI (« Pouls de la communauté », « Je l'écris moi-même ») — future verify scripts should assert the FR strings, as `tools/verify_p*.py` already do.
+
+**Final status: passed (5/5 confirmed at Fable-5 tier, live-render evidence).**
+
+---
+
+*Re-verified: 2026-07-09*
+*Verifier: Claude (Fable 5, adversarial re-check)*
