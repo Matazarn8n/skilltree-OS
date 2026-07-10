@@ -97,7 +97,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 05-01: overlay tour 6 étapes + sélection parcours + Cal.com + persistance (P7)
+- [ ] 05-01-PLAN.md — Tour 6 étapes persistant (lib/onboarding.ts) + 4 parcours enum + CTA Cal.com + gate landing + verify_p7 (P7)
 
 ### Phase 6: Revue & gel v1
 **Goal**: Passe fidélité + qualité écran-par-écran avant gel, findings bloquants fixés, tag `v1-perso`.
