@@ -1,0 +1,23 @@
+user A = 4500c1ab-b125-49ed-9897-69f8078dd130
+user B = 9edd8ad1-9b9f-4a88-a04c-e033956e4d1e
+✓ A a écrit sa ligne dans installs
+✓ A a écrit sa ligne dans progress
+✓ A a écrit sa ligne dans brain
+✓ A a écrit sa ligne dans tree_state
+✓ A a écrit sa ligne dans onboarding
+✓ service-role voit 1 ligne(s) de A dans installs (contrôle positif)
+✓ service-role voit 1 ligne(s) de A dans progress (contrôle positif)
+✓ service-role voit 1 ligne(s) de A dans brain (contrôle positif)
+✓ service-role voit 1 ligne(s) de A dans tree_state (contrôle positif)
+✓ service-role voit 1 ligne(s) de A dans onboarding (contrôle positif)
+✓ B voit 0 ligne de A dans installs (isolation OK)
+✓ B voit 0 ligne de A dans progress (isolation OK)
+✓ B voit 0 ligne de A dans brain (isolation OK)
+✓ B voit 0 ligne de A dans tree_state (isolation OK)
+✓ B voit 0 ligne de A dans onboarding (isolation OK)
+--- counter-proof : disable RLS sur installs ---
+✓ counter-proof CONFIRMÉ : sans RLS, B voit 1 ligne(s) de A dans installs → le test détecte bien la fuite (il virerait au ROUGE)
+✓ RLS ré-activé sur installs
+✓ après réactivation RLS : B voit 0 ligne de A dans installs
+
+RESULT: PASS (isolation tenant prouvée + counter-proof)

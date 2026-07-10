@@ -1,107 +1,134 @@
--- SkillTree-OS — schéma Postgres (cible Supabase). Voir docs/00_master_plan.md §2.
--- Principe : entités relationnelles + arêtes explicites (pas de JSON d'arbre monolithique).
--- RLS dès le départ -> multi-tenant natif (produit visé revendable).
+-- SkillTree-OS — schéma state-user (Postgres/Supabase). Conforme docs/ARCHITECTURE.md §5.
+-- REMPLACE l'ancien schéma prototype (sectors/skills/skill_edges — supprimés, D4 : le catalogue
+-- reste des fichiers buildés, jamais en DB). RLS par-user (D5) sur les 6 tables.
+-- Idempotent : rejouable via `supabase db reset` ou `psql -f`.
 
--- ── Catalogue (public en lecture, écriture admin) ───────────────────────────
-create table if not exists sectors (
-  slug         text primary key,
-  name         text not null,
-  tagline      text not null,
-  color_var    text not null,
-  order_index  int  not null default 0
-);
+-- ── Reset (idempotent) : drop tables AVANT les types — sinon `drop type cascade`
+-- retire les colonnes enum des tables existantes que `create table if not exists` ne
+-- recrée pas (colonnes fantômes). On repart propre à chaque application.
+drop table if exists onboarding cascade;
+drop table if exists tree_state cascade;
+drop table if exists brain cascade;
+drop table if exists installs cascade;
+drop table if exists progress cascade;
+drop table if exists users cascade;
 
-create type skill_status as enum ('live','drop','soon');
-create type skill_stage  as enum ('foundation','capture','generate','orchestrate');
+-- ── Enums ────────────────────────────────────────────────────────────────────
+drop type if exists lesson_status cascade;
+drop type if exists brain_section cascade;
+drop type if exists brain_source cascade;
+drop type if exists job_level cascade;
+drop type if exists onboarding_path cascade;
 
-create table if not exists skills (
-  id            uuid primary key default gen_random_uuid(),
-  slug          text unique not null,
-  name          text not null,
-  sector_slug   text not null references sectors(slug),
-  summary       text not null,
-  autonomy      bool not null default true,
-  status        skill_status not null default 'live',
-  stage         skill_stage  not null default 'foundation',
-  icon          text not null default 'skill',
-  install_count int  not null default 0,
-  published_at  timestamptz not null default now()
-);
-create index if not exists skills_sector_idx on skills(sector_slug);
-create index if not exists skills_status_idx on skills(status, published_at desc);
+create type lesson_status   as enum ('locked','in_progress','done');
+create type brain_section   as enum ('company','offer','customers','voice','ops','stack','goals','constraints');
+create type brain_source    as enum ('ai','manual');
+create type job_level       as enum ('none','manual','assisted','autonomous');
+create type onboarding_path as enum ('agency','business','company','exploring');
 
--- arêtes du graphe (prérequis) : droper un skill = 1 insert, jamais réécrire un arbre
-create table if not exists skill_edges (
-  from_skill uuid not null references skills(id) on delete cascade,
-  to_skill   uuid not null references skills(id) on delete cascade,
-  kind       text not null default 'requires',
-  primary key (from_skill, to_skill)
+-- ── Tables ───────────────────────────────────────────────────────────────────
+create table if not exists users (
+  id         uuid primary key references auth.users on delete cascade,
+  email      text not null,
+  paid       bool not null default false,
+  plan       text not null default 'member',
+  created_at timestamptz not null default now()
 );
 
-create table if not exists build_guides (
-  skill_id uuid primary key references skills(id) on delete cascade,
-  steps    jsonb not null default '[]'   -- [{title, body, code}]  (sans schéma -> jsonb ok)
-);
-create table if not exists command_centers (
-  skill_id uuid primary key references skills(id) on delete cascade,
-  title    text not null,
-  metrics  jsonb not null default '[]'   -- [{label, value}]
-);
-
--- ── Contenu pédagogique ─────────────────────────────────────────────────────
-create table if not exists modules (
-  slug text primary key, title text not null, subtitle text not null, order_index int not null default 0
-);
-create table if not exists lessons (
-  id uuid primary key default gen_random_uuid(),
-  module_slug text not null references modules(slug),
-  slug text not null, title text not null, order_index int not null, est_min int not null default 5,
-  mdx_ref text not null,                 -- corps versionné en repo (content/lessons/…)
-  unique (module_slug, slug)
-);
-
--- ── Utilisateur & état (RLS scopé auth.uid()) ───────────────────────────────
-create table if not exists profiles (
-  id uuid primary key references auth.users(id) on delete cascade,
-  email text, plan text not null default 'member', persona text, created_at timestamptz default now()
-);
-create table if not exists user_skills (
-  user_id uuid not null references auth.users(id) on delete cascade,
-  skill_id uuid not null references skills(id) on delete cascade,
-  installed_at timestamptz default now(),
-  primary key (user_id, skill_id)
-);
-create table if not exists user_progress (
-  user_id uuid not null references auth.users(id) on delete cascade,
-  lesson_id uuid not null references lessons(id) on delete cascade,
-  completed_at timestamptz default now(),
+create table if not exists progress (
+  user_id      uuid not null references users(id) on delete cascade,
+  lesson_id    text not null,                       -- 'start-here/welcome' … (18, validés vs catalogue au build)
+  status       lesson_status not null default 'in_progress',
+  completed_at timestamptz,
   primary key (user_id, lesson_id)
 );
-create table if not exists brains (
-  user_id uuid primary key references auth.users(id) on delete cascade,
-  sections jsonb not null default '{}',  -- 8 sections
-  source_url text, drafted_by text, updated_at timestamptz default now()
+
+create table if not exists installs (
+  user_id      uuid not null references users(id) on delete cascade,
+  skill_slug   text not null,                       -- 78 slugs catalogue
+  installed_at timestamptz not null default now(),
+  primary key (user_id, skill_slug)
 );
 
--- ── RLS ─────────────────────────────────────────────────────────────────────
-alter table profiles       enable row level security;
-alter table user_skills    enable row level security;
-alter table user_progress  enable row level security;
-alter table brains         enable row level security;
+create table if not exists brain (
+  user_id    uuid not null references users(id) on delete cascade,
+  section    brain_section not null,
+  content    text not null default '',
+  source     brain_source not null default 'manual',
+  updated_at timestamptz not null default now(),
+  primary key (user_id, section)
+);
 
-create policy "own profile"  on profiles      for all using (auth.uid() = id)      with check (auth.uid() = id);
-create policy "own skills"   on user_skills   for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
-create policy "own progress" on user_progress for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
-create policy "own brain"    on brains        for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create table if not exists tree_state (
+  user_id    uuid not null references users(id) on delete cascade,
+  job_id     text not null,                         -- slug D9
+  level      job_level not null default 'none',
+  updated_at timestamptz not null default now(),
+  primary key (user_id, job_id)
+);
 
--- catalogue & contenu : lecture publique
-alter table sectors enable row level security;
-alter table skills  enable row level security;
-alter table modules enable row level security;
-alter table lessons enable row level security;
-create policy "read sectors" on sectors for select using (true);
-create policy "read skills"  on skills  for select using (true);
-create policy "read modules" on modules for select using (true);
-create policy "read lessons" on lessons for select using (true);
+create table if not exists onboarding (
+  user_id uuid primary key references users(id) on delete cascade,
+  path    onboarding_path,
+  step    int not null default 0,                   -- 0..6
+  done    bool not null default false
+);
 
--- Le jour SaaS multi-org : ajouter org_id aux tables user_* + policy sur org membership. Pas avant.
+-- ── Signup trigger : crée la ligne users dès l'inscription auth ──────────────
+create or replace function handle_new_user()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  insert into public.users (id, email)
+  values (new.id, coalesce(new.email, ''))
+  on conflict (id) do nothing;
+  return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function handle_new_user();
+
+-- ── RLS (D5) : chaque user ne voit QUE ses lignes ────────────────────────────
+alter table users      enable row level security;
+alter table progress   enable row level security;
+alter table installs   enable row level security;
+alter table brain      enable row level security;
+alter table tree_state enable row level security;
+alter table onboarding enable row level security;
+
+-- users : keyée par id
+drop policy if exists users_select on users;
+drop policy if exists users_insert on users;
+drop policy if exists users_update on users;
+create policy users_select on users for select using (id = auth.uid());
+create policy users_insert on users for insert with check (id = auth.uid());
+create policy users_update on users for update using (id = auth.uid()) with check (id = auth.uid());
+
+-- progress / installs / brain / tree_state / onboarding : keyées par user_id
+do $$
+declare t text;
+begin
+  foreach t in array array['progress','installs','brain','tree_state','onboarding'] loop
+    execute format('drop policy if exists %I_all on %I', t, t);
+    execute format(
+      'create policy %I_all on %I for all using (user_id = auth.uid()) with check (user_id = auth.uid())',
+      t, t);
+  end loop;
+end $$;
+
+-- ── Grants : RLS gate la VISIBILITÉ des lignes, les GRANT donnent l'ACCÈS table.
+-- Les deux sont requis (Supabase). `authenticated` = user connecté (JWT) ; l'isolation
+-- reste assurée par les policies (auth.uid()). `anon` n'a AUCUN grant sur les tables user.
+grant usage on schema public to anon, authenticated, service_role;
+grant select, insert, update, delete on all tables in schema public to authenticated;
+grant select, insert, update, delete on all tables in schema public to service_role;
+-- futures tables : mêmes grants par défaut
+alter default privileges in schema public grant select, insert, update, delete on tables to authenticated, service_role;
+
+-- PostgREST : recharge son cache de schéma après ce DDL (sinon PGRST204 colonnes fantômes)
+notify pgrst, 'reload schema';
