@@ -3,15 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 
 // Brain — base de connaissance de l'entreprise, en 8 sections (enum `brain_section`,
 // docs/ARCHITECTURE.md §5 : company/offer/customers/voice/ops/stack/goals/constraints).
-// Chaque section porte son contenu + sa source (ai|manual). Persisté en localStorage
-// (mono-user, pas de backend) sous la clé "skilltree.brain.v1" — miroir de lib/progress.ts
-// (event + storage pour re-render tous les hooks montés).
-//
-// STUB PHASE 4 : `draftBrain()` ci-dessous est un gabarit FR déterministe, calculé
-// localement à partir de l'input (url/notes) — CE N'EST PAS un appel réseau/LLM.
-// Phase 4 remplace le corps de `draftBrain()` par `POST /api/brain/draft` (gateway
-// HERMES :8765, D7) et la persistance de `useBrain()` par `GET/PUT /api/brain` (D5,
-// Postgres+RLS) — signatures inchangées, aucun composant de Phase 3 ne bouge.
+// Chaque section porte son contenu + sa source (ai|manual). Phase 4 : persisté en Postgres
+// via GET/PUT /api/brain (RLS auth.uid()), et `draftBrain()` appelle le SEUL point LLM
+// (/api/brain/draft → gateway HERMES :8765, D7). Signatures publiques inchangées.
 
 export type BrainSectionKey =
   | "company"
@@ -105,40 +99,43 @@ export interface BrainEntry {
 
 export type BrainMap = Partial<Record<BrainSectionKey, BrainEntry>>;
 
-const STORAGE_KEY = "skilltree.brain.v1";
 const EVENT = "skilltree:brain";
 
-function read(): BrainMap {
-  if (typeof window === "undefined") return {};
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw);
-    // Garde-fou : un ancien brouillon (format pré-refonte) n'a pas la forme
-    // Record<sectionKey, BrainEntry> — on l'ignore plutôt que de planter dessus.
-    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
-    return parsed as BrainMap;
-  } catch {
-    return {};
-  }
+// Brain — état user réel (Postgres via /api/brain, RLS auth.uid()). Phase 4 a remplacé
+// le corps localStorage par des appels /api ; signatures inchangées. Cache module hydraté
+// par useBrain() ; loadBrainMap() (lecture sync hors hook) tape sur ce cache.
+let cache: BrainMap = {};
+
+function emit() {
+  if (typeof window !== "undefined") window.dispatchEvent(new Event(EVENT));
 }
 
-function write(map: BrainMap) {
+/** Recharge le cache depuis la DB (GET /api/brain) puis notifie les hooks montés. */
+async function hydrate(): Promise<void> {
+  if (typeof window === "undefined") return;
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
-    window.dispatchEvent(new Event(EVENT));
+    const res = await fetch("/api/brain", { cache: "no-store" });
+    if (!res.ok) return;
+    const data = (await res.json()) as Record<string, BrainEntry>;
+    const next: BrainMap = {};
+    for (const key of BRAIN_SECTION_KEYS) {
+      if (data[key]) next[key] = { content: data[key].content, source: data[key].source };
+    }
+    cache = next;
+    emit();
   } catch {
-    // localStorage indisponible (navigation privée stricte, etc.) — dégrade en silence.
+    // non authentifié / hors-ligne — pas d'invention.
   }
 }
 
 /**
- * Lecture synchrone directe (hors hook) — utilisée une seule fois au montage du
- * wizard pour décider l'écran de départ (intake vs reprise), sans dépendre du
- * cycle d'hydratation asynchrone de `useBrain()`.
+ * Lecture synchrone directe (hors hook) — tape sur le cache module hydraté par useBrain().
+ * Note : au tout premier rendu (avant hydratation DB), le cache est vide → le wizard démarre
+ * à l'intake même pour un user avec un Brain existant (la reprise fine = raffinement Phase 5,
+ * onboarding). Les données restent en DB et s'affichent une fois useBrain() hydraté.
  */
 export function loadBrainMap(): BrainMap {
-  return read();
+  return cache;
 }
 
 /** Première section dont le contenu est vide (ordre BRAIN_SECTIONS) ; -1 si les 8 sont remplies. */
@@ -146,19 +143,15 @@ export function firstUnfilledIndex(map: BrainMap): number {
   return BRAIN_SECTIONS.findIndex((s) => !(map[s.key]?.content ?? "").trim());
 }
 
-/** Hook client : lit/écrit le brain, se re-rend sur tout changement (même onglet ou autre onglet). */
+/** Hook client : hydrate depuis la DB au montage, se re-rend sur tout changement. */
 export function useBrain() {
-  const [map, setMap] = useState<BrainMap>({});
+  const [map, setMap] = useState<BrainMap>(cache);
 
   useEffect(() => {
-    setMap(read());
-    const onChange = () => setMap(read());
+    void hydrate();
+    const onChange = () => setMap({ ...cache });
     window.addEventListener(EVENT, onChange);
-    window.addEventListener("storage", onChange);
-    return () => {
-      window.removeEventListener(EVENT, onChange);
-      window.removeEventListener("storage", onChange);
-    };
+    return () => window.removeEventListener(EVENT, onChange);
   }, []);
 
   const readSection = useCallback(
@@ -167,47 +160,63 @@ export function useBrain() {
   );
 
   const save = useCallback((key: BrainSectionKey, content: string, source: BrainSource) => {
-    const next = { ...read(), [key]: { content, source } };
-    write(next);
-    setMap(next);
+    cache = { ...cache, [key]: { content, source } };
+    setMap({ ...cache });
+    emit();
+    void fetch("/api/brain", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ section: key, content, source }),
+    });
   }, []);
 
   const saveAll = useCallback((entries: Record<BrainSectionKey, string>, source: BrainSource) => {
-    const next = { ...read() };
+    const next = { ...cache };
+    for (const key of BRAIN_SECTION_KEYS) next[key] = { content: entries[key] ?? "", source };
+    cache = next;
+    setMap({ ...cache });
+    emit();
+    // Persiste chaque section (PUT idempotent par (user, section)).
     for (const key of BRAIN_SECTION_KEYS) {
-      next[key] = { content: entries[key] ?? "", source };
+      void fetch("/api/brain", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ section: key, content: entries[key] ?? "", source }),
+      });
     }
-    write(next);
-    setMap(next);
   }, []);
 
   const all = useCallback((): BrainMap => map, [map]);
 
   const reset = useCallback(() => {
-    write({});
+    cache = {};
     setMap({});
+    emit();
+    // Efface côté DB en remettant chaque section à vide (source manual).
+    for (const key of BRAIN_SECTION_KEYS) {
+      void fetch("/api/brain", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ section: key, content: "", source: "manual" }),
+      });
+    }
   }, []);
 
   return { read: readSection, save, saveAll, all, reset };
 }
 
 /**
- * STUB LOCAL (Phase 4-ready) — gabarit FR déterministe par section, dérivé de l'input.
- * PAS un appel réseau/LLM : aucun fetch, aucun setTimeout déguisé en latence serveur.
- * Phase 4 remplace ce corps par `await fetch("/api/brain/draft", { method: "POST", body: ... })`
- * (gateway HERMES :8765, D7) — la signature `draftBrain(input) => Record<key, string>` ne change pas.
+ * SEUL point LLM : appelle POST /api/brain/draft (gateway HERMES :8765 via X-Internal-Token, D7).
+ * Async — la signature de RETOUR passe de Record à Promise<Record> (le caller await désormais).
+ * AUCUN fallback gabarit : si la route échoue (403/429/502), on throw (une panne LLM DOIT
+ * échouer, cf. règle anti-faux-positif) — jamais de faux brouillon déterministe.
  */
-export function draftBrain(input: { url?: string; notes?: string }): Record<BrainSectionKey, string> {
-  const site = input.url?.trim() || "ton site";
-  const pitch = input.notes?.trim() || "ce que tu fais au quotidien";
-  return {
-    company: `Brouillon à partir de ${site} : ${pitch}. À préciser : marché, taille d'équipe, ancienneté.`,
-    offer: `Tes offres principales et leur prix — point de départ déduit de : « ${pitch} ».`,
-    customers: `Profil client déduit de tes notes : qui achète, pourquoi maintenant, budget type.`,
-    voice: `Direct, concret, sans jargon — ajuste si ce n'est pas ton style habituel.`,
-    ops: `Les étapes types d'une mission, du premier contact à la livraison.`,
-    stack: `Outils cités ou déduits de ${site} — à compléter (CRM, facturation, support).`,
-    goals: `Objectifs déduits de tes notes pour les prochains mois — à chiffrer.`,
-    constraints: `Rien d'identifié depuis ${site} — liste ici ce qui est interdit ou à éviter.`,
-  };
+export async function draftBrain(input: { url?: string; notes?: string }): Promise<Record<BrainSectionKey, string>> {
+  const res = await fetch("/api/brain/draft", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+  });
+  if (!res.ok) throw new Error(`draft_failed_${res.status}`);
+  return (await res.json()) as Record<BrainSectionKey, string>;
 }

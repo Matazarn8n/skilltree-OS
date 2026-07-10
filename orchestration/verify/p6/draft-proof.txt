@@ -1,0 +1,13 @@
+proxy_calls 0->1
+sections=['company', 'offer', 'customers', 'voice', 'ops', 'stack', 'goals', 'constraints']
+
+{
+  "company": "Agence de growth B2B spécialisée sur les SaaS en early-stage (pre-seed à Series A). On aide les fondateurs à décrocher leurs 50 premiers clients payants sans brûler leur runway sur des canaux qui ne convertissent pas encore.",
+  "offer": "Sprint growth de 90 jours : audit ICP + message, système outbound (cold email + LinkedIn), optimisation du funnel d'activation. Livrable : pipeline qualifié actif et playbook reproductible que l'équipe peut opérer seule ensuite.",
+  "customers": "SaaS B2B entre 5k et 80k MRR, équipe de 2 à 8 personnes, produit en production avec au moins quelques clients actifs. Verticales typiques : outils RH, ops, finance SMB, infra dev — acheteur = manager ou directeur, pas le DSI.",
+  "voice": "Direct, chiffré, sans jargon agency. On parle timelines, coûts d'acquisition et décisions — jamais de \"stratégie holistique\". Ton de co-fondateur expérimenté, pas de consultant externe qui livre un rapport PDF.",
+  "ops": "Sprints bimensuels, point stratégique hebdomadaire de 30 minutes, un lead strategist par client. Zéro sous-traitance cachée, tout documenté dans Notion, exécution dans les outils déjà en place chez le client.",
+  "stack": "Clay + Apollo (enrichissement), Instantly ou Lemlist (séquences outbound), HubSpot ou Attio (CRM client), Notion (playbooks), Slack (async). On évite d'imposer de nouveaux outils si l'existant suffit.",
+  "goals": "12 clients actifs en simultané d'ici 9 mois, taux de renouvellement post-sprint >75%, 3 case studies publics avec métriques vérifiées (MRR ajouté, CAC, délai) avant fin 2026.",
+  "constraints": "Pas de clients pré-produit (sans utilisateurs actifs, pas de signal exploitable). Budget minimum 2 500 €/mois. On décline les verticales très réglementées (santé, finance institutionnelle) sans expertise sectorielle interne préalable."
+}

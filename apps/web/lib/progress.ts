@@ -2,54 +2,57 @@
 import { useCallback, useEffect, useState } from "react";
 import { lessonKey } from "./lessons";
 
-// Progression des leçons — état local uniquement (localStorage), aucun backend.
-// Clé "module/lesson" -> true si terminée. Un event window custom fait re-render
-// tous les hooks montés dans l'onglet dès qu'une leçon est marquée terminée.
+// Progression des leçons — état user réel (Postgres via /api/progress, RLS auth.uid()).
+// Phase 4 a remplacé le corps localStorage par des appels /api ; signatures inchangées.
+// lesson_id en DB = lessonKey(module, lesson). Un event window re-rend les hooks montés.
 
-const STORAGE_KEY = "skilltree.progress.v1";
 const EVENT = "skilltree:progress";
 
-type ProgressMap = Record<string, true>;
+let cache: Record<string, true> = {};
 
-function read(): ProgressMap {
-  if (typeof window === "undefined") return {};
+function emit() {
+  if (typeof window !== "undefined") window.dispatchEvent(new Event(EVENT));
+}
+
+async function hydrate(): Promise<void> {
+  if (typeof window === "undefined") return;
   try {
-    return JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "{}") as ProgressMap;
+    const res = await fetch("/api/progress", { cache: "no-store" });
+    if (!res.ok) return;
+    const { done } = (await res.json()) as { done: string[] };
+    cache = Object.fromEntries(done.map((k) => [k, true as const]));
+    emit();
   } catch {
-    return {};
+    // non authentifié / hors-ligne — pas d'invention.
   }
 }
 
-function write(map: ProgressMap) {
-  try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
-    window.dispatchEvent(new Event(EVENT));
-  } catch {
-    // localStorage indisponible (navigation privée stricte, etc.) — dégrade en silence.
-  }
-}
-
-/** Hook client : lit + met à jour la progression, se re-rend sur tout changement (même onglet ou autre onglet). */
+/** Hook client : hydrate depuis la DB au montage, se re-rend sur tout changement. */
 export function useProgress() {
-  const [map, setMap] = useState<ProgressMap>({});
+  const [map, setMap] = useState<Record<string, true>>(cache);
 
   useEffect(() => {
-    setMap(read());
-    const onChange = () => setMap(read());
+    void hydrate();
+    const onChange = () => setMap({ ...cache });
     window.addEventListener(EVENT, onChange);
-    window.addEventListener("storage", onChange);
-    return () => {
-      window.removeEventListener(EVENT, onChange);
-      window.removeEventListener("storage", onChange);
-    };
+    return () => window.removeEventListener(EVENT, onChange);
   }, []);
 
-  const isComplete = useCallback((moduleSlug: string, lessonSlug: string) => !!map[lessonKey(moduleSlug, lessonSlug)], [map]);
+  const isComplete = useCallback(
+    (moduleSlug: string, lessonSlug: string) => !!map[lessonKey(moduleSlug, lessonSlug)],
+    [map]
+  );
 
-  const markComplete = useCallback((moduleSlug: string, lessonSlug: string) => {
-    const next = { ...read(), [lessonKey(moduleSlug, lessonSlug)]: true as const };
-    write(next);
-    setMap(next);
+  const markComplete = useCallback(async (moduleSlug: string, lessonSlug: string) => {
+    const key = lessonKey(moduleSlug, lessonSlug);
+    cache = { ...cache, [key]: true };
+    setMap({ ...cache });
+    emit();
+    await fetch("/api/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lessonId: key, status: "done" }),
+    }).catch(() => {});
   }, []);
 
   const countDone = useCallback(

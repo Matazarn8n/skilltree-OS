@@ -1,85 +1,103 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-// Interface d'installation locale — stub client (localStorage), AUCUN backend.
-// Phase 4 (Supabase) remplacera le corps de install()/uninstall()/isInstalled() par des
-// appels POST/DELETE /api/install ; les signatures ci-dessous restent identiques pour que
-// l'UI (InstallModal, CommandBar, MostInstalled, TreeAudit de 03-04) n'ait rien à réécrire.
+// Installs — état user réel (Postgres via /api/install, RLS auth.uid()). Phase 4 a remplacé
+// le corps localStorage par des appels /api ; les signatures publiques sont INCHANGÉES pour
+// que l'UI (InstallModal, MostInstalled, TreeAudit) n'ait rien à réécrire.
 //
-// Miroir strict du pattern lib/progress.ts (même clé de storage + event + hook).
+// Cache module hydraté par le hook → les fonctions pures (isInstalled/install/uninstall,
+// utilisables hors React) restent SYNCHRONES en tapant sur ce cache, et poussent la mutation
+// vers l'API en fire-and-forget. La source de vérité durable reste la row Postgres.
 
-const STORAGE_KEY = "skilltree.installs.v1";
 const EVENT = "skilltree:installs";
 
-type InstallMap = Record<string, true>;
+let cache: Record<string, true> = {};
 
-function read(): InstallMap {
-  if (typeof window === "undefined") return {};
+function emit() {
+  if (typeof window !== "undefined") window.dispatchEvent(new Event(EVENT));
+}
+
+/** Recharge le cache depuis la DB (GET /api/install) puis notifie les hooks montés. */
+async function hydrate(): Promise<void> {
+  if (typeof window === "undefined") return;
   try {
-    return JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "{}") as InstallMap;
+    const res = await fetch("/api/install", { cache: "no-store" });
+    if (!res.ok) return;
+    const { installed } = (await res.json()) as { installed: string[] };
+    cache = Object.fromEntries(installed.map((s) => [s, true as const]));
+    emit();
   } catch {
-    return {};
+    // hors-ligne / non authentifié — le cache reste ce qu'il est ; pas d'invention de données.
   }
 }
 
-function write(map: InstallMap) {
-  try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
-    window.dispatchEvent(new Event(EVENT));
-  } catch {
-    // localStorage indisponible (navigation privée stricte, etc.) — dégrade en silence.
-  }
-}
-
-/** Fonction pure, utilisable hors hook (ex. depuis un handler non-React). */
+/** Fonction pure (hors hook) : lit le cache module. */
 export function isInstalled(slug: string): boolean {
-  return !!read()[slug];
+  return !!cache[slug];
 }
 
-/** Fonction pure : marque un slug installé. */
+/** Fonction pure : installe (optimiste dans le cache + POST fire-and-forget). */
 export function install(slug: string): void {
-  const next = { ...read(), [slug]: true as const };
-  write(next);
+  cache = { ...cache, [slug]: true };
+  emit();
+  // ponytail: fire-and-forget — la persistance réelle est la row ; le hook re-hydrate au montage.
+  void fetch("/api/install", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ slug }),
+  });
 }
 
-/** Fonction pure : retire un slug installé. */
+/** Fonction pure : désinstalle (optimiste + DELETE fire-and-forget). */
 export function uninstall(slug: string): void {
-  const next = { ...read() };
+  const next = { ...cache };
   delete next[slug];
-  write(next);
+  cache = next;
+  emit();
+  void fetch("/api/install", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ slug }),
+  });
 }
 
-/** Hook client : lit + met à jour les installs, se re-rend sur tout changement
- *  (même onglet via l'event custom, autre onglet via `storage`). */
+/** Hook client : hydrate depuis la DB au montage, se re-rend sur tout changement. */
 export function useInstalls() {
-  const [map, setMap] = useState<InstallMap>({});
+  const [map, setMap] = useState<Record<string, true>>(cache);
 
   useEffect(() => {
-    setMap(read());
-    const onChange = () => setMap(read());
+    void hydrate();
+    const onChange = () => setMap({ ...cache });
     window.addEventListener(EVENT, onChange);
-    window.addEventListener("storage", onChange);
-    return () => {
-      window.removeEventListener(EVENT, onChange);
-      window.removeEventListener("storage", onChange);
-    };
+    return () => window.removeEventListener(EVENT, onChange);
   }, []);
 
   const installed = Object.keys(map);
 
   const isInstalledHook = useCallback((slug: string) => !!map[slug], [map]);
 
-  const installHook = useCallback((slug: string) => {
-    const next = { ...read(), [slug]: true as const };
-    write(next);
-    setMap(next);
+  const installHook = useCallback(async (slug: string) => {
+    cache = { ...cache, [slug]: true };
+    setMap({ ...cache });
+    emit();
+    await fetch("/api/install", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ slug }),
+    }).catch(() => {});
   }, []);
 
-  const uninstallHook = useCallback((slug: string) => {
-    const next = { ...read() };
+  const uninstallHook = useCallback(async (slug: string) => {
+    const next = { ...cache };
     delete next[slug];
-    write(next);
-    setMap(next);
+    cache = next;
+    setMap({ ...cache });
+    emit();
+    await fetch("/api/install", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ slug }),
+    }).catch(() => {});
   }, []);
 
   return {

@@ -1,0 +1,4 @@
+{
+  "paid": true,
+  "mode": "personal"
+}

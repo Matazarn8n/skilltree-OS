@@ -61,8 +61,10 @@ export function BrainWizard() {
 
   const startManual = () => setStage(0);
 
-  const startWithAI = (url: string, notes: string) => {
-    const drafted = draftBrain({ url, notes });
+  const startWithAI = async (url: string, notes: string) => {
+    // Re-couplage Phase 4 : draftBrain est désormais async (appel LLM réel via gateway,
+    // /api/brain/draft). Seul l'await change ici — le JSX/rendu est intact.
+    const drafted = await draftBrain({ url, notes });
     brain.saveAll(drafted, "ai");
     setStage(0);
   };

@@ -1,46 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
 import { SKILLS, skillBySlug } from "@/lib/catalog";
+import { useInstalls } from "@/lib/installs";
 
-// Contrat localStorage PARTAGÉ avec le Hub (03-01, apps/web/lib/installs.ts) — voir NOTE
-// frontmatter du plan 03-04. Ce module ne fait QUE lire ce contrat (clé + event), il
-// n'IMPORTE PAS lib/installs.ts et ne l'écrit jamais : les installs réels sont posés par
-// le Hub, ce plan les consomme via ce helper local, clone du style de lib/progress.ts.
-const INSTALLS_KEY = "skilltree.installs.v1";
-const INSTALLS_EVENT = "skilltree:installs";
-
-type InstallMap = Record<string, true>;
-
-function readInstalls(): InstallMap {
-  if (typeof window === "undefined") return {};
-  try {
-    return JSON.parse(window.localStorage.getItem(INSTALLS_KEY) ?? "{}") as InstallMap;
-  } catch {
-    return {};
-  }
-}
-
-/**
- * Helper LOCAL à ce plan : lit `localStorage['skilltree.installs.v1']` + écoute l'event
- * `skilltree:installs` (même onglet) et l'event natif `storage` (autre onglet). Se
- * re-rend dès qu'un skill est installé, sans reload — c'est ce qui rend le TreeAudit
- * réactif (compteur N→N+1).
- */
+// Re-couplage Phase 4 : les installs viennent désormais de la SOURCE UNIQUE useInstalls()
+// (Postgres via /api/install, RLS auth.uid()) — plus du localStorage brut. Signature de
+// useInstalledSlugs inchangée (MyTree la consomme telle quelle), seule la source change ;
+// la réactivité N→N+1 sans reload est assurée par le re-render du hook.
 export function useInstalledSlugs(): string[] {
-  const [map, setMap] = useState<InstallMap>({});
-
-  useEffect(() => {
-    setMap(readInstalls());
-    const onChange = () => setMap(readInstalls());
-    window.addEventListener(INSTALLS_EVENT, onChange);
-    window.addEventListener("storage", onChange);
-    return () => {
-      window.removeEventListener(INSTALLS_EVENT, onChange);
-      window.removeEventListener("storage", onChange);
-    };
-  }, []);
-
-  return Object.keys(map);
+  return useInstalls().installed;
 }
 
 // Fallback existant (avant ce plan) : jobs autonomes du catalogue, simulant ce qui serait

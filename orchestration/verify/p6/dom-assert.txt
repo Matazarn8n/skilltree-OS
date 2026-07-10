@@ -1,0 +1,16 @@
+[PASS] signup crée un auth.users :: uid=c09802c0…
+[PASS] installs vides avant install :: count=0
+[PASS] slug catalogue récupéré :: slug=sales
+[PASS] POST /api/install 200 :: status=200
+[PASS] row installs créée (compteur +1) :: 0→1
+[PASS] TreeAudit montre l'install après reload :: 1 skill installé, calculé depuis ta machine connectée.
+[PASS] /api/catalog 200 :: status=200
+[PASS] routes catalogue n'importent pas supabase (0-DB) :: matches=''
+[PASS] /api/access PERSONAL_MODE paid:true :: {"paid": true, "mode": "personal"}
+[PASS] POST /api/brain/draft 200 (user payé) :: status=200
+[PASS] draft renvoie les 8 sections :: keys=['company', 'offer', 'customers', 'voice', 'ops', 'stack', 'goals', 'constraints']
+[PASS] contenu NON-gabarit (≠ phrase du stub) :: len=1710 sample='Agence de growth B2B spécialisée sur les SaaS en early-stage (pre-seed à Series '
+[PASS] nouvelle row proxy_calls (source skilltree-brain-draft) :: 0→1
+[PASS] rate-limit renvoie 429 au-delà de la fenêtre :: statuses=[502, 200, 200, 200, 429, 429]
+[PASS] serveur unpaid: /api/access paid:false (env override OK) :: {"paid": false}
+[PASS] draft gated: 403 si non payé :: status=403
