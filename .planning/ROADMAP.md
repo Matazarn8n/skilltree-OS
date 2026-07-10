@@ -11,9 +11,9 @@ Reconstruction perso FR de SkillTree en 6 phases, dérivées du plan d'exécutio
 - Decimal phases (2.1, …): Urgent insertions (marked INSERTED)
 
 - [x] **Phase 1: Fondations data + scaffold** - Catalogue consolidé buildé + invariants assertés + prototype rebranché
-- [ ] **Phase 2: Hero constellation** - Roue-constellation 137 nœuds + ViewSwitcher, a11y + LOWFX
+- [x] **Phase 2: Hero constellation** - Roue-constellation 137 nœuds + ViewSwitcher, a11y + LOWFX — COMPLETE + VERIFIED 4/4 (verify_p1.py 15/15), poussée origin/main
 - [x] **Phase 3: Vues & modules UI** - Hub, Modules, Brain, Tree/Community/Settings, Dashboards/Chart (5 plans parallèles) — COMPLETE + VERIFIED 2026-07-08 (gsd-verifier passed 5/5)
-- [ ] **Phase 4: Backend** - Supabase RLS + auth + routes user + LLM draft + Stripe-ready
+- [x] **Phase 4: Backend** - Supabase RLS + auth + routes user + LLM draft + Stripe-ready — COMPLETE + VERIFIED 5/5 (gsd-verifier, verify_p6.py 17/17), poussée origin/main @ bae10db (2026-07-10)
 - [ ] **Phase 5: Onboarding** - Tour 6 étapes + sélection parcours + Cal.com
 - [ ] **Phase 6: Revue & gel v1** - Passe fidélité + a11y + chasse verbatim, tag v1-perso
 
@@ -31,7 +31,7 @@ Reconstruction perso FR de SkillTree en 6 phases, dérivées du plan d'exécutio
 **Plans**: 1 plan
 
 Plans:
-- [ ] 01-01: build_catalog.mjs + assert-graph.mjs + suppression lib/data.ts + rewire pages (P0)
+- [x] 01-01: build_catalog.mjs + assert-graph.mjs + suppression lib/data.ts + rewire pages (P0)
 
 ### Phase 2: Hero constellation
 **Goal**: La roue-constellation fidèle (7 fans, branches radiales par fonction, 137 nœuds, hub central « Cerveau d'entreprise ») avec panel job complet FR, plus le shell 3 vues piloté par `?view=` (D6).
@@ -46,8 +46,8 @@ Plans:
 **Plans**: 2 plans (séquencés wave 1 → wave 2 : géométrie/roue/shell d'abord, panel/a11y/preuves ensuite — un seul plan dépassait le budget contexte : ~10 fichiers, 2 préoccupations distinctes)
 
 Plans:
-- [ ] 02-01-PLAN.md — Géométrie trigo pure (W_STEP=360/7, 2 layouts) + ConstellationWheel/SectorView/JobNode/HubCore + ViewSwitcher `?view=` + suppression StageGrid/SkillMap + smoke 137 boutons
-- [ ] 02-02-PLAN.md — JobPanel complet FR (BREAKS INTO / BUILDS ON cliquable / LADDER / THE HUMAN) + a11y clavier + LOWFX/reduced-motion + suite Playwright `orchestration/verify/p1/`
+- [x] 02-01-PLAN.md — Géométrie trigo pure (W_STEP=360/7, 2 layouts) + ConstellationWheel/SectorView/JobNode/HubCore + ViewSwitcher `?view=` + suppression StageGrid/SkillMap + smoke 137 boutons
+- [x] 02-02-PLAN.md — JobPanel complet FR (BREAKS INTO / BUILDS ON cliquable / LADDER / THE HUMAN) + a11y clavier + LOWFX/reduced-motion + suite Playwright `orchestration/verify/p1/`
 
 ### Phase 3: Vues & modules UI
 **Goal**: Toutes les vues et modules restants, fidèles aux captures, branchés sur le catalogue et des interfaces stub locales (`install`, `progress`, `draftBrain`) en attendant le backend. 5 plans en fan-out Sonnet parallèle (aucune dépendance croisée).
@@ -82,8 +82,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: schema.sql + RLS + Supabase Auth (opus-4-8 / high — irréversible)
-- [ ] 04-02: routes user + /api/brain/draft (gateway :8765) + /api/access Stripe-ready + swap interfaces (sonnet-4-6 / medium)
+- [x] 04-01: schema.sql + RLS + Supabase Auth (opus-4-8 / high — irréversible)
+- [x] 04-02: routes user + /api/brain/draft (gateway :8765) + /api/access Stripe-ready + swap interfaces (sonnet-4-6 / medium)
 
 ### Phase 5: Onboarding
 **Goal**: Tour 6 étapes + sélection de parcours + CTA Cal.com, fidèle à `captures/dynamic/`, persistant côté serveur.
@@ -130,9 +130,9 @@ P1 ─┬─ P2 ─┬─ P3.05 ─┐
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Fondations data + scaffold | 0/1 | Not started | - |
-| 2. Hero constellation | 0/1 | Not started | - |
+| 1. Fondations data + scaffold | 1/1 | Complete + Verified | 2026-07-07 |
+| 2. Hero constellation | 2/2 | Complete + Verified | 2026-07-08 |
 | 3. Vues & modules UI | 5/5 | Complete + Verified | 2026-07-08 |
-| 4. Backend | 0/2 | Planned (plan-checker PASSED) | - |
-| 5. Onboarding | 0/1 | Not started | - |
+| 4. Backend | 2/2 | Complete + Verified (gsd-verifier 5/5) | 2026-07-10 |
+| 5. Onboarding | 0/1 | Planned (plan-checker 0 blocker) | - |
 | 6. Revue & gel v1 | 0/1 | Not started | - |
