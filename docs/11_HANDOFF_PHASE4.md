@@ -27,6 +27,19 @@
 
 **Contrat gateway :8765 (probé sur le vivant par le planner)** : `POST :8765/api/llm/complete`, header `X-Internal-Token: $HERMES_INTERNAL_TOKEN` (⚠️ **PAS** `Authorization: Bearer`, **PAS** `x-api-key`, **PAS** `ANTHROPIC_API_KEY` dans l'app — la gateway détient l'OAuth), body `{prompt, model, max_tokens, source}`. Cf. `~/.claude/CLAUDE.md` « Anthropic Auth » + memory `nuveo-n8n-credential-wiring-trap` (le piège header a déjà mordu côté n8n : creds « attachés » mais faux car mauvais header).
 
+## ⚡ ADDENDUM 2026-07-09 — env chaud + 04-01 cœur FAIT + piège d'exécution
+
+**04-01 cœur sécurité DONE + PROUVÉ + POUSSÉ** (commit `ad1a6f7`, sur `origin/main`) :
+- `supabase/schema.sql` = §5 (6 tables/5 enums/RLS/policies `auth.uid()`/trigger `handle_new_user`/grants authenticated+service_role), appliqué au Supabase local.
+- `supabase/tests/rls_isolation.mjs` (sans dépendance, HTTP GoTrue+PostgREST) → **PASS + counter-proof** : B authentifié voit 0 ligne de A sur les 5 tables, service-role voit les lignes de A (contrôle positif anti-table-vide), RLS retiré sur installs → B voit la ligne de A (test virerait ROUGE) → réactivé. Preuve `orchestration/verify/p6/rls-isolation.txt`. `node supabase/tests/rls_isolation.mjs` exit 0.
+- `supabase/config.toml` : `[analytics] enabled=false` (vector échoue sur docker.sock de cet hôte — LAISSER off).
+
+**⚠️ Piège d'exécution majeur : les subagents `gsd-executor` meurent à un plafond ~600s dans ce harness** (3 spawns opus morts à ~607-615s/2 tool_uses, « user interrupted » = timeout, PAS un vrai interrupt). Plan 04-01/04-02 > 10min wall-clock → **exécuter INLINE** (orchestrateur Bash, sans plafond) ou en session fraîche. Ne PAS re-déléguer à un `gsd-executor`.
+
+**RESTE 04-01** (inline) : deps `@supabase/ssr @supabase/supabase-js` (apps/web/package.json), `lib/supabase/{server,client}.ts`, `middleware.ts` (refresh session), `app/auth/{login/page.tsx,callback/route.ts,signout/route.ts}`, `.env.example`, `pnpm build` vert. **RESTE 04-02** entier (7 routes + `/api/brain/draft` gateway `:8765` via `X-Internal-Token` seul + `/api/access` PERSONAL_MODE + swap corps des 3 stubs signatures gelées + `tools/verify_p6.py`).
+
+**Env DÉJÀ chaud (ne pas refaire)** : Supabase local UP (10 conteneurs), DB `127.0.0.1:54322` OPEN, CLI cachée. `apps/web/.env.local` écrit (vraies clés JWT, `PERSONAL_MODE=true`, chmod 600, **gitignoré**). Appliquer le schéma = `docker exec -i supabase_db_skilltree-OS psql -U postgres -d postgres < supabase/schema.sql` (pas de psql sur l'hôte). `supabase status -o json` redonne les clés.
+
 ## Setup utilisateur requis (04-01, avant exécution wave 1)
 
 Supabase **LOCAL** (docker), zéro compte externe :
